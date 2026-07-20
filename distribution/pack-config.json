@@ -1,0 +1,80 @@
+{
+  "packageName": "GregTech Odyssey — Friends Edition",
+  "packageVersion": "1.0.0",
+  "manifestVersion": "0.5.6-friends.1.0.0",
+  "author": "ChiefSparrow",
+  "base": {
+    "name": "GregTech Odyssey",
+    "version": "0.5.6-beta",
+    "fileName": "GregTech.Odyssey-0.5.6-beta-all-locales.zip",
+    "sha256": "CC2D8C148ECD37317E4E9EEE850D814E3C13020426CE945044A96589526A3C77"
+  },
+  "forceRequiredProjectIds": [
+    581495
+  ],
+  "curseForgeAdditions": [
+    {
+      "name": "HT's TreeChop 0.19.0 fixed",
+      "projectID": 421377,
+      "fileID": 5565422,
+      "required": true
+    },
+    {
+      "name": "Panda's Falling Trees 0.13.2",
+      "projectID": 880630,
+      "fileID": 6231030,
+      "required": true
+    },
+    {
+      "name": "Complementary Reimagined r5.6.1",
+      "projectID": 627557,
+      "fileID": 7090226,
+      "required": true
+    },
+    {
+      "name": "Euphoria Patcher 1.7.7 r5.6.1 Forge",
+      "projectID": 915902,
+      "fileID": 7214963,
+      "required": true
+    }
+  ],
+  "customArtifacts": [
+    {
+      "name": "GTO Simple Crafting Terminal Fix",
+      "version": "1.0.0",
+      "buildGlob": "gto-terminal-fix/build/libs/gto_terminal_fix-1.0.0.jar",
+      "archivePath": "overrides/mods/gto-terminal-fix-1.0.0.jar",
+      "sides": "client+server"
+    },
+    {
+      "name": "GTO Farming Fix",
+      "version": "1.0.1",
+      "buildGlob": "gto-farming-fix/build/libs/gto_farming_fix-1.0.1.jar",
+      "archivePath": "overrides/mods/gto-farming-fix-1.0.1.jar",
+      "sides": "client+server"
+    },
+    {
+      "name": "GTO Russian Fixes",
+      "version": "1.0.0",
+      "buildGlob": "gto-russian-fixes/dist/z-gto-russian-fixes-0.5.6-v1.0.0.zip",
+      "archivePath": "overrides/config/openloader/resources/z-gto-russian-fixes-0.5.6-v1.0.0.zip",
+      "sides": "client"
+    }
+  ],
+  "forbiddenArchivePrefixes": [
+    "overrides/saves/",
+    "overrides/logs/",
+    "overrides/crash-reports/",
+    "overrides/screenshots/",
+    "overrides/backups/",
+    "overrides/xaero/",
+    "overrides/XaeroWaypoints/",
+    "overrides/XaeroWorldMap/"
+  ],
+  "forbiddenArchiveFiles": [
+    "overrides/servers.dat",
+    "overrides/usercache.json",
+    "overrides/usernamecache.json",
+    "overrides/options.txt"
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "defaults": {
+    "status": "linguistic_checked",
+    "category": "FTB Library: интерфейс",
+    "context": "Ручной перевод заголовка информационной группы.",
+    "namespace": "ftblibrary"
+  },
+  "entries": {
+    "sidebar_group.ftblibrary.info": "FTB Library — информация"
+  }
+}

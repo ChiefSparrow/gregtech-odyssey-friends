@@ -1,0 +1,26 @@
+# Gradle and Java build products
+**/.gradle/
+**/build/
+**/run/
+*.class
+
+# Python cache and generated translation outputs
+**/__pycache__/
+*.py[cod]
+gto-russian-fixes/dist/
+gto-russian-fixes/reports/
+gto-russian-fixes/pack/assets/
+
+# Release products and temporary staging
+/dist/
+distribution/.staging-*/
+
+# Third-party binaries are resolved from CurseForge/CurseMaven
+gto-farming-fix/libs/
+
+# IDE and OS metadata
+.idea/
+.vscode/
+*.iml
+.DS_Store
+Thumbs.db

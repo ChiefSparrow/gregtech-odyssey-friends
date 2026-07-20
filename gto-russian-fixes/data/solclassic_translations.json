@@ -1,0 +1,26 @@
+{
+  "defaults": {
+    "status": "linguistic_checked",
+    "category": "Spice of Life: Classic",
+    "context": "Ручной перевод предметов и интерфейса истории питания.",
+    "namespace": "solclassic"
+  },
+  "entries": {
+    "container.basket": "Корзина",
+    "container.large_basket": "Большая корзина (старая)",
+    "container.wicker_basket": "Плетёная корзина",
+    "gui.food_history_book.empty": "История питания пока пуста",
+    "gui.food_history_book.page": "Страница %s из %s",
+    "gui.food_history_book.summary": "Съедено уникальных блюд: %s",
+    "gui.food_history_book.title": "История питания",
+    "item.solclassic.basket": "Корзина",
+    "item.solclassic.food_history_book": "Книга истории питания",
+    "item.solclassic.large_basket": "Большая корзина (старая)",
+    "item.solclassic.wicker_basket": "Плетёная корзина",
+    "tooltip.food_history_book.description": "Нажмите ПКМ, чтобы открыть историю питания",
+    "tooltip.food_reduction": "Восстановление голода уменьшено на %s%%",
+    "tooltip.wicker_basket.description1": "Нажмите ПКМ, чтобы съесть лучшую доступную еду",
+    "tooltip.wicker_basket.description2": "Нажмите Shift + ПКМ, чтобы открыть",
+    "tooltip.wicker_basket.food_info": "§7Следующее блюдо: %s (питательность: %s)"
+  }
+}

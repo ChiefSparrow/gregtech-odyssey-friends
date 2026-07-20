@@ -1,0 +1,2959 @@
+{
+  "meta": {
+    "target_pack": "GregTech Odyssey 0.5.6",
+    "locale": "ru_ru",
+    "version": "1.0.0",
+    "status_values": [
+      "draft",
+      "context_checked",
+      "linguistic_checked",
+      "in_game_checked"
+    ]
+  },
+  "entries": {
+    "advancements.deeperdarker.obtain_reinforced_echo_shard.description": {
+      "ru": "Усильте осколок эха",
+      "status": "context_checked",
+      "category": "deeperdarker: описания",
+      "context": "Перевод из официального репозитория Deeper and Darker; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "deeperdarker"
+    },
+    "advancements.deeperdarker.obtain_reinforced_echo_shard.title": {
+      "ru": "Скалковый инженер",
+      "status": "context_checked",
+      "category": "deeperdarker: интерфейс",
+      "context": "Перевод из официального репозитория Deeper and Darker; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "deeperdarker"
+    },
+    "advancements.deeperdarker.obtain_sonorous_staff.description": {
+      "ru": "Заполучите звучный посох",
+      "status": "context_checked",
+      "category": "deeperdarker: описания",
+      "context": "Перевод из официального репозитория Deeper and Darker; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "deeperdarker"
+    },
+    "advancements.deeperdarker.obtain_sonorous_staff.title": {
+      "ru": "Жалобы на шум",
+      "status": "context_checked",
+      "category": "deeperdarker: интерфейс",
+      "context": "Перевод из официального репозитория Deeper and Darker; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "deeperdarker"
+    },
+    "biome.deeperdarker.blooming_caverns": {
+      "ru": "Цветущие пещеры",
+      "status": "context_checked",
+      "category": "deeperdarker: интерфейс",
+      "context": "Перевод из официального репозитория Deeper and Darker; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "deeperdarker"
+    },
+    "biome.deeperdarker.deeplands": {
+      "ru": "Глубоземье",
+      "status": "context_checked",
+      "category": "deeperdarker: интерфейс",
+      "context": "Перевод из официального репозитория Deeper and Darker; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "deeperdarker"
+    },
+    "biome.deeperdarker.echoing_forest": {
+      "ru": "Эхо-лес",
+      "status": "context_checked",
+      "category": "deeperdarker: интерфейс",
+      "context": "Перевод из официального репозитория Deeper and Darker; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "deeperdarker"
+    },
+    "biome.deeperdarker.overcast_columns": {
+      "ru": "Сумрачные колонны",
+      "status": "context_checked",
+      "category": "deeperdarker: интерфейс",
+      "context": "Перевод из официального репозитория Deeper and Darker; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "deeperdarker"
+    },
+    "block.deeperdarker.bloom_button": {
+      "ru": "Цветущая кнопка",
+      "status": "context_checked",
+      "category": "deeperdarker: блоки",
+      "context": "Перевод из официального репозитория Deeper and Darker; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "deeperdarker"
+    },
+    "block.deeperdarker.bloom_door": {
+      "ru": "Цветущая дверь",
+      "status": "context_checked",
+      "category": "deeperdarker: блоки",
+      "context": "Перевод из официального репозитория Deeper and Darker; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "deeperdarker"
+    },
+    "block.deeperdarker.bloom_fence": {
+      "ru": "Цветущий забор",
+      "status": "context_checked",
+      "category": "deeperdarker: блоки",
+      "context": "Перевод из официального репозитория Deeper and Darker; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "deeperdarker"
+    },
+    "block.deeperdarker.bloom_fence_gate": {
+      "ru": "Цветущая калитка",
+      "status": "context_checked",
+      "category": "deeperdarker: блоки",
+      "context": "Перевод из официального репозитория Deeper and Darker; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "deeperdarker"
+    },
+    "block.deeperdarker.bloom_hanging_sign": {
+      "ru": "Цветущая подвесная табличка",
+      "status": "context_checked",
+      "category": "deeperdarker: блоки",
+      "context": "Перевод из официального репозитория Deeper and Darker; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "deeperdarker"
+    },
+    "block.deeperdarker.bloom_planks": {
+      "ru": "Цветущие доски",
+      "status": "context_checked",
+      "category": "deeperdarker: блоки",
+      "context": "Перевод из официального репозитория Deeper and Darker; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "deeperdarker"
+    },
+    "block.deeperdarker.bloom_pressure_plate": {
+      "ru": "Цветущая нажимная плита",
+      "status": "context_checked",
+      "category": "deeperdarker: блоки",
+      "context": "Перевод из официального репозитория Deeper and Darker; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "deeperdarker"
+    },
+    "block.deeperdarker.bloom_sign": {
+      "ru": "Цветущая табличка",
+      "status": "context_checked",
+      "category": "deeperdarker: блоки",
+      "context": "Перевод из официального репозитория Deeper and Darker; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "deeperdarker"
+    },
+    "block.deeperdarker.bloom_slab": {
+      "ru": "Цветущая плита",
+      "status": "context_checked",
+      "category": "deeperdarker: блоки",
+      "context": "Перевод из официального репозитория Deeper and Darker; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "deeperdarker"
+    },
+    "block.deeperdarker.bloom_stairs": {
+      "ru": "Цветущие ступеньки",
+      "status": "context_checked",
+      "category": "deeperdarker: блоки",
+      "context": "Перевод из официального репозитория Deeper and Darker; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "deeperdarker"
+    },
+    "block.deeperdarker.bloom_trapdoor": {
+      "ru": "Цветущий люк",
+      "status": "context_checked",
+      "category": "deeperdarker: блоки",
+      "context": "Перевод из официального репозитория Deeper and Darker; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "deeperdarker"
+    },
+    "block.deeperdarker.blooming_sculk_stone": {
+      "ru": "Цветущий скалковый камень",
+      "status": "context_checked",
+      "category": "deeperdarker: блоки",
+      "context": "Перевод из официального репозитория Deeper and Darker; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "deeperdarker"
+    },
+    "block.deeperdarker.blooming_stem": {
+      "ru": "Цветущий стебель",
+      "status": "context_checked",
+      "category": "deeperdarker: блоки",
+      "context": "Перевод из официального репозитория Deeper and Darker; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "deeperdarker"
+    },
+    "block.deeperdarker.glowing_flowers": {
+      "ru": "Светящиеся цветы",
+      "status": "context_checked",
+      "category": "deeperdarker: блоки",
+      "context": "Перевод из официального репозитория Deeper and Darker; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "deeperdarker"
+    },
+    "block.deeperdarker.glowing_grass": {
+      "ru": "Светящаяся трава",
+      "status": "context_checked",
+      "category": "deeperdarker: блоки",
+      "context": "Перевод из официального репозитория Deeper and Darker; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "deeperdarker"
+    },
+    "block.deeperdarker.glowing_roots": {
+      "ru": "Светящиеся корни",
+      "status": "context_checked",
+      "category": "deeperdarker: блоки",
+      "context": "Перевод из официального репозитория Deeper and Darker; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "deeperdarker"
+    },
+    "block.deeperdarker.glowing_roots_plant": {
+      "ru": "Стебель светящихся корней",
+      "status": "context_checked",
+      "category": "deeperdarker: блоки",
+      "context": "Перевод из официального репозитория Deeper and Darker; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "deeperdarker"
+    },
+    "block.deeperdarker.glowing_vines": {
+      "ru": "Светящаяся лоза",
+      "status": "context_checked",
+      "category": "deeperdarker: блоки",
+      "context": "Перевод из официального репозитория Deeper and Darker; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "deeperdarker"
+    },
+    "block.deeperdarker.glowing_vines_plant": {
+      "ru": "Стебель светящейся лозы",
+      "status": "context_checked",
+      "category": "deeperdarker: блоки",
+      "context": "Перевод из официального репозитория Deeper and Darker; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "deeperdarker"
+    },
+    "block.deeperdarker.ice_lily": {
+      "ru": "Ледяная лилия",
+      "status": "context_checked",
+      "category": "deeperdarker: блоки",
+      "context": "Перевод из официального репозитория Deeper and Darker; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "deeperdarker"
+    },
+    "block.deeperdarker.lily_flower": {
+      "ru": "Цветок лилии",
+      "status": "context_checked",
+      "category": "deeperdarker: блоки",
+      "context": "Перевод из официального репозитория Deeper and Darker; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "deeperdarker"
+    },
+    "block.deeperdarker.potted_blooming_stem": {
+      "ru": "Цветущий стебель в горшке",
+      "status": "context_checked",
+      "category": "deeperdarker: блоки",
+      "context": "Перевод из официального репозитория Deeper and Darker; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "deeperdarker"
+    },
+    "block.deeperdarker.soundproof_glass": {
+      "ru": "Звуконепроницаемое стекло",
+      "status": "context_checked",
+      "category": "deeperdarker: блоки",
+      "context": "Перевод из официального репозитория Deeper and Darker; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "deeperdarker"
+    },
+    "block.deeperdarker.stripped_blooming_stem": {
+      "ru": "Обтёсанный цветущий стебель",
+      "status": "context_checked",
+      "category": "deeperdarker: блоки",
+      "context": "Перевод из официального репозитория Deeper and Darker; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "deeperdarker"
+    },
+    "block.functionalstorage.acacia_1": {
+      "ru": "Акациевый ящик (1x1)",
+      "status": "context_checked",
+      "category": "functionalstorage: блоки",
+      "context": "Перевод из официального репозитория Functional Storage; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "functionalstorage"
+    },
+    "block.functionalstorage.acacia_2": {
+      "ru": "Акациевый ящик (1x2)",
+      "status": "context_checked",
+      "category": "functionalstorage: блоки",
+      "context": "Перевод из официального репозитория Functional Storage; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "functionalstorage"
+    },
+    "block.functionalstorage.acacia_4": {
+      "ru": "Акациевый ящик (2x2)",
+      "status": "context_checked",
+      "category": "functionalstorage: блоки",
+      "context": "Перевод из официального репозитория Functional Storage; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "functionalstorage"
+    },
+    "block.functionalstorage.armory_cabinet": {
+      "ru": "Оружейный шкаф",
+      "status": "context_checked",
+      "category": "functionalstorage: блоки",
+      "context": "Перевод из официального репозитория Functional Storage; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "functionalstorage"
+    },
+    "block.functionalstorage.birch_1": {
+      "ru": "Берёзовый ящик (1x1)",
+      "status": "context_checked",
+      "category": "functionalstorage: блоки",
+      "context": "Перевод из официального репозитория Functional Storage; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "functionalstorage"
+    },
+    "block.functionalstorage.birch_2": {
+      "ru": "Берёзовый ящик (1x2)",
+      "status": "context_checked",
+      "category": "functionalstorage: блоки",
+      "context": "Перевод из официального репозитория Functional Storage; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "functionalstorage"
+    },
+    "block.functionalstorage.birch_4": {
+      "ru": "Берёзовый ящик (2x2)",
+      "status": "context_checked",
+      "category": "functionalstorage: блоки",
+      "context": "Перевод из официального репозитория Functional Storage; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "functionalstorage"
+    },
+    "block.functionalstorage.cherry_1": {
+      "ru": "Вишнёвый ящик (1x1)",
+      "status": "context_checked",
+      "category": "functionalstorage: блоки",
+      "context": "Перевод из официального репозитория Functional Storage; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "functionalstorage"
+    },
+    "block.functionalstorage.cherry_2": {
+      "ru": "Вишнёвый ящик (1x2)",
+      "status": "context_checked",
+      "category": "functionalstorage: блоки",
+      "context": "Перевод из официального репозитория Functional Storage; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "functionalstorage"
+    },
+    "block.functionalstorage.cherry_4": {
+      "ru": "Вишнёвый ящик (2x2)",
+      "status": "context_checked",
+      "category": "functionalstorage: блоки",
+      "context": "Перевод из официального репозитория Functional Storage; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "functionalstorage"
+    },
+    "block.functionalstorage.compacting_drawer": {
+      "ru": "Сжимающий ящик",
+      "status": "context_checked",
+      "category": "functionalstorage: блоки",
+      "context": "Перевод из официального репозитория Functional Storage; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "functionalstorage"
+    },
+    "block.functionalstorage.compacting_framed_drawer": {
+      "ru": "Каркасный сжимающий ящик",
+      "status": "context_checked",
+      "category": "functionalstorage: блоки",
+      "context": "Перевод из официального репозитория Functional Storage; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "functionalstorage"
+    },
+    "block.functionalstorage.controller_extension": {
+      "ru": "Точка доступа контроллера",
+      "status": "context_checked",
+      "category": "functionalstorage: блоки",
+      "context": "Перевод из официального репозитория Functional Storage; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "functionalstorage"
+    },
+    "block.functionalstorage.crimson_1": {
+      "ru": "Багровый ящик (1x1)",
+      "status": "context_checked",
+      "category": "functionalstorage: блоки",
+      "context": "Перевод из официального репозитория Functional Storage; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "functionalstorage"
+    },
+    "block.functionalstorage.crimson_2": {
+      "ru": "Багровый ящик (1x2)",
+      "status": "context_checked",
+      "category": "functionalstorage: блоки",
+      "context": "Перевод из официального репозитория Functional Storage; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "functionalstorage"
+    },
+    "block.functionalstorage.crimson_4": {
+      "ru": "Багровый ящик (2x2)",
+      "status": "context_checked",
+      "category": "functionalstorage: блоки",
+      "context": "Перевод из официального репозитория Functional Storage; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "functionalstorage"
+    },
+    "block.functionalstorage.dark_oak_1": {
+      "ru": "Ящик из тёмного дуба (1x1)",
+      "status": "context_checked",
+      "category": "functionalstorage: блоки",
+      "context": "Перевод из официального репозитория Functional Storage; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "functionalstorage"
+    },
+    "block.functionalstorage.dark_oak_2": {
+      "ru": "Ящик из тёмного дуба (1x2)",
+      "status": "context_checked",
+      "category": "functionalstorage: блоки",
+      "context": "Перевод из официального репозитория Functional Storage; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "functionalstorage"
+    },
+    "block.functionalstorage.dark_oak_4": {
+      "ru": "Ящик из тёмного дуба (2x2)",
+      "status": "context_checked",
+      "category": "functionalstorage: блоки",
+      "context": "Перевод из официального репозитория Functional Storage; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "functionalstorage"
+    },
+    "block.functionalstorage.ender_drawer": {
+      "ru": "Эндер-ящик",
+      "status": "context_checked",
+      "category": "functionalstorage: блоки",
+      "context": "Перевод из официального репозитория Functional Storage; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "functionalstorage"
+    },
+    "block.functionalstorage.fluid_1": {
+      "ru": "Ящик для жидкостей (1x1)",
+      "status": "context_checked",
+      "category": "functionalstorage: блоки",
+      "context": "Перевод из официального репозитория Functional Storage; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "functionalstorage"
+    },
+    "block.functionalstorage.fluid_2": {
+      "ru": "Ящик для жидкостей (1x2)",
+      "status": "context_checked",
+      "category": "functionalstorage: блоки",
+      "context": "Перевод из официального репозитория Functional Storage; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "functionalstorage"
+    },
+    "block.functionalstorage.fluid_4": {
+      "ru": "Ящик для жидкостей (2x2)",
+      "status": "context_checked",
+      "category": "functionalstorage: блоки",
+      "context": "Перевод из официального репозитория Functional Storage; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "functionalstorage"
+    },
+    "block.functionalstorage.framed_1": {
+      "ru": "Каркасный ящик (1x1)",
+      "status": "context_checked",
+      "category": "functionalstorage: блоки",
+      "context": "Перевод из официального репозитория Functional Storage; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "functionalstorage"
+    },
+    "block.functionalstorage.framed_2": {
+      "ru": "Каркасный ящик (1x2)",
+      "status": "context_checked",
+      "category": "functionalstorage: блоки",
+      "context": "Перевод из официального репозитория Functional Storage; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "functionalstorage"
+    },
+    "block.functionalstorage.framed_4": {
+      "ru": "Каркасный ящик (2x2)",
+      "status": "context_checked",
+      "category": "functionalstorage: блоки",
+      "context": "Перевод из официального репозитория Functional Storage; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "functionalstorage"
+    },
+    "block.functionalstorage.framed_controller_extension": {
+      "ru": "Каркасная точка доступа контроллера",
+      "status": "context_checked",
+      "category": "functionalstorage: блоки",
+      "context": "Перевод из официального репозитория Functional Storage; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "functionalstorage"
+    },
+    "block.functionalstorage.framed_simple_compacting_drawer": {
+      "ru": "Каркасный простой сжимающий ящик",
+      "status": "context_checked",
+      "category": "functionalstorage: блоки",
+      "context": "Перевод из официального репозитория Functional Storage; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "functionalstorage"
+    },
+    "block.functionalstorage.framed_storage_controller": {
+      "ru": "Каркасный контроллер хранилища",
+      "status": "context_checked",
+      "category": "functionalstorage: блоки",
+      "context": "Перевод из официального репозитория Functional Storage; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "functionalstorage"
+    },
+    "block.functionalstorage.jungle_1": {
+      "ru": "Тропический ящик (1x1)",
+      "status": "context_checked",
+      "category": "functionalstorage: блоки",
+      "context": "Перевод из официального репозитория Functional Storage; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "functionalstorage"
+    },
+    "block.functionalstorage.jungle_2": {
+      "ru": "Тропический ящик (1x2)",
+      "status": "context_checked",
+      "category": "functionalstorage: блоки",
+      "context": "Перевод из официального репозитория Functional Storage; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "functionalstorage"
+    },
+    "block.functionalstorage.jungle_4": {
+      "ru": "Тропический ящик (2x2)",
+      "status": "context_checked",
+      "category": "functionalstorage: блоки",
+      "context": "Перевод из официального репозитория Functional Storage; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "functionalstorage"
+    },
+    "block.functionalstorage.mangrove_1": {
+      "ru": "Мангровый ящик (1x1)",
+      "status": "context_checked",
+      "category": "functionalstorage: блоки",
+      "context": "Перевод из официального репозитория Functional Storage; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "functionalstorage"
+    },
+    "block.functionalstorage.mangrove_2": {
+      "ru": "Мангровый ящик (1x2)",
+      "status": "context_checked",
+      "category": "functionalstorage: блоки",
+      "context": "Перевод из официального репозитория Functional Storage; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "functionalstorage"
+    },
+    "block.functionalstorage.mangrove_4": {
+      "ru": "Мангровый ящик (2x2)",
+      "status": "context_checked",
+      "category": "functionalstorage: блоки",
+      "context": "Перевод из официального репозитория Functional Storage; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "functionalstorage"
+    },
+    "block.functionalstorage.oak_1": {
+      "ru": "Дубовый ящик (1x1)",
+      "status": "context_checked",
+      "category": "functionalstorage: блоки",
+      "context": "Перевод из официального репозитория Functional Storage; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "functionalstorage"
+    },
+    "block.functionalstorage.oak_2": {
+      "ru": "Дубовый ящик (1x2)",
+      "status": "context_checked",
+      "category": "functionalstorage: блоки",
+      "context": "Перевод из официального репозитория Functional Storage; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "functionalstorage"
+    },
+    "block.functionalstorage.oak_4": {
+      "ru": "Дубовый ящик (2x2)",
+      "status": "context_checked",
+      "category": "functionalstorage: блоки",
+      "context": "Перевод из официального репозитория Functional Storage; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "functionalstorage"
+    },
+    "block.functionalstorage.simple_compacting_drawer": {
+      "ru": "Простой сжимающий ящик",
+      "status": "context_checked",
+      "category": "functionalstorage: блоки",
+      "context": "Перевод из официального репозитория Functional Storage; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "functionalstorage"
+    },
+    "block.functionalstorage.spruce_1": {
+      "ru": "Еловый ящик (1x1)",
+      "status": "context_checked",
+      "category": "functionalstorage: блоки",
+      "context": "Перевод из официального репозитория Functional Storage; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "functionalstorage"
+    },
+    "block.functionalstorage.spruce_2": {
+      "ru": "Еловый ящик (1x2)",
+      "status": "context_checked",
+      "category": "functionalstorage: блоки",
+      "context": "Перевод из официального репозитория Functional Storage; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "functionalstorage"
+    },
+    "block.functionalstorage.spruce_4": {
+      "ru": "Еловый ящик (2x2)",
+      "status": "context_checked",
+      "category": "functionalstorage: блоки",
+      "context": "Перевод из официального репозитория Functional Storage; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "functionalstorage"
+    },
+    "block.functionalstorage.storage_controller": {
+      "ru": "Контроллер хранилища",
+      "status": "context_checked",
+      "category": "functionalstorage: блоки",
+      "context": "Перевод из официального репозитория Functional Storage; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "functionalstorage"
+    },
+    "block.functionalstorage.warped_1": {
+      "ru": "Искажённый ящик (1x1)",
+      "status": "context_checked",
+      "category": "functionalstorage: блоки",
+      "context": "Перевод из официального репозитория Functional Storage; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "functionalstorage"
+    },
+    "block.functionalstorage.warped_2": {
+      "ru": "Искажённый ящик (1x2)",
+      "status": "context_checked",
+      "category": "functionalstorage: блоки",
+      "context": "Перевод из официального репозитория Functional Storage; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "functionalstorage"
+    },
+    "block.functionalstorage.warped_4": {
+      "ru": "Искажённый ящик (2x2)",
+      "status": "context_checked",
+      "category": "functionalstorage: блоки",
+      "context": "Перевод из официального репозитория Functional Storage; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "functionalstorage"
+    },
+    "block.gtceu.bronze_multiblock_tank": {
+      "ru": "Бронзовый многоблочный резервуар",
+      "status": "linguistic_checked",
+      "category": "GTCEu: резервуары",
+      "context": "Парный вариант к уже переведённым деревянному и стальному многоблочным резервуарам; термин совпадает с квестбуком.",
+      "namespace": "gtceu"
+    },
+    "block.gtceu.bronze_tank_valve": {
+      "ru": "Клапан бронзового резервуара",
+      "status": "linguistic_checked",
+      "category": "GTCEu: резервуары",
+      "context": "Форма повторяет существующие «Клапан деревянного резервуара» и «Клапан стального резервуара» в предметах и заданиях.",
+      "namespace": "gtceu"
+    },
+    "block.gtceu.control_hatch": {
+      "ru": "Люк управления механизмом",
+      "status": "linguistic_checked",
+      "category": "GTCEu: люки",
+      "context": "Управляющий люк многоблочной машины; «механизм» согласован с переводом Machine Controller.",
+      "namespace": "gtceu"
+    },
+    "block.gtceu.ev_buffer": {
+      "ru": "§5Улучшенный буфер III§r",
+      "status": "linguistic_checked",
+      "category": "GTCEu: буферы",
+      "context": "Продолжает существующий ряд MV «Улучшенный буфер» и HV «Улучшенный буфер II».",
+      "namespace": "gtceu"
+    },
+    "block.gtceu.iv_buffer": {
+      "ru": "§9Элитный буфер§r",
+      "status": "linguistic_checked",
+      "category": "GTCEu: буферы",
+      "context": "Первая ступень серии Elite Buffer.",
+      "namespace": "gtceu"
+    },
+    "block.gtceu.luv_buffer": {
+      "ru": "§dЭлитный буфер II§r",
+      "status": "linguistic_checked",
+      "category": "GTCEu: буферы",
+      "context": "Вторая ступень серии Elite Buffer.",
+      "namespace": "gtceu"
+    },
+    "block.gtceu.max_1024a_laser_source_hatch": {
+      "ru": "Люк для лазерного источника (1024§eA§r §c§lMAX§r)",
+      "status": "linguistic_checked",
+      "category": "GTCEu: лазерная энергия",
+      "context": "Форма и порядок характеристик повторяют переведённые старшие лазерные люки GTOCore.",
+      "namespace": "gtceu"
+    },
+    "block.gtceu.max_1024a_laser_target_hatch": {
+      "ru": "Люк для лазерного приёмника (1024§eA§r §c§lMAX§r)",
+      "status": "linguistic_checked",
+      "category": "GTCEu: лазерная энергия",
+      "context": "Парный принимающий вариант лазерного люка.",
+      "namespace": "gtceu"
+    },
+    "block.gtceu.max_256a_laser_source_hatch": {
+      "ru": "Люк для лазерного источника (256§eA§r §c§lMAX§r)",
+      "status": "linguistic_checked",
+      "category": "GTCEu: лазерная энергия",
+      "context": "Форма и порядок характеристик повторяют переведённые старшие лазерные люки GTOCore.",
+      "namespace": "gtceu"
+    },
+    "block.gtceu.max_256a_laser_target_hatch": {
+      "ru": "Люк для лазерного приёмника (256§eA§r §c§lMAX§r)",
+      "status": "linguistic_checked",
+      "category": "GTCEu: лазерная энергия",
+      "context": "Парный принимающий вариант лазерного люка.",
+      "namespace": "gtceu"
+    },
+    "block.gtceu.max_4096a_laser_source_hatch": {
+      "ru": "Люк для лазерного источника (4096§eA§r §c§lMAX§r)",
+      "status": "linguistic_checked",
+      "category": "GTCEu: лазерная энергия",
+      "context": "Форма и порядок характеристик повторяют переведённые старшие лазерные люки GTOCore.",
+      "namespace": "gtceu"
+    },
+    "block.gtceu.max_4096a_laser_target_hatch": {
+      "ru": "Люк для лазерного приёмника (4096§eA§r §c§lMAX§r)",
+      "status": "linguistic_checked",
+      "category": "GTCEu: лазерная энергия",
+      "context": "Парный принимающий вариант лазерного люка.",
+      "namespace": "gtceu"
+    },
+    "block.gtceu.max_buffer": {
+      "ru": "§c§lБуфер MAX§r",
+      "status": "linguistic_checked",
+      "category": "GTCEu: буферы",
+      "context": "MAX является обозначением уровня и остаётся без перевода.",
+      "namespace": "gtceu"
+    },
+    "block.gtceu.opv_buffer": {
+      "ru": "§9§lЛегендарный буфер§r",
+      "status": "linguistic_checked",
+      "category": "GTCEu: буферы",
+      "context": "Ступень Legendary в последовательности названий буферов.",
+      "namespace": "gtceu"
+    },
+    "block.gtceu.uev_buffer": {
+      "ru": "§aЭпический буфер II§r",
+      "status": "linguistic_checked",
+      "category": "GTCEu: буферы",
+      "context": "Вторая ступень серии Epic Buffer.",
+      "namespace": "gtceu"
+    },
+    "block.gtceu.uhv_buffer": {
+      "ru": "§4Эпический буфер§r",
+      "status": "linguistic_checked",
+      "category": "GTCEu: буферы",
+      "context": "Первая ступень серии Epic Buffer.",
+      "namespace": "gtceu"
+    },
+    "block.gtceu.uiv_buffer": {
+      "ru": "§2Эпический буфер III§r",
+      "status": "linguistic_checked",
+      "category": "GTCEu: буферы",
+      "context": "Третья ступень серии Epic Buffer.",
+      "namespace": "gtceu"
+    },
+    "block.gtceu.uv_buffer": {
+      "ru": "§3Совершенный буфер§r",
+      "status": "linguistic_checked",
+      "category": "GTCEu: буферы",
+      "context": "Ultimate переведено как естественное название ступени, без кальки «ультимативный».",
+      "namespace": "gtceu"
+    },
+    "block.gtceu.uxv_buffer": {
+      "ru": "§eЭпический буфер IV§r",
+      "status": "linguistic_checked",
+      "category": "GTCEu: буферы",
+      "context": "Четвёртая ступень серии Epic Buffer.",
+      "namespace": "gtceu"
+    },
+    "block.gtceu.zpm_buffer": {
+      "ru": "§cЭлитный буфер III§r",
+      "status": "linguistic_checked",
+      "category": "GTCEu: буферы",
+      "context": "Третья ступень серии Elite Buffer.",
+      "namespace": "gtceu"
+    },
+    "block.gtocore.space_probe_surface_reception": {
+      "ru": "Сбор космического излучения",
+      "status": "context_checked",
+      "category": "gtocore: блоки",
+      "context": "Точное совпадение английской строки с уже переведённым ключом gtceu.space_probe_surface_reception; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "gtceu.space_probe_surface_reception",
+      "namespace": "gtocore"
+    },
+    "config.jade.plugin_functionalstorage.armory": {
+      "ru": "Оружейный шкаф Functional Storage",
+      "status": "context_checked",
+      "category": "jade: интерфейс",
+      "context": "Перевод из официального репозитория Functional Storage; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "functionalstorage"
+    },
+    "configurationtool.configmode": {
+      "ru": "Режим настройки: ",
+      "status": "context_checked",
+      "category": "other: интерфейс",
+      "context": "Перевод из официального репозитория Functional Storage; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "functionalstorage"
+    },
+    "configurationtool.configmode.indicator": {
+      "ru": "Сменить режим индикатора",
+      "status": "context_checked",
+      "category": "configmode: интерфейс",
+      "context": "Перевод из официального репозитория Functional Storage; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "functionalstorage"
+    },
+    "configurationtool.configmode.indicator.mode_0": {
+      "ru": "Скрыт",
+      "status": "context_checked",
+      "category": "configmode: интерфейс",
+      "context": "Перевод из официального репозитория Functional Storage; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "functionalstorage"
+    },
+    "configurationtool.configmode.indicator.mode_1": {
+      "ru": "Показывать шкалу заполнения",
+      "status": "context_checked",
+      "category": "configmode: интерфейс",
+      "context": "Перевод из официального репозитория Functional Storage; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "functionalstorage"
+    },
+    "configurationtool.configmode.indicator.mode_2": {
+      "ru": "Показывать шкалу только при заполнении",
+      "status": "context_checked",
+      "category": "configmode: интерфейс",
+      "context": "Перевод из официального репозитория Functional Storage; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "functionalstorage"
+    },
+    "configurationtool.configmode.indicator.mode_3": {
+      "ru": "Показывать шкалу без фона только при заполнении",
+      "status": "context_checked",
+      "category": "configmode: интерфейс",
+      "context": "Перевод из официального репозитория Functional Storage; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "functionalstorage"
+    },
+    "configurationtool.configmode.locking": {
+      "ru": "Блокировка",
+      "status": "context_checked",
+      "category": "configmode: интерфейс",
+      "context": "Перевод из официального репозитория Functional Storage; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "functionalstorage"
+    },
+    "configurationtool.configmode.swapped": {
+      "ru": "Режим изменён на ",
+      "status": "context_checked",
+      "category": "configmode: интерфейс",
+      "context": "Перевод из официального репозитория Functional Storage; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "functionalstorage"
+    },
+    "configurationtool.configmode.toggle_numbers": {
+      "ru": "Скрыть/Показать количество",
+      "status": "context_checked",
+      "category": "configmode: интерфейс",
+      "context": "Перевод из официального репозитория Functional Storage; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "functionalstorage"
+    },
+    "configurationtool.configmode.toggle_render": {
+      "ru": "Скрыть/Показать отображение предметов/жидкостей",
+      "status": "context_checked",
+      "category": "configmode: интерфейс",
+      "context": "Перевод из официального репозитория Functional Storage; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "functionalstorage"
+    },
+    "configurationtool.configmode.toggle_upgrades": {
+      "ru": "Скрыть/Показать отображение улучшений",
+      "status": "context_checked",
+      "category": "configmode: интерфейс",
+      "context": "Перевод из официального репозитория Functional Storage; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "functionalstorage"
+    },
+    "configurationtool.use": {
+      "ru": "Shift + ПКМ по воздуху для смены режима. ПКМ по ящику для переключения опции.",
+      "status": "context_checked",
+      "category": "other: интерфейс",
+      "context": "Перевод из официального репозитория Functional Storage; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "functionalstorage"
+    },
+    "cover.ender_item_link.title": {
+      "ru": "Эндер-связь предметов",
+      "status": "linguistic_checked",
+      "category": "GTCEu: покрытия",
+      "context": "Заголовок интерфейса должен совпадать с названием предмета покрытия.",
+      "namespace": "gtceu"
+    },
+    "cover.ender_redstone_link.title": {
+      "ru": "Эндер-связь редстоуна",
+      "status": "linguistic_checked",
+      "category": "GTCEu: покрытия",
+      "context": "Заголовок интерфейса должен совпадать с названием предмета покрытия.",
+      "namespace": "gtceu"
+    },
+    "data.error1.tooltip": {
+      "ru": "Всего лишь случайность",
+      "status": "context_checked",
+      "category": "error1: описания",
+      "context": "Точное совпадение английской строки с уже переведённым ключом gtocore.lang.research.error1.0.257040250; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "gtocore.lang.research.error1.0.257040250",
+      "namespace": "gtocore"
+    },
+    "death.attack.deeperdarker.bite": {
+      "ru": "%s был съеден",
+      "status": "context_checked",
+      "category": "attack: интерфейс",
+      "context": "Перевод из официального репозитория Deeper and Darker; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "deeperdarker"
+    },
+    "death.attack.deeperdarker.ring": {
+      "ru": "%s испытал смертельный шум в ушах от %s",
+      "status": "context_checked",
+      "category": "attack: интерфейс",
+      "context": "Перевод из официального репозитория Deeper and Darker; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "deeperdarker"
+    },
+    "drawer.block.contents": {
+      "ru": "Содержимое: ",
+      "status": "context_checked",
+      "category": "block: интерфейс",
+      "context": "Перевод из официального репозитория Functional Storage; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "functionalstorage"
+    },
+    "enchantment.deeperdarker.catalysis.desc": {
+      "ru": "Распространяет скалк при убийстве мобов.",
+      "status": "context_checked",
+      "category": "deeperdarker: описания",
+      "context": "Перевод из официального репозитория Deeper and Darker; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "deeperdarker"
+    },
+    "enchantment.deeperdarker.sculk_smite.desc": {
+      "ru": "Увеличивает урон против скалковых мобов, таких как раскол и хранитель.",
+      "status": "context_checked",
+      "category": "deeperdarker: описания",
+      "context": "Перевод из официального репозитория Deeper and Darker; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "deeperdarker"
+    },
+    "entity.deeperdarker.angler_fish": {
+      "ru": "Рыба-удильщик",
+      "status": "context_checked",
+      "category": "deeperdarker: существа",
+      "context": "Перевод из официального репозитория Deeper and Darker; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "deeperdarker"
+    },
+    "entity.deeperdarker.sludge": {
+      "ru": "Шлам",
+      "status": "context_checked",
+      "category": "deeperdarker: существа",
+      "context": "Перевод из официального репозитория Deeper and Darker; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "deeperdarker"
+    },
+    "frameddrawer.use": {
+      "ru": "Как изменить текстуру:\nВ сетке крафта поместите в первый слот блок для внешней текстуры. Во второй — блок для внутренней. В третий слот поместите сам каркасный ящик. Текстуру разделителя можно изменить, добавив блок в четвёртый слот.\n",
+      "status": "context_checked",
+      "category": "other: интерфейс",
+      "context": "Перевод из официального репозитория Functional Storage; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "functionalstorage"
+    },
+    "gtocore.machine.dyson_sphere_receiving_station.tooltip.0": {
+      "ru": "Начинает работу после запуска модулей сферы Дайсона",
+      "status": "context_checked",
+      "category": "machine: описания",
+      "context": "Точное совпадение английской строки с уже переведённым ключом gtocore.lang.dyson_sphere_receiving_station.1.1804774890; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "gtocore.lang.dyson_sphere_receiving_station.1.1804774890",
+      "namespace": "gtocore"
+    },
+    "gtocore.machine.dyson_sphere_receiving_station.tooltip.1": {
+      "ru": "Каждый цикл имеет шанс (количество модулей / 128 + 1) % повредить модуль",
+      "status": "context_checked",
+      "category": "machine: описания",
+      "context": "Точное совпадение английской строки с уже переведённым ключом gtocore.lang.dyson_sphere_receiving_station.6.427413323; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "gtocore.lang.dyson_sphere_receiving_station.6.427413323",
+      "namespace": "gtocore"
+    },
+    "gtocore.machine.dyson_sphere_receiving_station.tooltip.2": {
+      "ru": "При повреждении выше 60% эффективность постепенно падает с 100% до 20%, и выводит редстоун-сигнал, усиливающийся с ростом повреждений",
+      "status": "context_checked",
+      "category": "machine: описания",
+      "context": "Точное совпадение английской строки с уже переведённым ключом gtocore.lang.dyson_sphere_receiving_station.7.1960990861; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "gtocore.lang.dyson_sphere_receiving_station.7.1960990861",
+      "namespace": "gtocore"
+    },
+    "gtocore.machine.dyson_sphere_receiving_station.tooltip.3": {
+      "ru": "Когда уровень повреждения достигает 100 %, число запущенных модулей уменьшается на один, а показатель повреждения сбрасывается",
+      "status": "context_checked",
+      "category": "machine: описания",
+      "context": "Точное совпадение английской строки с уже переведённым ключом gtocore.lang.dyson_sphere_receiving_station.8.1452081537; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "gtocore.lang.dyson_sphere_receiving_station.8.1452081537",
+      "namespace": "gtocore"
+    },
+    "gtocore.machine.dyson_sphere_receiving_station.tooltip.4": {
+      "ru": "Если повреждение превышает 60%, запуск не увеличивает счётчик запусков, но сбрасывает повреждения",
+      "status": "context_checked",
+      "category": "machine: описания",
+      "context": "Точное совпадение английской строки с уже переведённым ключом gtocore.lang.dyson_sphere_receiving_station.9.299083700; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "gtocore.lang.dyson_sphere_receiving_station.9.299083700",
+      "namespace": "gtocore"
+    },
+    "gtocore.machine.dyson_sphere_receiving_station.tooltip.5": {
+      "ru": "Производство и требуемые вычисления зависят от числа запущенных модулей",
+      "status": "context_checked",
+      "category": "machine: описания",
+      "context": "Точное совпадение английской строки с уже переведённым ключом gtocore.lang.dyson_sphere_receiving_station.3.-2110948568; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "gtocore.lang.dyson_sphere_receiving_station.3.-2110948568",
+      "namespace": "gtocore"
+    },
+    "gtocore.machine.dyson_sphere_receiving_station.tooltip.6": {
+      "ru": "Каждый запуск увеличивает выходную мощность на 1A MAX",
+      "status": "context_checked",
+      "category": "machine: описания",
+      "context": "Точное совпадение английской строки с уже переведённым ключом gtocore.lang.dyson_sphere_receiving_station.4.1630903586; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "gtocore.lang.dyson_sphere_receiving_station.4.1630903586",
+      "namespace": "gtocore"
+    },
+    "gtocore.machine.magnetic_fluid_generator.tooltip.1": {
+      "ru": "Уровень стекла ограничивает уровень энергетического разъёма",
+      "status": "context_checked",
+      "category": "machine: описания",
+      "context": "Точное совпадение английской строки с уже переведённым ключом gtocore.lang.magnetic_fluid_generator.1.-1683981547; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "gtocore.lang.magnetic_fluid_generator.1.-1683981547",
+      "namespace": "gtocore"
+    },
+    "gtocore.machine.programmablec_hatch.tooltip": {
+      "ru": "Позволяет изменять интегральную схему при помощи виртуального поставщика предметов",
+      "status": "context_checked",
+      "category": "machine: описания",
+      "context": "Точное совпадение английской строки с уже переведённым ключом gtocore.machine.programmablec_hatch.extra_tooltip.0; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "gtocore.machine.programmablec_hatch.extra_tooltip.0",
+      "namespace": "gtocore"
+    },
+    "gui.functionalstorage.amount": {
+      "ru": "Количество: ",
+      "status": "context_checked",
+      "category": "functionalstorage: интерфейс",
+      "context": "Перевод из официального репозитория Functional Storage; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "functionalstorage"
+    },
+    "gui.functionalstorage.empty": {
+      "ru": "Пусто",
+      "status": "context_checked",
+      "category": "functionalstorage: интерфейс",
+      "context": "Перевод из официального репозитория Functional Storage; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "functionalstorage"
+    },
+    "gui.functionalstorage.fluid": {
+      "ru": "Жидкость: ",
+      "status": "context_checked",
+      "category": "functionalstorage: интерфейс",
+      "context": "Перевод из официального репозитория Functional Storage; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "functionalstorage"
+    },
+    "gui.functionalstorage.item": {
+      "ru": "Предмет: ",
+      "status": "context_checked",
+      "category": "functionalstorage: интерфейс",
+      "context": "Перевод из официального репозитория Functional Storage; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "functionalstorage"
+    },
+    "gui.functionalstorage.open_gui": {
+      "ru": "Нажмите Shift + ПКМ, чтобы открыть интерфейс",
+      "status": "context_checked",
+      "category": "functionalstorage: интерфейс",
+      "context": "Перевод из официального репозитория Functional Storage; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "functionalstorage"
+    },
+    "gui.functionalstorage.slot": {
+      "ru": "Слот: ",
+      "status": "context_checked",
+      "category": "functionalstorage: интерфейс",
+      "context": "Перевод из официального репозитория Functional Storage; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "functionalstorage"
+    },
+    "gui.functionalstorage.storage": {
+      "ru": "Хранилище",
+      "status": "context_checked",
+      "category": "functionalstorage: интерфейс",
+      "context": "Перевод из официального репозитория Functional Storage; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "functionalstorage"
+    },
+    "gui.functionalstorage.storage_range": {
+      "ru": "Радиус",
+      "status": "context_checked",
+      "category": "functionalstorage: интерфейс",
+      "context": "Перевод из официального репозитория Functional Storage; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "functionalstorage"
+    },
+    "gui.functionalstorage.utility": {
+      "ru": "Утилиты",
+      "status": "context_checked",
+      "category": "functionalstorage: интерфейс",
+      "context": "Перевод из официального репозитория Functional Storage; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "functionalstorage"
+    },
+    "item.deeperdarker.angler_fish_spawn_egg": {
+      "ru": "Яйцо призыва рыбы-удильщика",
+      "status": "context_checked",
+      "category": "deeperdarker: предметы",
+      "context": "Перевод из официального репозитория Deeper and Darker; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "deeperdarker"
+    },
+    "item.deeperdarker.bloom_berries": {
+      "ru": "Цветущие ягоды",
+      "status": "context_checked",
+      "category": "deeperdarker: предметы",
+      "context": "Перевод из официального репозитория Deeper and Darker; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "deeperdarker"
+    },
+    "item.deeperdarker.bloom_boat": {
+      "ru": "Цветущая лодка",
+      "status": "context_checked",
+      "category": "deeperdarker: предметы",
+      "context": "Перевод из официального репозитория Deeper and Darker; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "deeperdarker"
+    },
+    "item.deeperdarker.bloom_chest_boat": {
+      "ru": "Цветущая грузовая лодка",
+      "status": "context_checked",
+      "category": "deeperdarker: предметы",
+      "context": "Перевод из официального репозитория Deeper and Darker; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "deeperdarker"
+    },
+    "item.deeperdarker.dampens_vibrations": {
+      "ru": "Гасит вибрации",
+      "status": "context_checked",
+      "category": "deeperdarker: предметы",
+      "context": "Перевод из официального репозитория Deeper and Darker; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "deeperdarker"
+    },
+    "item.deeperdarker.lily_flower": {
+      "ru": "Цветок лилии",
+      "status": "context_checked",
+      "category": "deeperdarker: предметы",
+      "context": "Перевод из официального репозитория Deeper and Darker; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "deeperdarker"
+    },
+    "item.deeperdarker.resonarium": {
+      "ru": "Резонарий",
+      "status": "context_checked",
+      "category": "deeperdarker: предметы",
+      "context": "Перевод из официального репозитория Deeper and Darker; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "deeperdarker"
+    },
+    "item.deeperdarker.resonarium_axe": {
+      "ru": "Резонариевый топор",
+      "status": "context_checked",
+      "category": "deeperdarker: предметы",
+      "context": "Перевод из официального репозитория Deeper and Darker; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "deeperdarker"
+    },
+    "item.deeperdarker.resonarium_boots": {
+      "ru": "Резонариевые ботинки",
+      "status": "context_checked",
+      "category": "deeperdarker: предметы",
+      "context": "Перевод из официального репозитория Deeper and Darker; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "deeperdarker"
+    },
+    "item.deeperdarker.resonarium_chestplate": {
+      "ru": "Резонариевый нагрудник",
+      "status": "context_checked",
+      "category": "deeperdarker: предметы",
+      "context": "Перевод из официального репозитория Deeper and Darker; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "deeperdarker"
+    },
+    "item.deeperdarker.resonarium_helmet": {
+      "ru": "Резонариевый шлем",
+      "status": "context_checked",
+      "category": "deeperdarker: предметы",
+      "context": "Перевод из официального репозитория Deeper and Darker; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "deeperdarker"
+    },
+    "item.deeperdarker.resonarium_hoe": {
+      "ru": "Резонариевая мотыга",
+      "status": "context_checked",
+      "category": "deeperdarker: предметы",
+      "context": "Перевод из официального репозитория Deeper and Darker; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "deeperdarker"
+    },
+    "item.deeperdarker.resonarium_leggings": {
+      "ru": "Резонариевые поножи",
+      "status": "context_checked",
+      "category": "deeperdarker: предметы",
+      "context": "Перевод из официального репозитория Deeper and Darker; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "deeperdarker"
+    },
+    "item.deeperdarker.resonarium_pickaxe": {
+      "ru": "Резонариевая кирка",
+      "status": "context_checked",
+      "category": "deeperdarker: предметы",
+      "context": "Перевод из официального репозитория Deeper and Darker; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "deeperdarker"
+    },
+    "item.deeperdarker.resonarium_plate": {
+      "ru": "Резонариевая пластина",
+      "status": "context_checked",
+      "category": "deeperdarker: предметы",
+      "context": "Перевод из официального репозитория Deeper and Darker; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "deeperdarker"
+    },
+    "item.deeperdarker.resonarium_shovel": {
+      "ru": "Резонариевая лопата",
+      "status": "context_checked",
+      "category": "deeperdarker: предметы",
+      "context": "Перевод из официального репозитория Deeper and Darker; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "deeperdarker"
+    },
+    "item.deeperdarker.resonarium_sword": {
+      "ru": "Резонариевый меч",
+      "status": "context_checked",
+      "category": "deeperdarker: предметы",
+      "context": "Перевод из официального репозитория Deeper and Darker; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "deeperdarker"
+    },
+    "item.deeperdarker.sludge_spawn_egg": {
+      "ru": "Яйцо призыва шлама",
+      "status": "context_checked",
+      "category": "deeperdarker: предметы",
+      "context": "Перевод из официального репозитория Deeper and Darker; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "deeperdarker"
+    },
+    "item.deeperdarker.sonorous_staff": {
+      "ru": "Звучный посох",
+      "status": "context_checked",
+      "category": "deeperdarker: предметы",
+      "context": "Перевод из официального репозитория Deeper and Darker; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "deeperdarker"
+    },
+    "item.deeperdarker.soul_elytra.cooldown": {
+      "ru": "Ускорение доступно через %s",
+      "status": "context_checked",
+      "category": "deeperdarker: предметы",
+      "context": "Перевод из официального репозитория Deeper and Darker; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "deeperdarker"
+    },
+    "item.deeperdarker.soul_elytra.equipped": {
+      "ru": "Для ускорения нажмите %s",
+      "status": "context_checked",
+      "category": "deeperdarker: предметы",
+      "context": "Перевод из официального репозитория Deeper and Darker; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "deeperdarker"
+    },
+    "item.deeperdarker.soul_elytra.no_cooldown": {
+      "ru": "Ускорение отключено",
+      "status": "context_checked",
+      "category": "deeperdarker: предметы",
+      "context": "Перевод из официального репозитория Deeper and Darker; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "deeperdarker"
+    },
+    "item.extrabotany.lens_mana.short": {
+      "ru": "Мана",
+      "status": "context_checked",
+      "category": "extrabotany: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом extrabotany.brew.mana_cocktail; источник русского варианта: extrabotany-forge-1.20.1-1.9.2.jar.",
+      "source_key": "extrabotany.brew.mana_cocktail",
+      "namespace": "extrabotany"
+    },
+    "item.functionalstorage.collector_upgrade": {
+      "ru": "Улучшение-сборщик",
+      "status": "context_checked",
+      "category": "functionalstorage: предметы",
+      "context": "Перевод из официального репозитория Functional Storage; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "functionalstorage"
+    },
+    "item.functionalstorage.configuration_tool": {
+      "ru": "Инструмент настройки",
+      "status": "context_checked",
+      "category": "functionalstorage: предметы",
+      "context": "Перевод из официального репозитория Functional Storage; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "functionalstorage"
+    },
+    "item.functionalstorage.copper_upgrade": {
+      "ru": "Медное улучшение",
+      "status": "context_checked",
+      "category": "functionalstorage: предметы",
+      "context": "Перевод из официального репозитория Functional Storage; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "functionalstorage"
+    },
+    "item.functionalstorage.creative_vending_upgrade": {
+      "ru": "Творческое раздаточное улучшение",
+      "status": "context_checked",
+      "category": "functionalstorage: предметы",
+      "context": "Перевод из официального репозитория Functional Storage; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "functionalstorage"
+    },
+    "item.functionalstorage.diamond_upgrade": {
+      "ru": "Алмазное улучшение",
+      "status": "context_checked",
+      "category": "functionalstorage: предметы",
+      "context": "Перевод из официального репозитория Functional Storage; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "functionalstorage"
+    },
+    "item.functionalstorage.gold_upgrade": {
+      "ru": "Золотое улучшение",
+      "status": "context_checked",
+      "category": "functionalstorage: предметы",
+      "context": "Перевод из официального репозитория Functional Storage; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "functionalstorage"
+    },
+    "item.functionalstorage.iron_downgrade": {
+      "ru": "Железное ухудшение",
+      "status": "context_checked",
+      "category": "functionalstorage: предметы",
+      "context": "Перевод из официального репозитория Functional Storage; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "functionalstorage"
+    },
+    "item.functionalstorage.linking_tool": {
+      "ru": "Инструмент связывания",
+      "status": "context_checked",
+      "category": "functionalstorage: предметы",
+      "context": "Перевод из официального репозитория Functional Storage; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "functionalstorage"
+    },
+    "item.functionalstorage.max_storage_upgrade": {
+      "ru": "Максимальное улучшение вместимости",
+      "status": "context_checked",
+      "category": "functionalstorage: предметы",
+      "context": "Перевод из официального репозитория Functional Storage; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "functionalstorage"
+    },
+    "item.functionalstorage.netherite_upgrade": {
+      "ru": "Незеритовое улучшение",
+      "status": "context_checked",
+      "category": "functionalstorage: предметы",
+      "context": "Перевод из официального репозитория Functional Storage; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "functionalstorage"
+    },
+    "item.functionalstorage.puller_upgrade": {
+      "ru": "Улучшение-вытягиватель",
+      "status": "context_checked",
+      "category": "functionalstorage: предметы",
+      "context": "Перевод из официального репозитория Functional Storage; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "functionalstorage"
+    },
+    "item.functionalstorage.pusher_upgrade": {
+      "ru": "Улучшение-выталкиватель",
+      "status": "context_checked",
+      "category": "functionalstorage: предметы",
+      "context": "Перевод из официального репозитория Functional Storage; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "functionalstorage"
+    },
+    "item.functionalstorage.redstone_upgrade": {
+      "ru": "Редстоун-улучшение",
+      "status": "context_checked",
+      "category": "functionalstorage: предметы",
+      "context": "Перевод из официального репозитория Functional Storage; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "functionalstorage"
+    },
+    "item.functionalstorage.void_upgrade": {
+      "ru": "Улучшение пустоты",
+      "status": "context_checked",
+      "category": "functionalstorage: предметы",
+      "context": "Перевод из официального репозитория Functional Storage; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "functionalstorage"
+    },
+    "item.gtceu.basic_tape.tooltip.0": {
+      "ru": "§7Недостаточно крепкая для решения механических проблем",
+      "status": "linguistic_checked",
+      "category": "GTCEu: подсказки",
+      "context": "Восстановлено из существующего объединённого русского описания этого же предмета.",
+      "namespace": "gtceu"
+    },
+    "item.gtceu.basic_tape.tooltip.1": {
+      "ru": "§7Можно использовать, чтобы подбирать ящики, не роняя предметы из них",
+      "status": "linguistic_checked",
+      "category": "GTCEu: подсказки",
+      "context": "Восстановлено из существующего объединённого русского описания этого же предмета.",
+      "namespace": "gtceu"
+    },
+    "item.gtceu.ender_item_link_cover": {
+      "ru": "Эндер-связь предметов",
+      "status": "linguistic_checked",
+      "category": "GTCEu: покрытия",
+      "context": "Предмет и заголовок его интерфейса используют одинаковое название.",
+      "namespace": "gtceu"
+    },
+    "item.gtceu.ender_redstone_link_cover": {
+      "ru": "Эндер-связь редстоуна",
+      "status": "linguistic_checked",
+      "category": "GTCEu: покрытия",
+      "context": "Предмет и заголовок его интерфейса используют одинаковое название.",
+      "namespace": "gtceu"
+    },
+    "item.gtocore.affix_essence_0": {
+      "ru": "Сущность аффикса (первичная)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.affix_essence_original; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.affix_essence_original",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.affix_essence_1": {
+      "ru": "Сущность аффикса (Железокования · Кузнеца)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.affix_essence_armor_attribute_ironforged; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.affix_essence_armor_attribute_ironforged",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.affix_essence_10": {
+      "ru": "Сущность аффикса (Выплавления · Бога-кузницы)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.affix_essence_armor_dmg_reduction_blast_forged; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.affix_essence_armor_dmg_reduction_blast_forged",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.affix_essence_11": {
+      "ru": "Сущность аффикса (Неистовства · Берсерка)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.affix_essence_heavy_weapon_attribute_berserking; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.affix_essence_heavy_weapon_attribute_berserking",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.affix_essence_12": {
+      "ru": "Сущность аффикса (Стойкости · Упрямства)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.affix_essence_armor_attribute_stalwart; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.affix_essence_armor_attribute_stalwart",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.affix_essence_13": {
+      "ru": "Сущность аффикса (Плюща · Природного токсина)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.affix_essence_ranged_mob_effect_ivy_laced; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.affix_essence_ranged_mob_effect_ivy_laced",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.affix_essence_14": {
+      "ru": "Сущность аффикса (Сатаны · Преисподней)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.affix_essence_ranged_mob_effect_satanic; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.affix_essence_ranged_mob_effect_satanic",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.affix_essence_15": {
+      "ru": "Сущность аффикса (Насилия · Убийства)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.affix_essence_sword_attribute_violent; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.affix_essence_sword_attribute_violent",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.affix_essence_16": {
+      "ru": "Сущность аффикса (Призрачности · Покинутого)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.affix_essence_ranged_special_spectral; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.affix_essence_ranged_special_spectral",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.affix_essence_17": {
+      "ru": "Сущность аффикса (Крылатый · Небес)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.affix_essence_armor_attribute_winged; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.affix_essence_armor_attribute_winged",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.affix_essence_18": {
+      "ru": "Сущность аффикса (Уничтожения · Титана)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.affix_essence_heavy_weapon_attribute_annihilating; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.affix_essence_heavy_weapon_attribute_annihilating",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.affix_essence_19": {
+      "ru": "Сущность аффикса (Мощности · Быка)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.affix_essence_heavy_weapon_attribute_forceful; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.affix_essence_heavy_weapon_attribute_forceful",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.affix_essence_2": {
+      "ru": "Сущность аффикса (Вампиризма · Кровопускания)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.affix_essence_sword_attribute_vampiric; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.affix_essence_sword_attribute_vampiric",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.affix_essence_20": {
+      "ru": "Сущность аффикса (Иссушения · Черного скелета)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.affix_essence_shield_mob_effect_withering; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.affix_essence_shield_mob_effect_withering",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.affix_essence_21": {
+      "ru": "Сущность аффикса (Шустрости · Лиса)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.affix_essence_armor_mob_effect_nimble; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.affix_essence_armor_mob_effect_nimble",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.affix_essence_22": {
+      "ru": "Сущность аффикса (Спелеолога · Исследования пещер)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.affix_essence_breaker_mob_effect_spelunkers; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.affix_essence_breaker_mob_effect_spelunkers",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.affix_essence_23": {
+      "ru": "Сущность аффикса (Всепроникновения · Сингулярности)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.affix_essence_breaker_special_omnetic; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.affix_essence_breaker_special_omnetic",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.affix_essence_24": {
+      "ru": "Сущность аффикса (Едкости · Едкого царства)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.affix_essence_heavy_weapon_mob_effect_caustic; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.affix_essence_heavy_weapon_mob_effect_caustic",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.affix_essence_25": {
+      "ru": "Сущность аффикса (Проворности · Ловкости)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.affix_essence_ranged_attribute_agile; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.affix_essence_ranged_attribute_agile",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.affix_essence_26": {
+      "ru": "Сущность аффикса (Благословления · Здоровья)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.affix_essence_armor_attribute_blessed; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.affix_essence_armor_attribute_blessed",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.affix_essence_27": {
+      "ru": "Сущность аффикса (Пернатости · Орла)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.affix_essence_armor_dmg_reduction_feathery; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.affix_essence_armor_dmg_reduction_feathery",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.affix_essence_28": {
+      "ru": "Сущность аффикса (Убийцы гигантов · Колоссальных ударов)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.affix_essence_heavy_weapon_attribute_giant_slaying; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.affix_essence_heavy_weapon_attribute_giant_slaying",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.affix_essence_29": {
+      "ru": "Сущность аффикса (Водности · Океана)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.affix_essence_armor_attribute_aquatic; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.affix_essence_armor_attribute_aquatic",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.affix_essence_3": {
+      "ru": "Сущность аффикса (Праздненства · вечеринок)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.affix_essence_sword_special_festive; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.affix_essence_sword_special_festive",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.affix_essence_30": {
+      "ru": "Сущность аффикса (Духовности · Знахаря)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.affix_essence_armor_attribute_spiritual; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.affix_essence_armor_attribute_spiritual",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.affix_essence_31": {
+      "ru": "Сущность аффикса (Отступания · Шута)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.affix_essence_shield_special_retreating; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.affix_essence_shield_special_retreating",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.affix_essence_32": {
+      "ru": "Сущность аффикса (Упругости · Восхождения)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.affix_essence_armor_attribute_elastic; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.affix_essence_armor_attribute_elastic",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.affix_essence_33": {
+      "ru": "Сущность аффикса (Убийственности · Минотавра)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.affix_essence_heavy_weapon_attribute_murderous; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.affix_essence_heavy_weapon_attribute_murderous",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.affix_essence_34": {
+      "ru": "Сущность аффикса (Хитроумности · Критического мышления)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.affix_essence_sword_attribute_intricate; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.affix_essence_sword_attribute_intricate",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.affix_essence_35": {
+      "ru": "Сущность аффикса (Обтекаемости · Снайпера)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.affix_essence_ranged_attribute_streamlined; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.affix_essence_ranged_attribute_streamlined",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.affix_essence_36": {
+      "ru": "Сущность аффикса (Заманивания · Хищника)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.affix_essence_ranged_mob_effect_ensnaring; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.affix_essence_ranged_mob_effect_ensnaring",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.affix_essence_37": {
+      "ru": "Сущность аффикса (Кислотности · Коррозии)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.affix_essence_ranged_mob_effect_acidic; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.affix_essence_ranged_mob_effect_acidic",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.affix_essence_38": {
+      "ru": "Сущность аффикса (Длины · Хватания)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.affix_essence_breaker_attribute_lengthy; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.affix_essence_breaker_attribute_lengthy",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.affix_essence_39": {
+      "ru": "Сущность аффикса (Раздирания · Хирургической точности)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.affix_essence_sword_attribute_lacerating; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.affix_essence_sword_attribute_lacerating",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.affix_essence_4": {
+      "ru": "Сущность аффикса (Мимолетный · Рейнджера)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.affix_essence_ranged_mob_effect_fleeting; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.affix_essence_ranged_mob_effect_fleeting",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.affix_essence_40": {
+      "ru": "Сущность аффикса (Оживления · Источника)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.affix_essence_armor_mob_effect_revitalizing; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.affix_essence_armor_mob_effect_revitalizing",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.affix_essence_41": {
+      "ru": "Сущность аффикса (Везучести · Счастливой случайности)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.affix_essence_breaker_attribute_lucky; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.affix_essence_breaker_attribute_lucky",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.affix_essence_42": {
+      "ru": "Сущность аффикса (Разрушительности · Карьерных работ)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.affix_essence_breaker_attribute_destructive; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.affix_essence_breaker_attribute_destructive",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.affix_essence_43": {
+      "ru": "Сущность аффикса (Быстроты · Разгрома)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.affix_essence_breaker_mob_effect_swift; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.affix_essence_breaker_mob_effect_swift",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.affix_essence_44": {
+      "ru": "Сущность аффикса (Рассекания · Мясника)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.affix_essence_heavy_weapon_special_cleaving; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.affix_essence_heavy_weapon_special_cleaving",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.affix_essence_45": {
+      "ru": "Сущность аффикса (Ветренности · Текучести)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.affix_essence_ranged_attribute_windswept; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.affix_essence_ranged_attribute_windswept",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.affix_essence_46": {
+      "ru": "Сущность аффикса (Вытянутости · Далеких битв)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.affix_essence_sword_attribute_elongated; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.affix_essence_sword_attribute_elongated",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.affix_essence_47": {
+      "ru": "Сущность аффикса (Печали · Ранения)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.affix_essence_ranged_mob_effect_grievous; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.affix_essence_ranged_mob_effect_grievous",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.affix_essence_48": {
+      "ru": "Сущность аффикса (Пронзания · Разделения)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.affix_essence_sword_attribute_piercing; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.affix_essence_sword_attribute_piercing",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.affix_essence_49": {
+      "ru": "Сущность аффикса (Гравитационности · Гравитации)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.affix_essence_armor_attribute_gravitational; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.affix_essence_armor_attribute_gravitational",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.affix_essence_5": {
+      "ru": "Сущность аффикса (Эльфа · Первого лучника)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.affix_essence_ranged_attribute_elven; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.affix_essence_ranged_attribute_elven",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.affix_essence_50": {
+      "ru": "Сущность аффикса (Ветренности · Текучести)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.affix_essence_armor_attribute_windswept; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.affix_essence_armor_attribute_windswept",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.affix_essence_51": {
+      "ru": "Сущность аффикса (Просвещения · Светозара)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.affix_essence_breaker_special_enlightened; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.affix_essence_breaker_special_enlightened",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.affix_essence_52": {
+      "ru": "Сущность аффикса (Волшебства · Таинства)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.affix_essence_ranged_special_magical; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.affix_essence_ranged_special_magical",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.affix_essence_53": {
+      "ru": "Сущность аффикса (Инферно · Солнца)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.affix_essence_sword_attribute_infernal; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.affix_essence_sword_attribute_infernal",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.affix_essence_54": {
+      "ru": "Сущность аффикса (Истребления · Короля Богов)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.affix_essence_heavy_weapon_attribute_decimating; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.affix_essence_heavy_weapon_attribute_decimating",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.affix_essence_55": {
+      "ru": "Сущность аффикса (Радиальности · Землекрушителя)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.affix_essence_breaker_special_radial; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.affix_essence_breaker_special_radial",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.affix_essence_56": {
+      "ru": "Сущность аффикса (Психики · Мстителя)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.affix_essence_shield_special_psychic; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.affix_essence_shield_special_psychic",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.affix_essence_57": {
+      "ru": "Сущность аффикса (Ослабления · Слабости)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.affix_essence_sword_mob_effect_weakening; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.affix_essence_sword_mob_effect_weakening",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.affix_essence_58": {
+      "ru": "Сущность аффикса (Ослепления · Тьмы)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.affix_essence_armor_mob_effect_blinding; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.affix_essence_armor_mob_effect_blinding",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.affix_essence_59": {
+      "ru": "Сущность аффикса (Ануллирования · Магоборца)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.affix_essence_heavy_weapon_attribute_nullifying; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.affix_essence_heavy_weapon_attribute_nullifying",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.affix_essence_6": {
+      "ru": "Сущность аффикса (Измельчения · Проникновения)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.affix_essence_heavy_weapon_attribute_shredding; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.affix_essence_heavy_weapon_attribute_shredding",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.affix_essence_60": {
+      "ru": "Сущность аффикса (Телепатии · Пространства и времени)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.affix_essence_telepathic; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.affix_essence_telepathic",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.affix_essence_61": {
+      "ru": "Сущность аффикса (Громовержца · Шторма)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.affix_essence_sword_special_thunderstruck; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.affix_essence_sword_special_thunderstruck",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.affix_essence_62": {
+      "ru": "Сущность аффикса (Едкости · Истребителя)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.affix_essence_heavy_weapon_mob_effect_bloodletting; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.affix_essence_heavy_weapon_mob_effect_bloodletting",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.affix_essence_63": {
+      "ru": "Сущность аффикса (Удачливости · Четырехлистного клевера)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.affix_essence_armor_attribute_fortunate; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.affix_essence_armor_attribute_fortunate",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.affix_essence_64": {
+      "ru": "Сущность аффикса (Сталекования · Защитника)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.affix_essence_armor_attribute_steel_touched; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.affix_essence_armor_attribute_steel_touched",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.affix_essence_65": {
+      "ru": "Сущность аффикса (Рунохранения · Хранителя заклинаний)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.affix_essence_armor_dmg_reduction_runed; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.affix_essence_armor_dmg_reduction_runed",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.affix_essence_66": {
+      "ru": "Сущность аффикса (Железогорности · Кузнеца)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.affix_essence_shield_attribute_ironforged; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.affix_essence_shield_attribute_ironforged",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.affix_essence_67": {
+      "ru": "Сущность аффикса (Блокирования · Блокады)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.affix_essence_armor_dmg_reduction_blockading; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.affix_essence_armor_dmg_reduction_blockading",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.affix_essence_68": {
+      "ru": "Сущность аффикса (Дворфа · Вулкана)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.affix_essence_armor_dmg_reduction_dwarven; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.affix_essence_armor_dmg_reduction_dwarven",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.affix_essence_69": {
+      "ru": "Сущность аффикса (Разрывания · Живучести)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.affix_essence_armor_mob_effect_bursting; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.affix_essence_armor_mob_effect_bursting",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.affix_essence_7": {
+      "ru": "Сущность аффикса (Катализации · Преобразования)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.affix_essence_shield_special_catalyzing; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.affix_essence_shield_special_catalyzing",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.affix_essence_70": {
+      "ru": "Сущность аффикса (Прочности · Долговечности)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.affix_essence_durable; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.affix_essence_durable",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.affix_essence_71": {
+      "ru": "Сущность аффикса (Ядовитости ·Змеи)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.affix_essence_shield_mob_effect_venomous; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.affix_essence_shield_mob_effect_venomous",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.affix_essence_72": {
+      "ru": "Сущность аффикса (Шалкера ·Левитации)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.affix_essence_ranged_mob_effect_shulkers; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.affix_essence_ranged_mob_effect_shulkers",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.affix_essence_73": {
+      "ru": "Сущность аффикса (Палача · Исполнения)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.affix_essence_heavy_weapon_special_executing; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.affix_essence_heavy_weapon_special_executing",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.affix_essence_74": {
+      "ru": "Сущность аффикса (Разрушительности · Карьерных работ)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.affix_essence_breaker_attribute_experienced; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.affix_essence_breaker_attribute_experienced",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.affix_essence_75": {
+      "ru": "Сущность аффикса (Ледниковости · Ледяных земель)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.affix_essence_sword_attribute_glacial; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.affix_essence_sword_attribute_glacial",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.affix_essence_76": {
+      "ru": "Сущность аффикса (Сталекования · Защитника)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.affix_essence_shield_attribute_steel_touched; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.affix_essence_shield_attribute_steel_touched",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.affix_essence_77": {
+      "ru": "Сущность аффикса (Неуловимости · Уклонения)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.affix_essence_sword_mob_effect_elusive; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.affix_essence_sword_mob_effect_elusive",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.affix_essence_78": {
+      "ru": "Сущность аффикса (Грациозности · дуэлянта)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.affix_essence_sword_attribute_graceful; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.affix_essence_sword_attribute_graceful",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.affix_essence_79": {
+      "ru": "Сущность аффикса (Поддерживания · Силы духа)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.affix_essence_armor_mob_effect_bolstering; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.affix_essence_armor_mob_effect_bolstering",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.affix_essence_8": {
+      "ru": "Сущность аффикса (Утонченности · Древней библиотеки)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.affix_essence_sword_mob_effect_sophisticated; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.affix_essence_sword_mob_effect_sophisticated",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.affix_essence_80": {
+      "ru": "Сущность аффикса (Разрушения чар · Петрицитового голема)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.affix_essence_sword_attribute_spellbreaking; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.affix_essence_sword_attribute_spellbreaking",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.affix_essence_81": {
+      "ru": "Сущность аффикса (Разрушения чар · Петрицитового голема)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.affix_essence_shield_mob_effect_devilish; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.affix_essence_shield_mob_effect_devilish",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.affix_essence_9": {
+      "ru": "Сущность аффикса (Стойкости · Упрямства)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.affix_essence_armor_attribute_stalwart; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.affix_essence_armor_attribute_stalwart",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.enchantment_essence_0": {
+      "ru": "Сущность зачарования (первичная)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.enchantment_essence_original; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.enchantment_essence_original",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.enchantment_essence_1": {
+      "ru": "Сущность зачарования (Бич разбойников)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.enchantment_essence_bane_of_illagers; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.enchantment_essence_bane_of_illagers",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.enchantment_essence_10": {
+      "ru": "Сущность зачарования (Сыворотка роста)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.enchantment_essence_growth_serum; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.enchantment_essence_growth_serum",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.enchantment_essence_11": {
+      "ru": "Сущность зачарования (Ледяные шипы)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.enchantment_essence_icy_thorns; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.enchantment_essence_icy_thorns",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.enchantment_essence_12": {
+      "ru": "Сущность зачарования (Наполнение)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.enchantment_essence_infusion; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.enchantment_essence_infusion",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.enchantment_essence_13": {
+      "ru": "Сущность зачарования (Знание веков)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.enchantment_essence_knowledge; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.enchantment_essence_knowledge",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.enchantment_essence_14": {
+      "ru": "Сущность зачарования (Починка жизнью)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.enchantment_essence_life_mending; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.enchantment_essence_life_mending",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.enchantment_essence_15": {
+      "ru": "Сущность зачарования (Пыл шахтера)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.enchantment_essence_miners_fervor; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.enchantment_essence_miners_fervor",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.enchantment_essence_16": {
+      "ru": "Сущность зачарования (Благословение природы)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.enchantment_essence_natures_blessing; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.enchantment_essence_natures_blessing",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.enchantment_essence_17": {
+      "ru": "Сущность зачарования (Уничтожение)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.enchantment_essence_obliteration; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.enchantment_essence_obliteration",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.enchantment_essence_18": {
+      "ru": "Сущность зачарования (Отталкивание)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.enchantment_essence_rebounding; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.enchantment_essence_rebounding",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.enchantment_essence_19": {
+      "ru": "Сущность зачарования (Отражающая защита)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.enchantment_essence_reflective; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.enchantment_essence_reflective",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.enchantment_essence_2": {
+      "ru": "Сущность зачарования (Ярость берсерка)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.enchantment_essence_berserkers_fury; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.enchantment_essence_berserkers_fury",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.enchantment_essence_20": {
+      "ru": "Сущность зачарования (Мусорщик)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.enchantment_essence_scavenger; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.enchantment_essence_scavenger",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.enchantment_essence_21": {
+      "ru": "Сущность зачарования (Удар щитом)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.enchantment_essence_shield_bash; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.enchantment_essence_shield_bash",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.enchantment_essence_22": {
+      "ru": "Сущность зачарования (Гарпун)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.enchantment_essence_spearfishing; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.enchantment_essence_spearfishing",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.enchantment_essence_23": {
+      "ru": "Сущность зачарования (Разделение)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.enchantment_essence_splitting; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.enchantment_essence_splitting",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.enchantment_essence_24": {
+      "ru": "Сущность зачарования (Стабильное положение)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.enchantment_essence_stable_footing; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.enchantment_essence_stable_footing",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.enchantment_essence_25": {
+      "ru": "Сущность зачарования (Искушение)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.enchantment_essence_tempting; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.enchantment_essence_tempting",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.enchantment_essence_26": {
+      "ru": "Сущность зачарования (Увеличение маны)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.enchantment_essence_mana_boost; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.enchantment_essence_mana_boost",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.enchantment_essence_27": {
+      "ru": "Сущность зачарования (Регенерация маны)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.enchantment_essence_mana_regen; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.enchantment_essence_mana_regen",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.enchantment_essence_28": {
+      "ru": "Сущность зачарования (Реактивный)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.enchantment_essence_reactive; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.enchantment_essence_reactive",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.enchantment_essence_29": {
+      "ru": "Сущность зачарования (Катализ)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.enchantment_essence_catalysis; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.enchantment_essence_catalysis",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.enchantment_essence_3": {
+      "ru": "Сущность зачарования (Захват)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.enchantment_essence_capturing; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.enchantment_essence_capturing",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.enchantment_essence_30": {
+      "ru": "Сущность зачарования (Скалковая кара)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.enchantment_essence_sculk_smite; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.enchantment_essence_sculk_smite",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.enchantment_essence_37": {
+      "ru": "Сущность зачарования (Предательство)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.enchantment_essence_backstabbing; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.enchantment_essence_backstabbing",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.enchantment_essence_38": {
+      "ru": "Сущность зачарования (Подводник)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.enchantment_essence_aqua_affinity; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.enchantment_essence_aqua_affinity",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.enchantment_essence_39": {
+      "ru": "Сущность зачарования (Бич членистоногих)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.enchantment_essence_bane_of_arthropods; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.enchantment_essence_bane_of_arthropods",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.enchantment_essence_4": {
+      "ru": "Сущность зачарования (Бензопила)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.enchantment_essence_chainsaw; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.enchantment_essence_chainsaw",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.enchantment_essence_40": {
+      "ru": "Сущность зачарования (Проклятие несъёмности)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.enchantment_essence_binding_curse; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.enchantment_essence_binding_curse",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.enchantment_essence_41": {
+      "ru": "Сущность зачарования (Взрывоустойчивость)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.enchantment_essence_blast_protection; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.enchantment_essence_blast_protection",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.enchantment_essence_42": {
+      "ru": "Сущность зачарования (Громовержец)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.enchantment_essence_channeling; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.enchantment_essence_channeling",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.enchantment_essence_43": {
+      "ru": "Сущность зачарования (Подводная ходьба)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.enchantment_essence_depth_strider; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.enchantment_essence_depth_strider",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.enchantment_essence_44": {
+      "ru": "Сущность зачарования (Эффективность)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.enchantment_essence_efficiency; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.enchantment_essence_efficiency",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.enchantment_essence_45": {
+      "ru": "Сущность зачарования (Невесомость)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.enchantment_essence_feather_falling; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.enchantment_essence_feather_falling",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.enchantment_essence_46": {
+      "ru": "Сущность зачарования (Заговор огня)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.enchantment_essence_fire_aspect; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.enchantment_essence_fire_aspect",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.enchantment_essence_47": {
+      "ru": "Сущность зачарования (Огнестойкость)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.enchantment_essence_fire_protection; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.enchantment_essence_fire_protection",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.enchantment_essence_48": {
+      "ru": "Сущность зачарования (Воспламенение)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.enchantment_essence_flame; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.enchantment_essence_flame",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.enchantment_essence_49": {
+      "ru": "Сущность зачарования (Удача)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.enchantment_essence_fortune; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.enchantment_essence_fortune",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.enchantment_essence_5": {
+      "ru": "Сущность зачарования (Хроматическая абберация)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.enchantment_essence_chromatic; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.enchantment_essence_chromatic",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.enchantment_essence_50": {
+      "ru": "Сущность зачарования (Ледоход)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.enchantment_essence_frost_walker; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.enchantment_essence_frost_walker",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.enchantment_essence_51": {
+      "ru": "Сущность зачарования (Пронзающая стрела)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.enchantment_essence_impaling; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.enchantment_essence_impaling",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.enchantment_essence_52": {
+      "ru": "Сущность зачарования (Пронзающая стрела)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.enchantment_essence_infinity; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.enchantment_essence_infinity",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.enchantment_essence_53": {
+      "ru": "Сущность зачарования (Отдача)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.enchantment_essence_knockback; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.enchantment_essence_knockback",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.enchantment_essence_54": {
+      "ru": "Сущность зачарования (Добыча)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.enchantment_essence_looting; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.enchantment_essence_looting",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.enchantment_essence_55": {
+      "ru": "Сущность зачарования (Верность)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.enchantment_essence_loyalty; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.enchantment_essence_loyalty",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.enchantment_essence_56": {
+      "ru": "Сущность зачарования (Везучий рыбак)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.enchantment_essence_luck_of_the_sea; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.enchantment_essence_luck_of_the_sea",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.enchantment_essence_57": {
+      "ru": "Сущность зачарования (Приманка)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.enchantment_essence_lure; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.enchantment_essence_lure",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.enchantment_essence_58": {
+      "ru": "Сущность зачарования (Починка)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.enchantment_essence_mending; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.enchantment_essence_mending",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.enchantment_essence_59": {
+      "ru": "Сущность зачарования (Тройной выстрел)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.enchantment_essence_multishot; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.enchantment_essence_multishot",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.enchantment_essence_6": {
+      "ru": "Сущность зачарования (Крещендо болтов)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.enchantment_essence_crescendo; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.enchantment_essence_crescendo",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.enchantment_essence_60": {
+      "ru": "Сущность зачарования (Пронзатель)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.enchantment_essence_piercing; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.enchantment_essence_piercing",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.enchantment_essence_61": {
+      "ru": "Сущность зачарования (Сила)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.enchantment_essence_power; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.enchantment_essence_power",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.enchantment_essence_62": {
+      "ru": "Сущность зачарования (Защита от снарядов)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.enchantment_essence_projectile_protection; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.enchantment_essence_projectile_protection",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.enchantment_essence_63": {
+      "ru": "Сущность зачарования (Защита)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.enchantment_essence_protection; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.enchantment_essence_protection",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.enchantment_essence_64": {
+      "ru": "Сущность зачарования (Откидывание)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.enchantment_essence_punch; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.enchantment_essence_punch",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.enchantment_essence_65": {
+      "ru": "Сущность зачарования (Быстрая перезарядка)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.enchantment_essence_quick_charge; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.enchantment_essence_quick_charge",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.enchantment_essence_66": {
+      "ru": "Сущность зачарования (Подводное дыхание)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.enchantment_essence_respiration; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.enchantment_essence_respiration",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.enchantment_essence_67": {
+      "ru": "Сущность зачарования (Тягун)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.enchantment_essence_riptide; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.enchantment_essence_riptide",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.enchantment_essence_68": {
+      "ru": "Сущность зачарования (Острота)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.enchantment_essence_sharpness; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.enchantment_essence_sharpness",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.enchantment_essence_69": {
+      "ru": "Сущность зачарования (Шелковое касание)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.enchantment_essence_silk_touch; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.enchantment_essence_silk_touch",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.enchantment_essence_7": {
+      "ru": "Сущность зачарования (Благо земли)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.enchantment_essence_earths_boon; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.enchantment_essence_earths_boon",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.enchantment_essence_70": {
+      "ru": "Сущность зачарования (Небесная кара)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.enchantment_essence_smite; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.enchantment_essence_smite",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.enchantment_essence_71": {
+      "ru": "Сущность зачарования (Скорость души)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.enchantment_essence_soul_speed; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.enchantment_essence_soul_speed",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.enchantment_essence_72": {
+      "ru": "Сущность зачарования (Разящий клинок)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.enchantment_essence_sweeping; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.enchantment_essence_sweeping",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.enchantment_essence_73": {
+      "ru": "Сущность зачарования (Проворство)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.enchantment_essence_swift_sneak; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.enchantment_essence_swift_sneak",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.enchantment_essence_74": {
+      "ru": "Сущность зачарования (Шипы)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.enchantment_essence_thorns; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.enchantment_essence_thorns",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.enchantment_essence_75": {
+      "ru": "Сущность зачарования (Прочность)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.enchantment_essence_unbreaking; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.enchantment_essence_unbreaking",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.enchantment_essence_76": {
+      "ru": "Сущность зачарования (Проклятие утраты)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.enchantment_essence_vanishing_curse; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.enchantment_essence_vanishing_curse",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.enchantment_essence_77": {
+      "ru": "Сущность зачарования (Подвижность молота)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.enchantment_essence_hammer_mobility; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.enchantment_essence_hammer_mobility",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.enchantment_essence_8": {
+      "ru": "Сущность зачарования (Бесконечный колчан)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.enchantment_essence_endless_quiver; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.enchantment_essence_endless_quiver",
+      "namespace": "gtocore"
+    },
+    "item.gtocore.enchantment_essence_9": {
+      "ru": "Сущность зачарования (Эксплуатирование)",
+      "status": "context_checked",
+      "category": "gtocore: предметы",
+      "context": "Точное совпадение английской строки с уже переведённым ключом item.gtocore.enchantment_essence_exploitation; источник русского варианта: openloader/z-gto-lang-all-locales-gto-0.5.6-r3.zip.",
+      "source_key": "item.gtocore.enchantment_essence_exploitation",
+      "namespace": "gtocore"
+    },
+    "item.utility.direction": {
+      "ru": "Направление: ",
+      "status": "context_checked",
+      "category": "utility: предметы",
+      "context": "Перевод из официального репозитория Functional Storage; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "functionalstorage"
+    },
+    "item.utility.direction.desc": {
+      "ru": "ПКМ в интерфейсе, чтобы сменить направление",
+      "status": "context_checked",
+      "category": "utility: предметы",
+      "context": "Перевод из официального репозитория Functional Storage; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "functionalstorage"
+    },
+    "item.utility.downgrade": {
+      "ru": "Уменьшает вместимость слотов до 64 предметов",
+      "status": "context_checked",
+      "category": "utility: предметы",
+      "context": "Перевод из официального репозитория Functional Storage; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "functionalstorage"
+    },
+    "item.utility.slot": {
+      "ru": "Слот: ",
+      "status": "context_checked",
+      "category": "utility: предметы",
+      "context": "Перевод из официального репозитория Functional Storage; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "functionalstorage"
+    },
+    "item.utility.slot.desc": {
+      "ru": "ПКМ в интерфейсе, чтобы сменить слот",
+      "status": "context_checked",
+      "category": "utility: предметы",
+      "context": "Перевод из официального репозитория Functional Storage; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "functionalstorage"
+    },
+    "key.categories.storage": {
+      "ru": "Хранилище",
+      "status": "context_checked",
+      "category": "categories: интерфейс",
+      "context": "Перевод из официального репозитория Functional Storage; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "functionalstorage"
+    },
+    "key.categories.utility": {
+      "ru": "Утилиты",
+      "status": "context_checked",
+      "category": "categories: интерфейс",
+      "context": "Перевод из официального репозитория Functional Storage; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "functionalstorage"
+    },
+    "key.deeperdarker.boost": {
+      "ru": "Ускорение элитр душ",
+      "status": "context_checked",
+      "category": "deeperdarker: интерфейс",
+      "context": "Перевод из официального репозитория Deeper and Darker; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "deeperdarker"
+    },
+    "key.deeperdarker.transmit": {
+      "ru": "Использовать скалковый передатчик",
+      "status": "context_checked",
+      "category": "deeperdarker: интерфейс",
+      "context": "Перевод из официального репозитория Deeper and Darker; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "deeperdarker"
+    },
+    "linkingtool.controller": {
+      "ru": "Контроллер: ",
+      "status": "context_checked",
+      "category": "other: интерфейс",
+      "context": "Перевод из официального репозитория Functional Storage; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "functionalstorage"
+    },
+    "linkingtool.controller.configured": {
+      "ru": "Контроллер привязан к инструменту",
+      "status": "context_checked",
+      "category": "controller: интерфейс",
+      "context": "Перевод из официального репозитория Functional Storage; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "functionalstorage"
+    },
+    "linkingtool.drawer.clear": {
+      "ru": "Частота ящика сброшена",
+      "status": "context_checked",
+      "category": "drawer: интерфейс",
+      "context": "Перевод из официального репозитория Functional Storage; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "functionalstorage"
+    },
+    "linkingtool.ender.changed": {
+      "ru": "Частота ящика изменена",
+      "status": "context_checked",
+      "category": "ender: интерфейс",
+      "context": "Перевод из официального репозитория Functional Storage; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "functionalstorage"
+    },
+    "linkingtool.ender.clear": {
+      "ru": "Shift + ПКМ в воздухе, чтобы сбросить частоту",
+      "status": "context_checked",
+      "category": "ender: интерфейс",
+      "context": "Перевод из официального репозитория Functional Storage; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "functionalstorage"
+    },
+    "linkingtool.ender.frequency": {
+      "ru": "Частота: ",
+      "status": "context_checked",
+      "category": "ender: интерфейс",
+      "context": "Перевод из официального репозитория Functional Storage; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "functionalstorage"
+    },
+    "linkingtool.ender.stored": {
+      "ru": "Частота сохранена в инструменте",
+      "status": "context_checked",
+      "category": "ender: интерфейс",
+      "context": "Перевод из официального репозитория Functional Storage; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "functionalstorage"
+    },
+    "linkingtool.ender.warning": {
+      "ru": "Невозможно изменить частоту, в ящике есть предметы. Нажмите Shift + ПКМ ещё раз, чтобы проигнорировать это предупреждение",
+      "status": "context_checked",
+      "category": "ender: интерфейс",
+      "context": "Перевод из официального репозитория Functional Storage; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "functionalstorage"
+    },
+    "linkingtool.linkingaction": {
+      "ru": "Действие связывания: ",
+      "status": "context_checked",
+      "category": "other: интерфейс",
+      "context": "Перевод из официального репозитория Functional Storage; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "functionalstorage"
+    },
+    "linkingtool.linkingaction.add": {
+      "ru": "Добавить",
+      "status": "context_checked",
+      "category": "linkingaction: интерфейс",
+      "context": "Перевод из официального репозитория Functional Storage; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "functionalstorage"
+    },
+    "linkingtool.linkingaction.remove": {
+      "ru": "Удалить",
+      "status": "context_checked",
+      "category": "linkingaction: интерфейс",
+      "context": "Перевод из официального репозитория Functional Storage; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "functionalstorage"
+    },
+    "linkingtool.linkingaction.swapped": {
+      "ru": "Действие изменено на %s",
+      "status": "context_checked",
+      "category": "linkingaction: интерфейс",
+      "context": "Перевод из официального репозитория Functional Storage; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "functionalstorage"
+    },
+    "linkingtool.linkingmode": {
+      "ru": "Режим связывания: ",
+      "status": "context_checked",
+      "category": "other: интерфейс",
+      "context": "Перевод из официального репозитория Functional Storage; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "functionalstorage"
+    },
+    "linkingtool.linkingmode.multiple": {
+      "ru": "Несколько",
+      "status": "context_checked",
+      "category": "linkingmode: интерфейс",
+      "context": "Перевод из официального репозитория Functional Storage; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "functionalstorage"
+    },
+    "linkingtool.linkingmode.multiple.desc": {
+      "ru": "Связывает несколько ящиков между 2 точками",
+      "status": "context_checked",
+      "category": "linkingmode: описания",
+      "context": "Перевод из официального репозитория Functional Storage; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "functionalstorage"
+    },
+    "linkingtool.linkingmode.single": {
+      "ru": "Один",
+      "status": "context_checked",
+      "category": "linkingmode: интерфейс",
+      "context": "Перевод из официального репозитория Functional Storage; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "functionalstorage"
+    },
+    "linkingtool.linkingmode.single.desc": {
+      "ru": "Связывает ящик с контроллером",
+      "status": "context_checked",
+      "category": "linkingmode: описания",
+      "context": "Перевод из официального репозитория Functional Storage; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "functionalstorage"
+    },
+    "linkingtool.linkingmode.swapped": {
+      "ru": "Режим изменён на %s",
+      "status": "context_checked",
+      "category": "linkingmode: интерфейс",
+      "context": "Перевод из официального репозитория Functional Storage; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "functionalstorage"
+    },
+    "linkingtool.multiple_drawer.linked": {
+      "ru": "Ящики привязаны к контроллеру",
+      "status": "context_checked",
+      "category": "multiple_drawer: интерфейс",
+      "context": "Перевод из официального репозитория Functional Storage; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "functionalstorage"
+    },
+    "linkingtool.multiple_drawer.removed": {
+      "ru": "Ящики отвязаны от контроллера",
+      "status": "context_checked",
+      "category": "multiple_drawer: интерфейс",
+      "context": "Перевод из официального репозитория Functional Storage; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "functionalstorage"
+    },
+    "linkingtool.single_drawer.linked": {
+      "ru": "Ящик привязан к контроллеру",
+      "status": "context_checked",
+      "category": "single_drawer: интерфейс",
+      "context": "Перевод из официального репозитория Functional Storage; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "functionalstorage"
+    },
+    "linkingtool.single_drawer.removed": {
+      "ru": "Ящик отвязан от контроллера",
+      "status": "context_checked",
+      "category": "single_drawer: интерфейс",
+      "context": "Перевод из официального репозитория Functional Storage; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "functionalstorage"
+    },
+    "linkingtool.use": {
+      "ru": "* Shift + ПКМ по воздуху, чтобы сменить режим или сбросить частоту.\n* ЛКМ по эндер-ящику, чтобы сохранить его частоту.\n* ПКМ по воздуху, чтобы сменить действие.\n\nПКМ по контроллеру, чтобы настроить инструмент, затем используйте его на ящиках поблизости для привязки.\n\nКогда вы держите инструмент в руке, он будет показывать ящики, подключённые к выбранному контроллеру.",
+      "status": "context_checked",
+      "category": "other: интерфейс",
+      "context": "Перевод из официального репозитория Functional Storage; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "functionalstorage"
+    },
+    "painting.ad_astra.earth.title": {
+      "ru": "Земля",
+      "status": "context_checked",
+      "category": "ad_astra: интерфейс",
+      "context": "Точное совпадение английской строки с уже переведённым ключом planet.minecraft.overworld; источник русского варианта: ad_astra-forge-1.20.1-1.15.20.jar.",
+      "source_key": "planet.minecraft.overworld",
+      "namespace": "ad_astra"
+    },
+    "painting.ad_astra.glacio.title": {
+      "ru": "Гласио",
+      "status": "context_checked",
+      "category": "ad_astra: интерфейс",
+      "context": "Точное совпадение английской строки с уже переведённым ключом planet.ad_astra.glacio; источник русского варианта: ad_astra-forge-1.20.1-1.15.20.jar.",
+      "source_key": "planet.ad_astra.glacio",
+      "namespace": "ad_astra"
+    },
+    "painting.ad_astra.mars.title": {
+      "ru": "Марс",
+      "status": "context_checked",
+      "category": "ad_astra: интерфейс",
+      "context": "Точное совпадение английской строки с уже переведённым ключом planet.ad_astra.mars; источник русского варианта: ad_astra-forge-1.20.1-1.15.20.jar.",
+      "source_key": "planet.ad_astra.mars",
+      "namespace": "ad_astra"
+    },
+    "painting.ad_astra.mercury.title": {
+      "ru": "Меркурий",
+      "status": "context_checked",
+      "category": "ad_astra: интерфейс",
+      "context": "Точное совпадение английской строки с уже переведённым ключом planet.ad_astra.mercury; источник русского варианта: ad_astra-forge-1.20.1-1.15.20.jar.",
+      "source_key": "planet.ad_astra.mercury",
+      "namespace": "ad_astra"
+    },
+    "painting.ad_astra.moon.title": {
+      "ru": "Луна",
+      "status": "context_checked",
+      "category": "ad_astra: интерфейс",
+      "context": "Точное совпадение английской строки с уже переведённым ключом planet.ad_astra.moon; источник русского варианта: ad_astra-forge-1.20.1-1.15.20.jar.",
+      "source_key": "planet.ad_astra.moon",
+      "namespace": "ad_astra"
+    },
+    "painting.ad_astra.venus.title": {
+      "ru": "Венера",
+      "status": "context_checked",
+      "category": "ad_astra: интерфейс",
+      "context": "Точное совпадение английской строки с уже переведённым ключом planet.ad_astra.venus; источник русского варианта: ad_astra-forge-1.20.1-1.15.20.jar.",
+      "source_key": "planet.ad_astra.venus",
+      "namespace": "ad_astra"
+    },
+    "painting.deeperdarker.abstraction.title": {
+      "ru": "Абстракция",
+      "status": "context_checked",
+      "category": "deeperdarker: интерфейс",
+      "context": "Перевод из официального репозитория Deeper and Darker; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "deeperdarker"
+    },
+    "painting.deeperdarker.adventure.title": {
+      "ru": "Приключение",
+      "status": "context_checked",
+      "category": "deeperdarker: интерфейс",
+      "context": "Перевод из официального репозитория Deeper and Darker; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "deeperdarker"
+    },
+    "painting.deeperdarker.carrot.title": {
+      "ru": "Вернуться к истокам",
+      "status": "context_checked",
+      "category": "deeperdarker: интерфейс",
+      "context": "Перевод из официального репозитория Deeper and Darker; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "deeperdarker"
+    },
+    "painting.deeperdarker.clouds.title": {
+      "ru": "Облака",
+      "status": "context_checked",
+      "category": "deeperdarker: интерфейс",
+      "context": "Перевод из официального репозитория Deeper and Darker; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "deeperdarker"
+    },
+    "painting.deeperdarker.echoer.title": {
+      "ru": "Эхо-сигнал",
+      "status": "context_checked",
+      "category": "deeperdarker: интерфейс",
+      "context": "Перевод из официального репозитория Deeper and Darker; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "deeperdarker"
+    },
+    "painting.deeperdarker.millipede.title": {
+      "ru": "Многоножка",
+      "status": "context_checked",
+      "category": "deeperdarker: интерфейс",
+      "context": "Перевод из официального репозитория Deeper and Darker; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "deeperdarker"
+    },
+    "painting.deeperdarker.ooze.title": {
+      "ru": "Склизь",
+      "status": "context_checked",
+      "category": "deeperdarker: интерфейс",
+      "context": "Перевод из официального репозитория Deeper and Darker; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "deeperdarker"
+    },
+    "storageupgrade.desc.fluid": {
+      "ru": "Умножает вместимость жидкостей на ",
+      "status": "context_checked",
+      "category": "desc: интерфейс",
+      "context": "Перевод из официального репозитория Functional Storage; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "functionalstorage"
+    },
+    "storageupgrade.desc.item": {
+      "ru": "Умножает вместимость предметов на ",
+      "status": "context_checked",
+      "category": "desc: интерфейс",
+      "context": "Перевод из официального репозитория Functional Storage; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "functionalstorage"
+    },
+    "storageupgrade.desc.range": {
+      "ru": "Увеличивает радиус контроллера на %s блока(ов)",
+      "status": "context_checked",
+      "category": "desc: интерфейс",
+      "context": "Перевод из официального репозитория Functional Storage; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "functionalstorage"
+    },
+    "subtitles.entity.angler_fish.death": {
+      "ru": "Рыба-удильщик погибает",
+      "status": "context_checked",
+      "category": "entity: интерфейс",
+      "context": "Перевод из официального репозитория Deeper and Darker; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "deeperdarker"
+    },
+    "subtitles.entity.angler_fish.flop": {
+      "ru": "Рыба-удильщик хлюпает",
+      "status": "context_checked",
+      "category": "entity: интерфейс",
+      "context": "Перевод из официального репозитория Deeper and Darker; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "deeperdarker"
+    },
+    "subtitles.entity.angler_fish.hurt": {
+      "ru": "Рыба-удильщик ранена",
+      "status": "context_checked",
+      "category": "entity: интерфейс",
+      "context": "Перевод из официального репозитория Deeper and Darker; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "deeperdarker"
+    },
+    "subtitles.entity.leech.hurt": {
+      "ru": "Скалковая пиявка ранена",
+      "status": "context_checked",
+      "category": "entity: интерфейс",
+      "context": "Перевод из официального репозитория Deeper and Darker; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "deeperdarker"
+    },
+    "subtitles.entity.shattered.notice": {
+      "ru": "Раскол замечает кого-то",
+      "status": "context_checked",
+      "category": "entity: интерфейс",
+      "context": "Перевод из официального репозитория Deeper and Darker; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "deeperdarker"
+    },
+    "subtitles.entity.stalker.notice": {
+      "ru": "Подражатель замечает кого-то",
+      "status": "context_checked",
+      "category": "entity: интерфейс",
+      "context": "Перевод из официального репозитория Deeper and Darker; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "deeperdarker"
+    },
+    "tooltips.deeperdarker.crystallized_amber.item": {
+      "ru": "Содержит: %s",
+      "status": "context_checked",
+      "category": "deeperdarker: описания",
+      "context": "Перевод из официального репозитория Deeper and Darker; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "deeperdarker"
+    },
+    "tooltips.deeperdarker.crystallized_amber.leech": {
+      "ru": "Содержит: Скалковая пиявка",
+      "status": "context_checked",
+      "category": "deeperdarker: описания",
+      "context": "Перевод из официального репозитория Deeper and Darker; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "deeperdarker"
+    },
+    "tooltips.deeperdarker.ice_lily.flowerless": {
+      "ru": "Бесцветочный",
+      "status": "context_checked",
+      "category": "deeperdarker: описания",
+      "context": "Перевод из официального репозитория Deeper and Darker; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "deeperdarker"
+    },
+    "upgrade.type": {
+      "ru": "Тип: ",
+      "status": "context_checked",
+      "category": "other: интерфейс",
+      "context": "Перевод из официального репозитория Functional Storage; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "functionalstorage"
+    },
+    "upgrade.type.storage": {
+      "ru": "Хранилище",
+      "status": "context_checked",
+      "category": "type: интерфейс",
+      "context": "Перевод из официального репозитория Functional Storage; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "functionalstorage"
+    },
+    "upgrade.type.utility": {
+      "ru": "Утилита",
+      "status": "context_checked",
+      "category": "type: интерфейс",
+      "context": "Перевод из официального репозитория Functional Storage; английская строка побайтно совпадает с версией в сборке.",
+      "namespace": "functionalstorage"
+    }
+  }
+}

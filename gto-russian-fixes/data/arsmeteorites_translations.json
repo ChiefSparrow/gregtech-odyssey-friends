@@ -1,0 +1,22 @@
+{
+  "defaults": {
+    "status": "linguistic_checked",
+    "category": "Ars Meteorites",
+    "context": "Ручной перевод названия ритуала и подсказок его настройки.",
+    "namespace": "arsmeteorites"
+  },
+  "entries": {
+    "item.arsmeteorites.ritual_conjure_meteorites": "Метеориты",
+    "tooltip.arsmeteorites.direction": "Изменяет положение центра метеорита",
+    "tooltip.arsmeteorites.explode": "Остерегайтесь взрывов",
+    "tooltip.arsmeteorites.input": "Выбирает тип метеоритов",
+    "tooltip.arsmeteorites.model0": "Модель: полностью случайные метеориты",
+    "tooltip.arsmeteorites.model1": "Модель: метеорит с фиксированными слоями",
+    "tooltip.arsmeteorites.model2": "Модель: метеорит со случайными слоями",
+    "tooltip.arsmeteorites.model3": "Модель: послойно случайный метеорит",
+    "tooltip.arsmeteorites.model4": "Модель: случайные слои с ограничениями",
+    "tooltip.arsmeteorites.probability": "Вес: %s",
+    "tooltip.arsmeteorites.source_gem": "Увеличивает радиус метеорита",
+    "arsmeteorites.ritual_desc.ritual_conjure_meteorites": "Призывает огромный метеорит из недр мира.\nСначала поглотите предметы, чтобы выбрать состав метеорита, а затем — чтобы увеличить его радиус.\nКоличество расходуемого Источника зависит от числа создаваемых блоков."
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "defaults": {
+    "status": "linguistic_checked",
+    "category": "Ars Énergistique",
+    "context": "Ручной перевод, согласованный с терминами AE2 и Ars Nouveau в установленной сборке.",
+    "namespace": "arseng"
+  },
+  "entries": {
+    "block.arseng.me_source_jar": "МЭ-кувшин с Источником",
+    "block.arseng.source_acceptor": "МЭ-конвертер Источника",
+    "item.arseng.cable_source_acceptor": "МЭ-приёмщик Источника",
+    "item.arseng.creative_source_cell": "Творческая МЭ-ячейка Источника",
+    "item.arseng.portable_source_cell_16k": "Переносная ячейка Источника 16К",
+    "item.arseng.portable_source_cell_1k": "Переносная ячейка Источника 1К",
+    "item.arseng.portable_source_cell_256k": "Переносная ячейка Источника 256К",
+    "item.arseng.portable_source_cell_4k": "Переносная ячейка Источника 4К",
+    "item.arseng.portable_source_cell_64k": "Переносная ячейка Источника 64К",
+    "item.arseng.source_cell_housing": "МЭ-корпус ячейки Источника",
+    "item.arseng.source_p2p_tunnel": "P2P-тоннель Источника",
+    "item.arseng.source_storage_cell_16k": "МЭ-ячейка хранения Источника 16К",
+    "item.arseng.source_storage_cell_1k": "МЭ-ячейка хранения Источника 1К",
+    "item.arseng.source_storage_cell_256k": "МЭ-ячейка хранения Источника 256К",
+    "item.arseng.source_storage_cell_4k": "МЭ-ячейка хранения Источника 4К",
+    "item.arseng.source_storage_cell_64k": "МЭ-ячейка хранения Источника 64К",
+    "item.arseng.spell_p2p_tunnel": "МЭ P2P-тоннель заклинаний",
+    "arseng.page.source_acceptor_description": "Конвертер Источника существует и в виде блока, и в виде кабельной части."
+  }
+}

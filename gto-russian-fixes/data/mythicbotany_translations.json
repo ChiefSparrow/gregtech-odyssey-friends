@@ -1,0 +1,24 @@
+{
+  "defaults": {
+    "status": "linguistic_checked",
+    "category": "MythicBotany",
+    "context": "Ручной перевод с терминологией Botania и существующей локализацией MythicBotany.",
+    "namespace": "mythicbotany"
+  },
+  "entries": {
+    "block.mythicbotany.feysythia": "Фейзития",
+    "block.mythicbotany.feysythia.description": "Сказание о феях",
+    "block.mythicbotany.feysythia_floating": "Парящая фейзития",
+    "block.mythicbotany.petrunia": "Петруния",
+    "block.mythicbotany.petrunia.description": "Получена из сада на Тисовой улице",
+    "block.mythicbotany.petrunia_floating": "Парящая петруния",
+    "block.mythicbotany.raw_elementium_block": "Блок необработанного элементия",
+    "enchantment.mythicbotany.hammer_mobility.desc": "Увеличивает скорость атаки молота.",
+    "item.mythicbotany.inactive_alsteel_template": "Иноземный кузнечный шаблон",
+    "item.mythicbotany.raw_elementium": "Необработанный элементий",
+    "tooltip.mythicbotany.alfsteel_template.applies_to": "Террасталевому снаряжению",
+    "tooltip.mythicbotany.alfsteel_template.slot_base": "доспех, оружие или инструмент из террастали",
+    "tooltip.mythicbotany.alfsteel_template.slot_description": "Добавьте %s",
+    "tooltip.mythicbotany.alfsteel_template.upgrade": "Улучшение до альфстали"
+  }
+}

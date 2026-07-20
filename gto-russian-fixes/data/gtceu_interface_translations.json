@@ -1,0 +1,24 @@
+{
+  "defaults": {
+    "status": "linguistic_checked",
+    "category": "GTCEu: интерфейс покрытий",
+    "context": "Ручной перевод с сохранением терминов GTCEu и форматирующих кодов.",
+    "namespace": "gtceu"
+  },
+  "entries": {
+    "cover.ender_fluid_link.tooltip.channel_description": "Введите описание канала",
+    "cover.ender_fluid_link.tooltip.channel_name": "Введите название канала",
+    "cover.ender_fluid_link.tooltip.clear_button": "Очистить описание канала",
+    "cover.ender_fluid_link.tooltip.list_button": "Показать список каналов",
+    "cover.universal.manual_import_export.mode.disabled.0": "Ручной ввод-вывод: §bотключён",
+    "cover.universal.manual_import_export.mode.disabled.1": "§7Предметы и жидкости перемещаются только в соответствии с режимом покрытия и его фильтром.",
+    "cover.universal.manual_import_export.mode.filtered.0": "Ручной ввод-вывод: §bс фильтром",
+    "cover.universal.manual_import_export.mode.filtered.1": "§7Предметы и жидкости можно извлекать и помещать независимо от режима покрытия, если они соответствуют его фильтру.",
+    "cover.universal.manual_import_export.mode.unfiltered.0": "Ручной ввод-вывод: §bбез фильтра",
+    "cover.universal.manual_import_export.mode.unfiltered.1": "§7Предметы и жидкости можно перемещать независимо от режима покрытия. Фильтр применяется только к ресурсам, которые перемещает само покрытие.",
+    "gtceu.gui.machinemode.tab_tooltip": "Сменить активный режим механизма",
+    "gtceu.machine.rotor_holder.tooltip.2": "Требует свободную область 5×5",
+    "gtceu.multiblock.universal.input_limit.info": "Если включено, ввод предметов будет ограничен одним стаком.",
+    "gtceu.minimap.bedrock_ore.title": "Жила коренной руды"
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "defaults": {
+    "status": "linguistic_checked",
+    "category": "Xaero's World Map: контекстные меню",
+    "context": "Ручной перевод контекстных действий карты, путевых точек и приватов с сохранением клавиш, форматных параметров и цветовых кодов.",
+    "namespace": "xaeroworldmap"
+  },
+  "entries": {
+    "gui.xaero_box_open_settings": "§2%s§r Открыть настройки",
+    "gui.xaero_open_settings": "Открыть настройки",
+    "gui.xaero_pac_claim_chunks": "Заприватить выбранные чанки",
+    "gui.xaero_pac_claim_selection_out_of_dimension": "§8(Приват) Другое измерение...",
+    "gui.xaero_pac_claim_selection_out_of_range": "§8(Приват) Слишком далеко...",
+    "gui.xaero_pac_forceload_chunks": "Всегда загружать выбранные чанки",
+    "gui.xaero_pac_unclaim_chunks": "Снять приват с выбранных чанков",
+    "gui.xaero_pac_unforceload_chunks": "Не загружать выбранные чанки постоянно",
+    "gui.xaero_right_click_box_map_export": "Экспортировать карту в PNG",
+    "gui.xaero_right_click_box_map_settings": "%s Открыть настройки",
+    "gui.xaero_right_click_map_cant_create_waypoint": "§8Здесь нельзя поставить путевую точку...",
+    "gui.xaero_right_click_map_cant_share_location": "§8Этими координатами нельзя поделиться...",
+    "gui.xaero_right_click_map_cant_teleport": "§8(Телепорт) Неоднозначная высота...",
+    "gui.xaero_right_click_map_cant_teleport_world": "§8(Телепорт) Мир не подтверждён...",
+    "gui.xaero_right_click_map_create_temporary_waypoint": "%s Поставить временную путевую точку",
+    "gui.xaero_right_click_map_create_waypoint": "%s Создать путевую точку",
+    "gui.xaero_right_click_map_share_location": "Отправить координаты в чат",
+    "gui.xaero_right_click_map_teleport": "Телепортироваться сюда",
+    "gui.xaero_right_click_map_title": "Выберите действие",
+    "gui.xaero_right_click_map_waypoints_menu": "%s Открыть меню путевых точек",
+    "gui.xaero_right_click_player_config": "%s Изменить настройки игрока",
+    "gui.xaero_right_click_player_teleport": "%s Телепортироваться к игроку",
+    "gui.xaero_right_click_waypoint_delete": "%s Удалить путевую точку",
+    "gui.xaero_right_click_waypoint_delete_confirm": "%s Подтвердить удаление",
+    "gui.xaero_right_click_waypoint_disable": "%s Отключить путевую точку",
+    "gui.xaero_right_click_waypoint_edit": "%s Изменить путевую точку",
+    "gui.xaero_right_click_waypoint_enable": "%s Включить путевую точку",
+    "gui.xaero_right_click_waypoint_restore": "Восстановить путевую точку",
+    "gui.xaero_right_click_waypoint_share": "Отправить путевую точку в чат",
+    "gui.xaero_right_click_waypoint_teleport": "%s Телепортироваться к путевой точке"
+  }
+}

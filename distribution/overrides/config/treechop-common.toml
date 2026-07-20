@@ -1,0 +1,21 @@
+[mod]
+	enabled = true
+	printDebugInfo = false
+
+[general]
+	dropLootForChoppedBlocks = true
+	dropLootOnFirstChop = false
+
+[treeDetection]
+	maxTreeBlocks = 1024
+	maxLeavesBlocks = 1024
+	breakLeaves = true
+	ignorePersistentLeaves = true
+	maxBreakLeavesDistance = 7
+
+[compatibility]
+	[compatibility.general]
+		choppingRequiresCorrectToolForDrops = true
+		choppingRequiresFastBreakingTool = false
+		preventChoppingOnRightClick = false
+		preventChopRecursion = true

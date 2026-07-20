@@ -1,0 +1,13 @@
+{
+  "defaults": {
+    "status": "linguistic_checked",
+    "category": "Clipboard: интерфейс",
+    "context": "Ручной перевод окна и подсказок планшета.",
+    "namespace": "usclb"
+  },
+  "entries": {
+    "gui.title": "Заметки",
+    "tooltip.usclb.clipboard.tooltip.notesby": "Заметки игрока ",
+    "tooltip.usclb.clipboard.tooltip.notwritten": "Заметок пока нет"
+  }
+}

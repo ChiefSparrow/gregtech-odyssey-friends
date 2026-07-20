@@ -1,0 +1,14 @@
+{
+  "defaults": {
+    "status": "linguistic_checked",
+    "category": "Modular Routers: интерфейс",
+    "context": "Ручной перевод режимов передачи энергии.",
+    "namespace": "modularrouters"
+  },
+  "entries": {
+    "modularrouters.guiText.tooltip.energy.from_router": "Передавать энергию из буфера маршрутизатора в предмет",
+    "modularrouters.guiText.tooltip.energy.none": "Не передавать энергию",
+    "modularrouters.guiText.tooltip.energy.rate": "Макс. скорость передачи: %s FE/т",
+    "modularrouters.guiText.tooltip.energy.to_router": "Передавать энергию из предмета в буфер маршрутизатора"
+  }
+}

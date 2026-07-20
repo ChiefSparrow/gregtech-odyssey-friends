@@ -1,0 +1,41 @@
+{
+  "exact_values": [
+    "いけないボーダーライン",
+    "Starlink",
+    "«Killer Queen»",
+    "ISZM",
+    "AE2",
+    "ME",
+    "CPU",
+    "GPU",
+    "EU/t",
+    "mB",
+    "LV",
+    "MV",
+    "HV",
+    "EV",
+    "IV",
+    "LuV",
+    "ZPM",
+    "UV",
+    "UHV",
+    "UEV",
+    "UIV",
+    "UXV",
+    "OpV",
+    "MAX",
+    "ASoC"
+  ],
+  "key_patterns": [
+    "^item\\.gtceu\\.advanced_soc$",
+    "^item\\.gtceu\\.nano_saber\\.tooltip$"
+  ],
+  "value_patterns": [
+    "^[A-Z][A-Z0-9+./_-]{1,15}$",
+    "^[A-Z][a-z]?[0-9]*(?:[A-Z][a-z]?[0-9]*)+$"
+  ],
+  "notes": {
+    "xtonesreworked": "Декоративные серийные названия рассматриваются отдельно и не переводятся автоматически.",
+    "proper_names": "Имена собственные и намеренные цитаты добавляются только после контекстной проверки."
+  }
+}

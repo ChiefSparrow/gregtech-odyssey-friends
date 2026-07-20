@@ -1,0 +1,13 @@
+{
+  "defaults": {
+    "status": "linguistic_checked",
+    "category": "GuideME: интерфейс",
+    "context": "Ручной перевод настроек встроенных руководств.",
+    "namespace": "guideme"
+  },
+  "entries": {
+    "guideme.configuration.debug.tooltip": "Расширенные параметры отладки для разработчиков руководств",
+    "guideme.configuration.ignoreTranslatedGuides.tooltip": "Всегда загружать исходную версию руководств GuideME независимо от выбранного языка интерфейса",
+    "guideme.configuration.title": "Настройки GuideME"
+  }
+}

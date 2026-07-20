@@ -1,0 +1,36 @@
+{
+  "defaults": {
+    "status": "linguistic_checked",
+    "category": "Sophisticated Backpacks: ловушка для мобов",
+    "context": "Ручной перевод интерфейса и предметов улучшения для поимки существ.",
+    "namespace": "sophisticatedbackpacks"
+  },
+  "entries": {
+    "gui.sophisticatedbackpacks.mob_catcher.click_to_release": "Нажмите, чтобы выпустить",
+    "gui.sophisticatedbackpacks.mob_catcher.entity_preview_failed": "Не удалось отобразить существо",
+    "gui.sophisticatedbackpacks.status.mob_catcher_blocklisted": "Это существо запрещено ловить",
+    "gui.sophisticatedbackpacks.status.mob_catcher_boss_blocked": "Боссов нельзя ловить",
+    "gui.sophisticatedbackpacks.status.mob_catcher_captured": "Поймано: %s",
+    "gui.sophisticatedbackpacks.status.mob_catcher_contains_mobs": "Перед снятием улучшения-ловушки выпустите пойманных существ",
+    "gui.sophisticatedbackpacks.status.mob_catcher_hostile_needs_advanced": "Для враждебных существ требуется продвинутая ловушка",
+    "gui.sophisticatedbackpacks.status.mob_catcher_invalid_entity": "Это существо нельзя поймать",
+    "gui.sophisticatedbackpacks.status.mob_catcher_inventory_blocked": "Существ с инвентарём нельзя ловить",
+    "gui.sophisticatedbackpacks.status.mob_catcher_mobs_need_advanced": "Для пойманных существ требуется продвинутая ловушка",
+    "gui.sophisticatedbackpacks.status.mob_catcher_no_release_space": "Здесь нет подходящего места, чтобы выпустить существо",
+    "gui.sophisticatedbackpacks.status.mob_catcher_no_space": "Нет свободной области размером %s×%s слотов",
+    "gui.sophisticatedbackpacks.status.mob_catcher_no_upgrade": "В рюкзаке нет улучшения-ловушки",
+    "gui.sophisticatedbackpacks.status.mob_catcher_not_owner": "Поймать это существо может только владелец",
+    "gui.sophisticatedbackpacks.status.mob_catcher_only_one_allowed": "В рюкзак можно установить только одно улучшение-ловушку",
+    "gui.sophisticatedbackpacks.status.mob_catcher_passengers_blocked": "Существ с пассажирами или транспортом нельзя ловить",
+    "gui.sophisticatedbackpacks.status.mob_catcher_players_blocked": "Игроков нельзя ловить",
+    "gui.sophisticatedbackpacks.status.mob_catcher_release_failed": "Здесь не удалось выпустить существо",
+    "gui.sophisticatedbackpacks.status.mob_catcher_released": "Выпущено: %s",
+    "gui.sophisticatedbackpacks.status.mob_catcher_too_large": "Существу требуется %s слотов, но улучшение поддерживает не более %s",
+    "gui.sophisticatedbackpacks.upgrades.buttons.do_not_refill_input": "Не пополнять вход",
+    "gui.sophisticatedbackpacks.upgrades.buttons.refill_input": "Пополнять вход",
+    "item.sophisticatedbackpacks.advanced_mob_catcher_upgrade": "Продвинутое улучшение-ловушка",
+    "item.sophisticatedbackpacks.advanced_mob_catcher_upgrade.tooltip": "Ловит мирных и враждебных существ в ячейки рюкзака по Shift + ПКМ",
+    "item.sophisticatedbackpacks.mob_catcher_upgrade": "Улучшение-ловушка",
+    "item.sophisticatedbackpacks.mob_catcher_upgrade.tooltip": "Ловит мирных существ в ячейки рюкзака по Shift + ПКМ"
+  }
+}

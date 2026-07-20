@@ -1,0 +1,19 @@
+{
+  "defaults": {
+    "status": "linguistic_checked",
+    "category": "Ad Astra",
+    "context": "Ручной перевод названий картин и заголовка настройки сторон.",
+    "namespace": "ad_astra"
+  },
+  "entries": {
+    "painting.ad_astra.alpha_centauri.title": "Альфа Центавра",
+    "painting.ad_astra.jupiter.title": "Юпитер",
+    "painting.ad_astra.neptune.title": "Нептун",
+    "painting.ad_astra.pluto.title": "Плутон",
+    "painting.ad_astra.saturn.title": "Сатурн",
+    "painting.ad_astra.sun.title": "Солнце",
+    "painting.ad_astra.the_milky_way.title": "Млечный Путь",
+    "painting.ad_astra.uranus.title": "Уран",
+    "side_config.ad_astra.title": "Настройка сторон [%s]"
+  }
+}

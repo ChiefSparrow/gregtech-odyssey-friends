@@ -1,0 +1,11 @@
+{
+  "defaults": {
+    "status": "linguistic_checked",
+    "category": "Sophisticated Core: интерфейс",
+    "context": "Ручной перевод подсказки расширенного списка результатов.",
+    "namespace": "sophisticatedcore"
+  },
+  "entries": {
+    "gui.sophisticatedcore.buttons.browse_results": "Открыть расширенный список результатов с поиском"
+  }
+}

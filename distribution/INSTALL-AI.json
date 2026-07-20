@@ -1,0 +1,80 @@
+{
+  "schema": "gto-friends-install-contract/v1",
+  "human_language": "ru-RU",
+  "artifact_kind": "CurseForge modpack ZIP importable by Prism Launcher",
+  "artifact_pattern": "GregTech-Odyssey-Friends-0.5.6-v*.zip",
+  "preferred_launcher": {
+    "name": "Prism Launcher",
+    "install_action": "Add Instance > Import > select the release ZIP",
+    "do_not_extract_before_import": true
+  },
+  "requirements": {
+    "licensed_minecraft_java_account": true,
+    "minecraft": "1.20.1",
+    "forge": "47.4.20",
+    "java": "17",
+    "recommended_ram_mib": 10240,
+    "acceptable_ram_mib": {
+      "minimum": 8192,
+      "maximum": 12288
+    }
+  },
+  "installation": [
+    "Download the modpack ZIP from GitHub Releases, not Source code.zip.",
+    "Import the ZIP directly into Prism Launcher.",
+    "Allow Prism to download all CurseForge dependencies.",
+    "Select a licensed Microsoft/Minecraft account.",
+    "Assign 8192-12288 MiB RAM and launch.",
+    "On first launch allow Euphoria Patcher to generate the patched shader.",
+    "If necessary select ComplementaryReimagined_r5.6.1 + EuphoriaPatches_1.7.7 in the shader menu."
+  ],
+  "update_policy": {
+    "method": "Import a new release as a separate Prism instance.",
+    "preserve": [
+      "server address entered by the user",
+      "worlds only when the user explicitly copies them",
+      "screenshots only when the user explicitly copies them"
+    ],
+    "never_overwrite_old_instance_automatically": true
+  },
+  "privacy": {
+    "release_must_not_contain": [
+      "world saves",
+      "logs",
+      "crash reports",
+      "screenshots",
+      "Xaero maps or waypoints",
+      "servers.dat",
+      "Minecraft account data",
+      "user or username caches",
+      "backups",
+      "personal options.txt"
+    ]
+  },
+  "server_notes": {
+    "server_address": null,
+    "required_shared_mods": [
+      "gto-terminal-fix-1.0.0.jar",
+      "gto-farming-fix-1.0.1.jar",
+      "HT's TreeChop",
+      "Panda's Falling Trees"
+    ],
+    "client_only": [
+      "Oculus",
+      "Complementary Reimagined",
+      "Euphoria Patcher",
+      "GTO Russian Fixes"
+    ]
+  },
+  "verification": {
+    "checksum_file_pattern": "*.sha256",
+    "repository_script": "distribution/verify-release.ps1",
+    "success_condition": "script exits 0 and prints VERIFICATION PASSED"
+  },
+  "troubleshooting": {
+    "dependency_download_failed": "Retry later or open Prism settings and re-authenticate CurseForge if requested.",
+    "out_of_memory": "Set 8192-12288 MiB, close heavy applications, and do not allocate all system RAM.",
+    "shader_missing": "Verify Oculus and Euphoria Patcher are installed, launch once, then select the generated shader manually.",
+    "server_mod_mismatch": "Use exactly the same Friends Edition release on client and server."
+  }
+}

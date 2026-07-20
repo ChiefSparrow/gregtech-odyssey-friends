@@ -1,0 +1,19 @@
+{
+  "defaults": {
+    "status": "linguistic_checked",
+    "category": "AE2: оставшиеся строки интерфейса",
+    "context": "Ручной перевод функциональных элементов интерфейса с сохранением обозначений и форматных параметров.",
+    "namespace": "ae2"
+  },
+  "entries": {
+    "gui.ae2.EnergyGenerationCapacity": "Мощность генерации: %s",
+    "gui.ae2.NoChannel": "Канал отсутствует",
+    "gui.ae2.SearchSettingsExposeInventoryExternal": "Открывать доступ к инвентарю для %s",
+    "gui.ae2.SearchTooltipToolTips": "Используйте # для поиска по подсказкам (#looting)",
+    "gui.ae2.TransformTypeExplode": "Взорвать",
+    "gui.ae2.TransformTypeThrowInFluid": "Бросить в %s",
+    "gui.tooltips.ae2.InscriberBufferHigh": "Размер стака: 64",
+    "gui.tooltips.ae2.InscriberBufferLow": "Размер стака: 4",
+    "gui.tooltips.ae2.InscriberBufferSize": "Размер стака во входном слоте"
+  }
+}

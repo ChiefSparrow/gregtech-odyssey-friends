@@ -1,0 +1,12 @@
+{
+  "defaults": {
+    "status": "linguistic_checked",
+    "category": "AE2 Insert Export Card: интерфейс",
+    "context": "Ручной перевод режимов фильтрации.",
+    "namespace": "ae2insertexportcard"
+  },
+  "entries": {
+    "gui.ae2insertexportcard.blacklist": "Чёрный список",
+    "gui.ae2insertexportcard.whitelist": "Белый список"
+  }
+}

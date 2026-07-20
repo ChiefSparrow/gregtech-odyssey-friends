@@ -1,0 +1,82 @@
+{
+  "defaults": {
+    "status": "linguistic_checked",
+    "category": "Оставшийся игровой контент",
+    "context": "Ручной перевод оставшихся названий игровых предметов, блоков, существ и их непосредственных подсказок."
+  },
+  "entries": {
+    "block.ae2.crystal_resonance_generator": "Генератор кристаллического резонанса",
+    "entity.minecraft.villager.ae2.fluix_researcher": {
+      "ru": "Исследователь флюикса",
+      "status": "linguistic_checked",
+      "category": "AE2: житель",
+      "context": "Пространство имён указано явно, поскольку сам ключ ошибочно находится в minecraft.",
+      "namespace": "ae2"
+    },
+    "block.buildinggadgets2.render_block": "Блок отрисовки (НЕ ИСПОЛЬЗОВАТЬ)",
+    "block.buildinggadgets2.template_manager": "Менеджер шаблонов",
+    "item.buildinggadgets2.gadget_building": "Строительный инструмент",
+    "item.buildinggadgets2.gadget_copy_paste": "Инструмент копирования и вставки",
+    "item.buildinggadgets2.gadget_cut_paste": "Инструмент вырезания и вставки",
+    "item.buildinggadgets2.gadget_destruction": "Инструмент разрушения",
+    "item.buildinggadgets2.gadget_exchanging": "Инструмент замены",
+    "item.buildinggadgets2.redprint": "Красный чертёж",
+    "item.buildinggadgets2.template": "Шаблон",
+    "block.endrem.custom_eye.broken": "Портал построен неправильно",
+    "block.endrem.ender_eye.throw_warning": "Это око не знает, куда лететь",
+    "block.endrem.ender_eye.use_warning": "Это око не хочет использоваться",
+    "block.usclb.clipboard": "Планшет с зажимом",
+    "item.usclb.clipboardfolder": "Рамка для планшета",
+    "item.usclb.inkandquill": "Чернила и перо",
+    "entity.ad_astra.tier_5_rocket": "Ракета 5-го уровня",
+    "entity.ad_astra.tier_6_rocket": "Ракета 6-го уровня",
+    "entity.ad_astra.tier_7_rocket": "Ракета 7-го уровня",
+    "item.ad_astra_rocketed.tier_5_rocket": "Ракета 5-го уровня",
+    "item.ad_astra_rocketed.tier_6_rocket": "Ракета 6-го уровня",
+    "item.ad_astra_rocketed.tier_7_rocket": "Ракета 7-го уровня",
+    "item.ae2insertexportcard.export_card": "Карта вывода",
+    "item.ae2insertexportcard.insert_card": "Карта ввода",
+    "item.expatternprovider.wireless_advanced_tool": "Беспроводной расширенный набор настройки МЭ",
+    "item.ftblibrary.fluid_container": "Контейнер для жидкости",
+    "item.ftblibrary.fluid_container.use": "Нажмите ПКМ по резервуару, чтобы опустошить контейнер",
+    "item.ftbultimine.ultiminer": "Ультимайнер",
+    "item.ftbultimine.ultiminer.tooltip": "Позволяет использовать %s, пока активен",
+    "item.gtmthings.virtual_fluid_provider": "Виртуальный поставщик жидкостей",
+    "item.guideme.guide": "Руководство",
+    "item.mob_bottle.tooltip_empty": {
+      "ru": "Нажмите ПКМ стеклянной бутылочкой по уменьшенному существу, чтобы поймать его",
+      "status": "linguistic_checked",
+      "category": "Shrink: поимка существ",
+      "context": "Ключ не содержит пространства имён мода, поэтому оно указано явно.",
+      "namespace": "shrink"
+    },
+    "item.shrink.mob_bottle": "Стеклянная бутылочка",
+    "item.shrink.shrinking_device": "Персональное уменьшающее устройство",
+    "item.modularrouters.energy_distributor_module": "Модуль распределения энергии",
+    "item.modularrouters.energy_output_module": "Модуль вывода энергии",
+    "item.modularrouters.energy_upgrade": "Улучшение энергии",
+    "item.modularrouters.tag_filter": "Фильтр тегов",
+    "item.sophisticatedcore.xp_bucket": "Ведро опыта",
+    "block.deeperdarker.blooming_moss_block": "Цветущий моховой блок",
+    "entity.minecraft.villager.shady_wizard": {
+      "ru": "Подозрительный маг",
+      "status": "linguistic_checked",
+      "category": "Ars Nouveau: житель",
+      "context": "Пространство имён указано явно, поскольку сам ключ ошибочно находится в minecraft.",
+      "namespace": "ars_nouveau"
+    },
+    "entity.ad_astra.air_vortex": "Воздушный вихрь",
+    "entity.ad_astra.ice_spit": "Ледяной плевок",
+    "entity.ad_astra.lunarian.toolsmith": "Лунарианский кузнец-инструментальщик",
+    "tooltip.ad_astra.eta": {
+      "ru": "До прибытия: %s с",
+      "status": "linguistic_checked",
+      "category": "Ad Astra: интерфейс",
+      "context": "ETA передано естественной русской формулировкой.",
+      "namespace": "ad_astra"
+    },
+    "enchantment.mythicbotany.hammer_mobility": "Подвижность молота",
+    "item.mythicbotany.dream_cherry": "Вишня грёз",
+    "item.modularrouters.override_card": "Карта обхода защиты"
+  }
+}
