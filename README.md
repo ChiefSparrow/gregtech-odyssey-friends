@@ -13,8 +13,23 @@
   [полную инструкцию для Prism Launcher](INSTALL-PRISM-LICENSED.md).
 - **Нет лицензии, запуск через TLauncher:** используйте
   [отдельную инструкцию для TLauncher](INSTALL-TLAUNCHER-NO-LICENSE.md).
-  Релизный CurseForge ZIP нельзя импортировать в TLauncher напрямую: сначала
-  точные зависимости подготавливаются и проверяются через Prism.
+  Скачайте отдельный `GTO-Friends-TLauncher-Installer-*.zip`: Prism для этого
+  варианта не нужен, точные зависимости установщик скачает и проверит сам.
+
+## Краткая установка через TLauncher
+
+1. Запустите через TLauncher любую версию Minecraft один раз и закройте её.
+2. Скачайте и полностью распакуйте
+   [`GTO-Friends-TLauncher-Installer-v1.0.1.zip`](https://github.com/ChiefSparrow/gregtech-odyssey-friends/releases/latest/download/GTO-Friends-TLauncher-Installer-v1.0.1.zip).
+3. Дважды нажмите `INSTALL-GTO-TLAUNCHER.bat`, затем
+   **Установить сборку**.
+4. В TLauncher укажите показанную игровую папку, Minecraft `1.20.1`,
+   Forge `47.4.20` **без значка TL**, Java 17 и `10240 МБ` памяти.
+
+Установщик не требует прав администратора, не меняет реестр и проверяет SHA-256
+каждой загрузки и всех 177 обязательных файлов. Подробности и безопасная
+проверка архива описаны в
+[инструкции для TLauncher](INSTALL-TLAUNCHER-NO-LICENSE.md).
 
 ## Краткая установка с лицензией через Prism
 
@@ -90,6 +105,10 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\distribution\verify-re
 powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\distribution\VERIFY-CLIENT.ps1 `
   -MinecraftDirectory 'C:\path\to\Prism\instance\minecraft' `
   -LockPath .\distribution\CLIENT-MOD-LOCK.json
+
+# Отдельный воспроизводимый установщик для TLauncher
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\distribution\build-tlauncher-installer.ps1
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\distribution\verify-tlauncher-installer.ps1
 ```
 
 Скрипт принимает только официальный базовый архив с зафиксированной SHA-256 и
