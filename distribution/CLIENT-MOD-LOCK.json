@@ -1,0 +1,1268 @@
+{
+    "schema":  "gto-friends-client-lock/v1",
+    "package":  {
+                    "name":  "GregTech Odyssey — Friends Edition",
+                    "version":  "1.0.4",
+                    "minecraft":  "1.20.1",
+                    "forge":  "47.4.20"
+                },
+    "policy":  {
+                   "curseForgeFilesArePinnedByProjectAndFileId":  true,
+                   "hashesAreUppercaseSha256":  true,
+                   "extraFilesInModsAreRejected":  true,
+                   "disabledFileSuffixIsSignificant":  true
+               },
+    "counts":  {
+                   "mods":  176,
+                   "resourcePacks":  2,
+                   "total":  178
+               },
+    "files":  [
+                  {
+                      "path":  "config/openloader/resources/z-gto-lang-all-locales-gto-0.5.6-r3.zip",
+                      "kind":  "resource-pack",
+                      "state":  "enabled",
+                      "size":  956483,
+                      "sha256":  "D7D74D4306C41A69475F9E8D7DBEDCBE4FF50A35900FE41365826CA803A54F28"
+                  },
+                  {
+                      "path":  "config/openloader/resources/z-gto-russian-fixes-0.5.6-v1.0.0.zip",
+                      "kind":  "resource-pack",
+                      "state":  "enabled",
+                      "size":  35971,
+                      "sha256":  "59FF21C980744AC533BD15CD5111565457E99BF8C4ADCCB7D09581932F256F73"
+                  },
+                  {
+                      "path":  "mods/ad_astra_rocketed-forge-1.20.1-1.0.5.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  4247529,
+                      "sha256":  "5C8AAC1F11DAF225AFB2DA30ED1672E944C9426BCA135DC9FAE20EE4B3220E80"
+                  },
+                  {
+                      "path":  "mods/ad_astra-forge-1.20.1-1.15.20.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  7508861,
+                      "sha256":  "99E274894AF7C3B01622A74775A9960B5857B35951888414E733F8C2EC683F26"
+                  },
+                  {
+                      "path":  "mods/AdvancedBackups-forge-1.20-3.7.1.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  338727,
+                      "sha256":  "EB471FBD7DE564E6B12890359546D280D5723E09867A3104EA31C7285ADA6942"
+                  },
+                  {
+                      "path":  "mods/advancementnomore-1.20.1-1.0.1.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  6549,
+                      "sha256":  "A8CBE435DB7A3C83BFB56D64E33B27D5CF44D048B3E5F156DF106D6DEDD8B050"
+                  },
+                  {
+                      "path":  "mods/ae2ct-1.20.1-1.1.1.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  242196,
+                      "sha256":  "0996CD736E5A951593F94125C059710800056DE8DEF77995DEB7BA6B50099367"
+                  },
+                  {
+                      "path":  "mods/ae2insertexportcard-1.20.1-1.3.0.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  213744,
+                      "sha256":  "329DFF2184EDC476E7261B073F17239015636543A22C16DF1161FAFE547D6B1C"
+                  },
+                  {
+                      "path":  "mods/AE2NetworkAnalyzer-1.20-1.0.6-forge.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  827642,
+                      "sha256":  "9C10AB288402B6A01815D58029298FC56DD482F045511AD35104B17E9B6C4393"
+                  },
+                  {
+                      "path":  "mods/AE2ToggleableViewCell-1.20.1-1.1.0.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  201310,
+                      "sha256":  "C08A7E4C180310A457B0B83B76863AD4017BD25B64DC07B9AD14D4293B97BB47"
+                  },
+                  {
+                      "path":  "mods/ae2wtlib-15.3.3-forge.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  229518,
+                      "sha256":  "39E5CEDE37D5C6A07592D6C1E83398791E037F3D434BC44F7460CD085A4DE5F4"
+                  },
+                  {
+                      "path":  "mods/AE-Dark-UI-GTO-v0.5.6.0.zip.disabled",
+                      "kind":  "mod",
+                      "state":  "disabled",
+                      "size":  12547579,
+                      "sha256":  "BD48E95B6A3E70C54C059D1DCEB53C955A5AFCFE705BC5E74F92775EE208479C"
+                  },
+                  {
+                      "path":  "mods/AE-Light-UI-GTO-v0.5.6.0.zip.disabled",
+                      "kind":  "mod",
+                      "state":  "disabled",
+                      "size":  12197727,
+                      "sha256":  "E998D4223EFC9D3A4FB1DB2DE2466082C974277F1796CD19183670327B0293DD"
+                  },
+                  {
+                      "path":  "mods/AI-Improvements-1.20-0.5.2.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  29553,
+                      "sha256":  "575A4A8E00F982C064D54BB3E73E5CDA2D14414DE054A471A3DAF3F58BDF560A"
+                  },
+                  {
+                      "path":  "mods/alltheleaks-1.1.1+1.20.1-forge.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  1187126,
+                      "sha256":  "7B8E945DA294B745E6AED9F88F28E232A767E032D7C2B8137A8EF36421D9FB33"
+                  },
+                  {
+                      "path":  "mods/alternate_current-mc1.20-1.7.0.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  36703,
+                      "sha256":  "9DFA5365EF170323612D6ADA820B7CAC12E05135F00F16D0F627488426F59565"
+                  },
+                  {
+                      "path":  "mods/API-pandalib-forge-mc1.20-0.5.2-SNAPSHOT.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  864398,
+                      "sha256":  "1595C586E9C3E7E9A455D23B1686CC82F8D9E11578EFD86A10A7031995301390"
+                  },
+                  {
+                      "path":  "mods/Apotheosis-1.20.1-7.4.8.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  2803994,
+                      "sha256":  "5ED8C17CF62837BB649D1054E3E4FE93C4D9BDEC98FE9F332E2637A260DA30DA"
+                  },
+                  {
+                      "path":  "mods/ApothicAttributes-1.20.1-1.3.7.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  227511,
+                      "sha256":  "68487B11C0D4E2F67A85F2B04BF65E99AC15294F2923F4391F83E9542293187A"
+                  },
+                  {
+                      "path":  "mods/appleskin-forge-mc1.20.1-2.5.1.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  47428,
+                      "sha256":  "E12419E43E3BABC810AF289403C5CD96BD7F09809B389ACC6BB2F122B4B2A426"
+                  },
+                  {
+                      "path":  "mods/applied-botanics-forge-1.5.2.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  255276,
+                      "sha256":  "B6003288CA4E41E4DEF0390665167ECE13AAF548BF6DA8941084221D0CF8D5C2"
+                  },
+                  {
+                      "path":  "mods/architectury-9.2.14-forge.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  580602,
+                      "sha256":  "218B471D0B8A1F6CDA14CFC1BEB9EEB0DF54304500ACC6C5613D9B88EC65D9AF"
+                  },
+                  {
+                      "path":  "mods/armorpointspp-forge-1.20-3.1.1.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  186794,
+                      "sha256":  "95BB87C7324F0EE1680F5465E6E2ED73FBA6A19BB90E58F0CA28FF3FF062FDFA"
+                  },
+                  {
+                      "path":  "mods/ars_nouveau-1.20.1-4.12.7-all.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  12430237,
+                      "sha256":  "1F1DEBC282A0C379C1141F2840EA294EEDE6F6B544C589663F40BBE17B59A1AF"
+                  },
+                  {
+                      "path":  "mods/arseng-1.2.0.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  147418,
+                      "sha256":  "02850730D3535AFEB19D94311C31693EE1986D07795934E4DC50282F7956E827"
+                  },
+                  {
+                      "path":  "mods/arsmeteorites-1.20.1-1.1.8.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  64447,
+                      "sha256":  "C76D7575AE8AE94A52C63952BE7594D87452BF7304DCCE9E6E6338B83063AB3B"
+                  },
+                  {
+                      "path":  "mods/async-locator-forge-1.20-1.3.0.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  264951,
+                      "sha256":  "D171FDDDD8DAD64CBA4C8C67CD2A0BDFC2697FF35E11F9FB666B7464E1E9468B"
+                  },
+                  {
+                      "path":  "mods/AsyncParticles-20.1.1.0+1.20.1.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  1904800,
+                      "sha256":  "2A3296C25669CF9512361103D5F08B360C347EEEEB26ACBFCCB15821F298ECD9"
+                  },
+                  {
+                      "path":  "mods/atg-2.0.3+1.20.1.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  18890,
+                      "sha256":  "B41CC9AF0C4E147A10345E8160D975A5BD75D149F54279217B07990BA5BFF599"
+                  },
+                  {
+                      "path":  "mods/athena-forge-1.20.1-3.1.2.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  91808,
+                      "sha256":  "64EEC9CFFB8847A459536096AC396B135FFB07C7D9D13C6A47D9CD7B251276AB"
+                  },
+                  {
+                      "path":  "mods/AttributeFix-Forge-1.20.1-21.0.5.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  19499,
+                      "sha256":  "43CCFD91C1A24D1B3C9D3CCF2DD6A86E9F0C2BA442B111A2238FBFF3CF88AF11"
+                  },
+                  {
+                      "path":  "mods/BadOptimizations-2.4.1-1.20.1.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  460234,
+                      "sha256":  "3DA53CDF856757D9EC7DF0BE86BC23B2C7D67A019B490F8F64317D4D9B77CAC8"
+                  },
+                  {
+                      "path":  "mods/balm-forge-1.20.1-7.3.39-all.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  601013,
+                      "sha256":  "BF8A600D9004443E7CF49C2597434E3F3B0E7E02BBE4DDEB1625458ACF2206A2"
+                  },
+                  {
+                      "path":  "mods/betterp2p-1.5.0-forge.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  262302,
+                      "sha256":  "AF3DB500145F352A21BC2CD86D1F854E5F3C1486A8659B493A5B2FBC3BA0776F"
+                  },
+                  {
+                      "path":  "mods/bocchium-1.20.1-0.0.3.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  10201,
+                      "sha256":  "8CD971CC5774AED3B02B67810891837ADC7E348C8A45BE0590D28EA110FDB9FA"
+                  },
+                  {
+                      "path":  "mods/Botania-1.20.1-454-FORGE.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  12211755,
+                      "sha256":  "4B12D7BE6A6BC1E121A222AB8EA4F680306B1AAA2369CCCD4A49441E3C2024C5"
+                  },
+                  {
+                      "path":  "mods/botarium-forge-1.20.1-2.3.4.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  157633,
+                      "sha256":  "470810A364FF4AD4D4FCD4E55798263938FC893970EACECC58E8B741A392B1CF"
+                  },
+                  {
+                      "path":  "mods/buildinggadgets2-1.0.8.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  3833683,
+                      "sha256":  "59EFB399A4ACDB69A01A970B1F1E3C5584495AABC726FF40857AB4AED9372C83"
+                  },
+                  {
+                      "path":  "mods/calculatoroverlay-1.0.3.jar.disabled",
+                      "kind":  "mod",
+                      "state":  "disabled",
+                      "size":  21220,
+                      "sha256":  "F648E0551B4931B7E36C7690D8A2D3DE8A363A63571ECDE0FF0DD7814FB4AFEB"
+                  },
+                  {
+                      "path":  "mods/camera-forge-1.20.1-1.0.20.jar.disabled",
+                      "kind":  "mod",
+                      "state":  "disabled",
+                      "size":  299726,
+                      "sha256":  "593F3A9C0BAF09D7BAF8F9EC44B882716C43FBF11D5CBFF607C9F7FA3EC9AEB8"
+                  },
+                  {
+                      "path":  "mods/chisel-forge-2.0.0+mc1.20.1.jar.disabled",
+                      "kind":  "mod",
+                      "state":  "disabled",
+                      "size":  8265809,
+                      "sha256":  "F6EBB48DE0A954349A5F0D607F7955E898A87DAE45FB7CF71878F4BAC56653C1"
+                  },
+                  {
+                      "path":  "mods/chloride-FORGE-mc1.20.1-v1.7.7.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  956960,
+                      "sha256":  "E843D67CF01E93CEE9CBFA99A09B77CC811BDEF293976AF52D48D20E16A7F90D"
+                  },
+                  {
+                      "path":  "mods/clienttweaks-forge-1.20.1-11.1.8.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  174804,
+                      "sha256":  "EE06EC96D75EBF4CDBD96BFC5BDEA18FBF3457F7A395C040C9228BDD0D90BF47"
+                  },
+                  {
+                      "path":  "mods/cloth-config-11.1.136-forge.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  1181413,
+                      "sha256":  "1E895E85CF5B1E1905EF3178EC155C8BADFE22A1577B92C09143A5AA1F4CE0F2"
+                  },
+                  {
+                      "path":  "mods/CmplAdd-EuphoriaPatcher-1.7.7-r5.6.1-forge.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  2246215,
+                      "sha256":  "9B7B9613A1FBA2498EBFA79C9F8899C32364FD95C6D13615B94AF755A48C3B9C"
+                  },
+                  {
+                      "path":  "mods/configuration-forge-1.20.1-3.1.0.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  439661,
+                      "sha256":  "179CA1A9928920A5D89D73D308E0E78F59083E4E44D869D5CF23A9087FD52C3D"
+                  },
+                  {
+                      "path":  "mods/constructionwand-1.20.1-2.11.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  210312,
+                      "sha256":  "B55CA6F0E734BAD848ADB06949675136F1D05CB4FB3EFDDE084C9842C40E1EEC"
+                  },
+                  {
+                      "path":  "mods/Controlling-forge-1.20.1-12.0.2.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  115280,
+                      "sha256":  "516308A93824119F6A1EBC75425AA21EE8F8DE0C331942793A054BA6D9C24944"
+                  },
+                  {
+                      "path":  "mods/Corgilib-Forge-1.20.1-4.0.3.4.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  360700,
+                      "sha256":  "9E638C7E73D997BB4ECBA4AA40DE90E89DD15FDBC4235FB997EED9AD43C10CD3"
+                  },
+                  {
+                      "path":  "mods/coroutil-forge-1.20.1-1.3.7.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  64187,
+                      "sha256":  "11448808A42C17425CF2EA39701841008683D6AD6E2838A34EEF0253251A870F"
+                  },
+                  {
+                      "path":  "mods/corpse-forge-1.20.1-1.0.23.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  245644,
+                      "sha256":  "8D77C5FC8DC981C750A8E66D4665F055457F748F0CE49A303D9BC50347BDBF7C"
+                  },
+                  {
+                      "path":  "mods/cosmeticarmorreworked-1.20.1-v1a.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  88752,
+                      "sha256":  "C790E8671625B05EC0AA19272E0EA74EA95619F953E3C6F39A6736AF0D386804"
+                  },
+                  {
+                      "path":  "mods/craftingtweaks-forge-1.20.1-18.2.9.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  230696,
+                      "sha256":  "1CC83C8C0BEE73A2FFA3428CE28E3C17D7F95E26E1A820D8BD7270E0931F8974"
+                  },
+                  {
+                      "path":  "mods/CreativeCore_FORGE_v2.12.39_mc1.20.1.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  1144128,
+                      "sha256":  "3565DDEA132785A044DDFCA670610A870C976E52D47A957D0A5F1DB78563D046"
+                  },
+                  {
+                      "path":  "mods/cryonicconfig-forge-1.0.0+mc1.20.1.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  133781,
+                      "sha256":  "51FFC8832EEC0FCE716ECAB9CD148CA7408B63963A1728B06DF45D8CFB2EB04A"
+                  },
+                  {
+                      "path":  "mods/CullLessLeaves-Reforged-1.20.1-1.0.5.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  22474,
+                      "sha256":  "B91CA5CD028B1C919E28851B984EDD61874D44AD8038CDEEE87315D2656CB292"
+                  },
+                  {
+                      "path":  "mods/curios-forge-5.14.1+1.20.1.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  398066,
+                      "sha256":  "1E817919A35B37CF30524AAEC73F0CA5130452F23F168F844854DF282EB8E51F"
+                  },
+                  {
+                      "path":  "mods/deeperdarker-forge-1.20.1-1.3.3.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  17844266,
+                      "sha256":  "D07DC6155E0B751C7D1EC26DABB7284A41798C85E48B0D809FD1254E489ED455"
+                  },
+                  {
+                      "path":  "mods/defaultoptions-forge-1.20.1-18.0.5.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  101393,
+                      "sha256":  "28A34106F7DC91015BC202924593E7A375C9D4DD2681AEC58F5ABD06FA5EAEEE"
+                  },
+                  {
+                      "path":  "mods/doespotatotick-1.20.1-5.6.3.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  46932,
+                      "sha256":  "5AA62C1B236E79136D8E4EF60544385C5AE0D6F37C34FE1A70EAAF3D179E5A66"
+                  },
+                  {
+                      "path":  "mods/Dungeon Crawl-1.20.1-2.3.15.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  758123,
+                      "sha256":  "71E1B8CEAF20C3102AE42EF2761CA47F30FE4CBD20ECBB687DF2CE75D1785514"
+                  },
+                  {
+                      "path":  "mods/DungeonsArise-1.20.x-2.1.58-release.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  8762342,
+                      "sha256":  "F8F1254DBE7ED7C1D5403F20361A36F0D0587C82B71313E3F427C7F1CE7C8A90"
+                  },
+                  {
+                      "path":  "mods/duplicationless-1.20.1-1.2.0.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  988325,
+                      "sha256":  "11DE4457532813E7C60A01E38883D663A316C9855170A8F9CFD65A59DE16743C"
+                  },
+                  {
+                      "path":  "mods/easy-villagers-forge-1.20.1-1.1.39.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  414686,
+                      "sha256":  "F2826C6F4BE28DF912D263F7914888F1B173C09DC99CC41998013E817D0DFB1D"
+                  },
+                  {
+                      "path":  "mods/effortlessbuilding-1.20.1-3.11.jar.disabled",
+                      "kind":  "mod",
+                      "state":  "disabled",
+                      "size":  2326090,
+                      "sha256":  "C40EE9A5B49FB4721E6E6A629D6236A640B6DA76F95E3F636C77DB8F2EB92DC2"
+                  },
+                  {
+                      "path":  "mods/elevatorid-1.20.1-1.9.1-forge.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  187868,
+                      "sha256":  "7487C091BC8E6AE7B83C61471C97258B380FAB2A0F421ED84DF78F92BA630F75"
+                  },
+                  {
+                      "path":  "mods/embeddium-0.3.31+mc1.20.1.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  1320675,
+                      "sha256":  "EED3D1325F2ACC2FD4E69BB495E5CCB91D962126AC5330F0582EBC2A3DAF47FB"
+                  },
+                  {
+                      "path":  "mods/emi-1.1.24+1.20.1+forge.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  1121750,
+                      "sha256":  "92784DCF5222D72983A420C90F2E9240468EE0FECE96F757C82D7884B6CBDB72"
+                  },
+                  {
+                      "path":  "mods/emitrades-forge-1.2.1+mc1.20.1.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  53378,
+                      "sha256":  "166874F0F4C9E269CAB646AC03A2DEC93A261B544670AFA98E2EB06275D52A86"
+                  },
+                  {
+                      "path":  "mods/endrem_forge-5.3.3-R-1.20.1.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  889634,
+                      "sha256":  "19295CA4A798F2E813F359FA376F586BC57FADACD78B7E32440257F9F8BF2557"
+                  },
+                  {
+                      "path":  "mods/eventwrapper-forge-1.20.1-1.1.4.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  1564001,
+                      "sha256":  "B583DB8E37EFE39D14257F316EBBB20D502E3F063F21E367595E54085C1D5DE1"
+                  },
+                  {
+                      "path":  "mods/ExplorersCompass-1.20.1-1.4.0-forge.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  174387,
+                      "sha256":  "0D9A7705F39A9EAC19C33E0FBE5422280048991A341DC0D9471BFF32111C502C"
+                  },
+                  {
+                      "path":  "mods/ExtendedAE-1.20-1.4.17-forge.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  2961176,
+                      "sha256":  "44939484CB98D3B69C67605487B7F74C2D9697570C57B16C64A898917868CBE0"
+                  },
+                  {
+                      "path":  "mods/extrabotany-forge-1.20.1-1.9.2.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  3869675,
+                      "sha256":  "1DE99382011D71C25E708107221E70D9A2F9C815A0B847A72317E62234E0AE26"
+                  },
+                  {
+                      "path":  "mods/ExtremeSoundMuffler-3.51-forge-1.20.1.jar.disabled",
+                      "kind":  "mod",
+                      "state":  "disabled",
+                      "size":  270331,
+                      "sha256":  "7F0A5D7F8BDCABB630C3A9034F815628831E7779475A5E707533FA454CFAE83C"
+                  },
+                  {
+                      "path":  "mods/factory_blocks-forge-1.4.0+mc1.20.1.jar.disabled",
+                      "kind":  "mod",
+                      "state":  "disabled",
+                      "size":  808664,
+                      "sha256":  "A21E9FF2F8ADD29E7368E933015406F8A3C91DC103BBF16783EA3A3850F23A75"
+                  },
+                  {
+                      "path":  "mods/fallingtrees-forge-mc1.20-0.13.2-SNAPSHOT.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  4025908,
+                      "sha256":  "6B4853214C5CC156B187B86162DF2DB028C0DDCF90380FA1897068CDE2622DE1"
+                  },
+                  {
+                      "path":  "mods/fancymenu_forge_3.9.6_MC_1.20.1.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  25627507,
+                      "sha256":  "B01245DF0AFD1780B4272FBCBF55F061B827D23803C86C2A3A76D88314032B92"
+                  },
+                  {
+                      "path":  "mods/FarmersDelight-1.20.1-1.3.2.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  3313327,
+                      "sha256":  "47AED94BB9192C4978FE199F9D3CA5895AECCFBE5B5A0869FDF3AA011C2641F7"
+                  },
+                  {
+                      "path":  "mods/farmersrespite-1.20.1-2.1.2.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  537307,
+                      "sha256":  "21C15EF71F66684CBD94080E04649741BDF2B2EA6A6D542783E8961365D090BB"
+                  },
+                  {
+                      "path":  "mods/FastFurnace-1.20.1-8.0.2.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  6170,
+                      "sha256":  "970C11C090E7A364E2E006AABB5E573F79901E710E97195334EE5802317776E8"
+                  },
+                  {
+                      "path":  "mods/FastLeafDecay-32.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  9835,
+                      "sha256":  "CE48DB06BFB5830C147969793771A8F8B5A5774B182543B906BC439EFD4E9469"
+                  },
+                  {
+                      "path":  "mods/fastnbt-1.20.1-1.3-forge.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  9794,
+                      "sha256":  "D0B60F83F564C3B60D952C0C9A2FCE68A41DC6D8320FD4952664C2CE448C7D80"
+                  },
+                  {
+                      "path":  "mods/Fastquit-3.0.1+1.20.1forge.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  316223,
+                      "sha256":  "BD427354B03D92606062844DDF3BA1543711FBE68D4E68C7371CEF9E1121F814"
+                  },
+                  {
+                      "path":  "mods/fastrecipesearch-1.20.1-26.1-forge.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  64093,
+                      "sha256":  "DC08BB53FE51BE36BDBA61161C9E1392961C4BD14560A9EAF24069805C3EE5F2"
+                  },
+                  {
+                      "path":  "mods/fastspawner-1.20.1-1.1.0.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  10031,
+                      "sha256":  "270DAD457D93077899C4AC62216261F9A961A6584B9375EB38B6B1824F1EBA0B"
+                  },
+                  {
+                      "path":  "mods/fasttag-1.20-26.1-forge.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  9548,
+                      "sha256":  "86873FFA77B60F75448FD9F64DEEA1DF90D0EA4AEFBFE5F758BFF91975D972A6"
+                  },
+                  {
+                      "path":  "mods/FastWorkbench-1.20.1-8.0.4.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  28188,
+                      "sha256":  "86D20C6879BF86EF76B3FD94998D3E5C3327ACB5D5324B6EB0B5348354766620"
+                  },
+                  {
+                      "path":  "mods/ferritecore-6.0.1-forge.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  123034,
+                      "sha256":  "9C2C9396A49E796D88497758CAA4637D2BCBB433C318E2DD9CEBCFFBAF0F6C54"
+                  },
+                  {
+                      "path":  "mods/findme-3.2.3-forge.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  38674,
+                      "sha256":  "E76860618564A4E7B3C44EA15E30BCE9441BB04259477891633523E186ED77BB"
+                  },
+                  {
+                      "path":  "mods/fixexperiencebug-1.20-46.2.2.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  3205,
+                      "sha256":  "08DC722AAA1BD61B4EE867BADEB830E537B8362633197DD211C772A4A002F42E"
+                  },
+                  {
+                      "path":  "mods/flerovium-forge-1.20.1-1.2.19-all.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  254081,
+                      "sha256":  "D61ACDAC6509BAE8E5A962876CB623D451FD625EB105A16E020D160DE5635B25"
+                  },
+                  {
+                      "path":  "mods/flickerfix-1.20.1-4.0.1.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  5630,
+                      "sha256":  "6F154F6BD798CDF5A9F3F90C743B396B2162308C69D9713AF22091A18A4746B6"
+                  },
+                  {
+                      "path":  "mods/fluidium-1.20.1-1.4.0.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  774902,
+                      "sha256":  "C352872092CC970B7826F5DD1779CDF325FBDB934DC104DD3DCA95440B432E21"
+                  },
+                  {
+                      "path":  "mods/FramedBlocks-9.4.3.jar.disabled",
+                      "kind":  "mod",
+                      "state":  "disabled",
+                      "size":  4251314,
+                      "sha256":  "58F4A8D8FB759A9DB8754D83461DF1B7B2E94426888259286D3ACC316E6C6589"
+                  },
+                  {
+                      "path":  "mods/ftb-essentials-forge-2001.2.4.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  157732,
+                      "sha256":  "E0022BFE29DC10E373947701DAE1BC4CE75EE15FE21F6D89269677FBB9AEBF73"
+                  },
+                  {
+                      "path":  "mods/ftb-library-forge-2001.2.13.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  780558,
+                      "sha256":  "41810281B65336265CAE2C88412022D02F2F0A3F28C66A06173D86F98ACF14A7"
+                  },
+                  {
+                      "path":  "mods/ftb-quests-forge-2001.4.22.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  1255469,
+                      "sha256":  "9EA9D159A78A2724CFE0457B024680FDB52A2126EFF9CFA5280A30578F647A68"
+                  },
+                  {
+                      "path":  "mods/ftb-teams-forge-2001.3.2.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  252579,
+                      "sha256":  "B1CB4D82EA9F137A87E12A7AAF3329619294B56F7D70337DFD557A76E10B6E07"
+                  },
+                  {
+                      "path":  "mods/ftb-ultimine-forge-2001.1.8.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  129653,
+                      "sha256":  "B80DDE55B2C91FD27F09F15ED2AEFB0756C7BD704316E488AE8A06B179E85730"
+                  },
+                  {
+                      "path":  "mods/ftb-xmod-compat-forge-2.1.3.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  129725,
+                      "sha256":  "16A8EB9DE88D5C33D29CB076CC39DFB337B2C54348E1EF1EFE9DD60CF85E5F72"
+                  },
+                  {
+                      "path":  "mods/functionalstorage-1.20.1-1.2.13.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  682220,
+                      "sha256":  "0D458BCD5C23E53B5479ACDB2E9AC2F762F2A1F3B14951BF3CC4CAFEABEFB687"
+                  },
+                  {
+                      "path":  "mods/geckolib-forge-1.20.1-4.8.4.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  1038209,
+                      "sha256":  "C04ABBA4FD354DD8C0E8A732F1F05F4DCA893D2E1D962B2AB128BBD411478747"
+                  },
+                  {
+                      "path":  "mods/GlitchCore-forge-1.20.1-0.0.1.1.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  87550,
+                      "sha256":  "E42A8B513DA08A910C133CAEAFAD9FC2FCC22FDAAA2EB3E2516E9112A5A0DB61"
+                  },
+                  {
+                      "path":  "mods/Glodium-1.20-1.5-forge.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  60550,
+                      "sha256":  "FC419CB5BF511750C0A2DA498B925F5122AC4F78617ACA6630FE80ABF0B6F460"
+                  },
+                  {
+                      "path":  "mods/gnetum-2.4.6.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  727997,
+                      "sha256":  "F3AC0D468730EF835B5E974AFEA241D4D8A227378F02B7A04BE129FF038F85A5"
+                  },
+                  {
+                      "path":  "mods/gpumemleakfix-1.20.1-1.8.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  7997,
+                      "sha256":  "A7019442F1B07B1A4A875FE404D04D162905CC7FD42E0B3C843AEFC7B39EFC46"
+                  },
+                  {
+                      "path":  "mods/gtocore-forge-1.20.1-0.5.6-beta.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  56183682,
+                      "sha256":  "FB5B563D98EED58A81E978113895057A09E05AEDFCC7F1ED9925126593836B3C"
+                  },
+                  {
+                      "path":  "mods/gto-farming-fix-1.0.1.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  18775,
+                      "sha256":  "190A1472AA0A2C0F6A760F55DEF2E465C13A92BBB3B70AB7BD9F38DE541122FB"
+                  },
+                  {
+                      "path":  "mods/gtonativelib-1.0.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  3124262,
+                      "sha256":  "1AE9C9160598253C4CC903D2149E4FADC2317B36741D254E5BFE23DC7F64BC03"
+                  },
+                  {
+                      "path":  "mods/gto-terminal-fix-1.0.0.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  3195,
+                      "sha256":  "C5B3B8DE55BCB479E5E950FA3A9316CEDFC025F69A4290211C6EF4DE86F4663F"
+                  },
+                  {
+                      "path":  "mods/guideme-20.1.15.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  9414827,
+                      "sha256":  "CF8052AB3DA121012EFC59A20E731C24BFE7488DFA556C9B88809F42DEA3B24A"
+                  },
+                  {
+                      "path":  "mods/HangGlider-v8.0.1-1.20.1-Forge.jar.disabled",
+                      "kind":  "mod",
+                      "state":  "disabled",
+                      "size":  136076,
+                      "sha256":  "82298214AA3F7225A0AC0ED93EB2CFF8283758AF211029CC00A7819A0FED6A7C"
+                  },
+                  {
+                      "path":  "mods/ImmediatelyFast-Forge-1.5.5+1.20.4.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  532063,
+                      "sha256":  "82DB19CC65B5C11A444498FB4B8CBCB0393C043E794CB5BF368631A0AF765035"
+                  },
+                  {
+                      "path":  "mods/immersive_aircraft-1.4.1+1.20.1-forge.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  2435800,
+                      "sha256":  "FE54DD2D78591A16F44600940BC66C7D40A83888F5A9E4623DA888DC6F7421DE"
+                  },
+                  {
+                      "path":  "mods/inventoryessentials-forge-1.20.1-8.2.18.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  170012,
+                      "sha256":  "8317C14EF243A6C48C620C691F278AD74A702C9B0790AC18DC698D8EA35CE36C"
+                  },
+                  {
+                      "path":  "mods/invtweaks-1.20.1-1.2.2.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  75049,
+                      "sha256":  "54BA6FD7D5E4B9A9DADF6876153B99A94B4997F8D4EE0E46C9C58EA5C8C95802"
+                  },
+                  {
+                      "path":  "mods/item-filters-forge-2001.1.0-build.59.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  110191,
+                      "sha256":  "99417B1342BA51CCB9611B17AB01FC1299971AA34E8F9D2A8B3C63DF5713EB49"
+                  },
+                  {
+                      "path":  "mods/Jade-1.20.1-Forge-11.13.2.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  552486,
+                      "sha256":  "31949971A7A8D5A5BC95AD9D400CBEDFD2D65FFBFB3CEA7C0B2FA3B47431A0A5"
+                  },
+                  {
+                      "path":  "mods/jecharacters-1.20.1-forge-4.6.4.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  267969,
+                      "sha256":  "AA2FE8A1D209A6C407C3FB8E9F0152D57F79606F9EF6DBB26B0A24CF05B6923D"
+                  },
+                  {
+                      "path":  "mods/jei-1.20.1-forge-15.20.0.133.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  1409767,
+                      "sha256":  "4D59C2FD5CEA526E5BD1017BB3166D83BB31AFBA81B3D43CD1F04A0C7DF547BB"
+                  },
+                  {
+                      "path":  "mods/JustEnoughResources-1.20.1-1.4.0.247.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  276231,
+                      "sha256":  "311D3A83DB489D27B96CD15DEB690CE64C78CFFB552C25C3DFF85956A14EC09E"
+                  },
+                  {
+                      "path":  "mods/kleeslabs-forge-1.20.1-15.0.12.jar.disabled",
+                      "kind":  "mod",
+                      "state":  "disabled",
+                      "size":  310159,
+                      "sha256":  "21CF8288E66A77E986AA242F88E46487BEF1C1D8C7FEB4189AA836A2B0B89764"
+                  },
+                  {
+                      "path":  "mods/konkrete_forge_1.8.0_MC_1.20-1.20.1.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  625185,
+                      "sha256":  "E78686B92C3761EC26EB9D3C53EFDD3D6CA77981CBD3723995E1163B7103AE0B"
+                  },
+                  {
+                      "path":  "mods/kotlinforforge-4.12.0-all.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  7442998,
+                      "sha256":  "6A66C6A68EC09F8717CDBF06883394F0EE24D7CD826B7134A0F81839E8E720AE"
+                  },
+                  {
+                      "path":  "mods/KryptonReforged-0.2.3.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  206758,
+                      "sha256":  "9B281428D0E7560B7B6E74CDC808C0FFD7A8E662BA84D1A12A6616B49CEDEC10"
+                  },
+                  {
+                      "path":  "mods/ldlib-forge-1.20.1-1.0.50.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  3114158,
+                      "sha256":  "559D2A0CF8F77D7D6487B2C1620A8EE09E6BED94268BE6DF77CBA0F7D8AC5112"
+                  },
+                  {
+                      "path":  "mods/LibX-1.20.1-5.0.14.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  1258082,
+                      "sha256":  "6B795BBEEB320A4FC44438BEC23F7937E8C70F7B87E809E044872E37A9AC1B27"
+                  },
+                  {
+                      "path":  "mods/LittleTiles_BETA_v1.6.0-pre161_mc1.20.1.jar.disabled",
+                      "kind":  "mod",
+                      "state":  "disabled",
+                      "size":  2623590,
+                      "sha256":  "365CFB137E0F3A95F605B45FEA82040AFB0AC4FA1A0FC0DEAEAF59CB35E8BAE4"
+                  },
+                  {
+                      "path":  "mods/Measurements-forge-1.20.1-2.0.1.jar.disabled",
+                      "kind":  "mod",
+                      "state":  "disabled",
+                      "size":  43445,
+                      "sha256":  "5860AA8B107D23BADB9929525A0551F68618B9B9668CFA71A415021613D36005"
+                  },
+                  {
+                      "path":  "mods/melody_forge_1.0.3_MC_1.20.1-1.20.4.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  37178,
+                      "sha256":  "933E2A7E79C4594F965F7F7D00B1F28A98EC2A180AD8F9F90310A266FE5CF5D8"
+                  },
+                  {
+                      "path":  "mods/merequester-forge-1.20.1-1.2.1.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  168495,
+                      "sha256":  "490DE12BE0237E5699ABA8AE57D9C40A97AE7491D6AE33ECB1FC5D3B30F391EA"
+                  },
+                  {
+                      "path":  "mods/mobtimizations-forge-1.20.1-1.0.1.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  27943,
+                      "sha256":  "1713BBF6ABA4E5CDF21854CC8DAF6B4C3893BC175778367273B9B052340AE168"
+                  },
+                  {
+                      "path":  "mods/modelfix-1.15.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  45246,
+                      "sha256":  "35F27982242A3EA58C526204A28704DDF355D19BB2E9B0FF10F9585C255A4F16"
+                  },
+                  {
+                      "path":  "mods/modernfix-forge-5.26.2+mc1.20.1.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  826829,
+                      "sha256":  "E9F00F787A78A976B8493EAFEEE63FF08FADB31BCB0A1E938D7B940D17AC70AE"
+                  },
+                  {
+                      "path":  "mods/ModernUI-Forge-1.20.1-3.12.0.1-universal.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  25104473,
+                      "sha256":  "49FEA599522316EF7ABD8897E8BCAD3ED742D935F0A53726EBA1F00C9CA8FE4C"
+                  },
+                  {
+                      "path":  "mods/modular-routers-12.1.1+mc1.20.1.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  1163834,
+                      "sha256":  "73927003853E062806916CE6CB009203BD083D0169DE7380E114835A1FB8659D"
+                  },
+                  {
+                      "path":  "mods/moremorelang-1.0.4.jar.disabled",
+                      "kind":  "mod",
+                      "state":  "disabled",
+                      "size":  394454,
+                      "sha256":  "AA92107C30FCEE59FA0BBD882B9F26CB9A9A0E88F046C0CDF8477C15218BE788"
+                  },
+                  {
+                      "path":  "mods/morered-1.20.1-4.0.0.4.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  756905,
+                      "sha256":  "A5BAA00780254A9982276A99DCEEA035C62D384F07926E3138CB3934F1B808A0"
+                  },
+                  {
+                      "path":  "mods/MouseTweaks-forge-mc1.20.1-2.25.1.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  76237,
+                      "sha256":  "6C27D16AA715AC6613A55FC463739E2C7B78279E4E4C4CEDE299E4A2D4A70F08"
+                  },
+                  {
+                      "path":  "mods/MythicBotany-1.20.1-4.0.4.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  2233413,
+                      "sha256":  "395CCECF60321FEDE08A5A528087AF273269F21DDCE062270DF6568D405A463D"
+                  },
+                  {
+                      "path":  "mods/nanhealthfixer-1.20.1-0.0.1.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  3010,
+                      "sha256":  "D03619BDA583C0D52848D9225B781D022D406CECF02DA2D5703BEAD81803FE1F"
+                  },
+                  {
+                      "path":  "mods/NaturesCompass-1.20.1-1.12.0-forge.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  227495,
+                      "sha256":  "BC3601E9E050802569647DE843FE9D3160934C5F31412CBA62CA2EA8C1485197"
+                  },
+                  {
+                      "path":  "mods/nolijium-0.5.6.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  362983,
+                      "sha256":  "CCB2A49A592AF42AFFFB25D7FCA6CF4FF9B872694CCE24875BEF1C45FBDB3086"
+                  },
+                  {
+                      "path":  "mods/no-telemetry-1.10.0.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  96316,
+                      "sha256":  "8E9086FEFD2EF7D65D31946A91B9414A23CD1B777BBAB08855039B130F0B8B2C"
+                  },
+                  {
+                      "path":  "mods/oculus-mc1.20.1-1.8.0.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  2851119,
+                      "sha256":  "0945DF0CBA0F62B3901DD80C3268E5311B770ECE78C78037A45DB12AC0425FEF"
+                  },
+                  {
+                      "path":  "mods/Oh-The-Biomes-Weve-Gone-Forge-1.8.0.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  19043613,
+                      "sha256":  "A6D21A08170DBFB6C3983B571BB2C1CD92AA93109F5B3A9B47101688DD81EA01"
+                  },
+                  {
+                      "path":  "mods/Oh-The-Trees-Youll-Grow-forge-1.20.1-1.7.0.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  171966,
+                      "sha256":  "B3495F6B0FFA38BC5BF7189E29A27EEF0C23B58540DC2F32033889C2943E5694"
+                  },
+                  {
+                      "path":  "mods/OpenLoader-Forge-1.20.1-19.0.5.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  23937,
+                      "sha256":  "56DA03448CE1C63CB0F41E99AE38C5857D663886F9249C234F18B7C0DE44B151"
+                  },
+                  {
+                      "path":  "mods/open-parties-and-claims-forge-1.20.1-0.27.5.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  1665005,
+                      "sha256":  "5975E16A590A860C34AAF488B8E9A69EB404FE313F7456FE01E77DEDE567C1C1"
+                  },
+                  {
+                      "path":  "mods/Patchouli-1.20.1-85-FORGE.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  642732,
+                      "sha256":  "05F7B5D52F6B8F0FD7F8B4822FA07A192D1394D83A264309C9D221D6D4FD21C5"
+                  },
+                  {
+                      "path":  "mods/pipez-forge-1.20.1-1.2.26.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  431615,
+                      "sha256":  "F692B0A24C46C954358DB8535248021DEAF3399973C4E746BA1E3E115A8A48C9"
+                  },
+                  {
+                      "path":  "mods/Placebo-1.20.1-8.6.3.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  282474,
+                      "sha256":  "1CDF906CFBCBB5E5BE2EF1BB721F79A24B01BD2AC559C8CDBFB7693F62421571"
+                  },
+                  {
+                      "path":  "mods/Pretty Rain-1.20.1-Forge-1.1.3.jar.disabled",
+                      "kind":  "mod",
+                      "state":  "disabled",
+                      "size":  601125,
+                      "sha256":  "4D61EF6E1D1B4A3FB4ACFC876FE0CFE14D56AFE2097F952332C8C23838096DDF"
+                  },
+                  {
+                      "path":  "mods/PuzzlesLib-v8.1.33-1.20.1-Forge.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  1342987,
+                      "sha256":  "F3077A9F817629B8E8929C1951042D1A1ADC62D30B72ADEBD54D2B074A4FAF4F"
+                  },
+                  {
+                      "path":  "mods/radium-mc1.20.1-0.12.4+git.26c9d8e.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  713454,
+                      "sha256":  "B42584E2672D6B5329959EC2B0F342395B19389FED0EE4D86EA71072F42F77A0"
+                  },
+                  {
+                      "path":  "mods/redirector-5.0.0.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  5793,
+                      "sha256":  "06F4F5AC6BEB817ACF0F9534F77C894B23B729D3A992A646AF36C854099447A8"
+                  },
+                  {
+                      "path":  "mods/renderblender-1.1.1.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  779583,
+                      "sha256":  "A0C35EFFF951F6E669AEBA0D5666566F5BAD4E92F53AF96B79BD968AF8D74C46"
+                  },
+                  {
+                      "path":  "mods/resourcefulconfig-forge-1.20.1-2.1.3.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  136923,
+                      "sha256":  "C404B9E5CF8595427A72D4CA6EE5730289168762B463F169BE3AE5DFE3727DED"
+                  },
+                  {
+                      "path":  "mods/resourcefullib-forge-1.20.1-2.1.29.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  432753,
+                      "sha256":  "B13AFB95231D88E1CAEA5A045967E0FC291B29020B0D26AD39E6F9E9A551FEE8"
+                  },
+                  {
+                      "path":  "mods/Searchables-forge-1.20.1-1.0.3.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  77732,
+                      "sha256":  "C1A76E93886210574D3F298C0461241FB711E52AC22C7A04D3236840F29E6576"
+                  },
+                  {
+                      "path":  "mods/Shrink-1.20.1-1.4.5.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  88318,
+                      "sha256":  "A7AF6DC3BC080C470A27FF691152C974BD13CE61E0C0948DAF5EEFECE432ABB1"
+                  },
+                  {
+                      "path":  "mods/solcarrot-1.20.1-1.15.1.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  104185,
+                      "sha256":  "629D6744C8D856C51C74C66EBA4C252C6D62D392DBAF5B24EA690CD8F081E679"
+                  },
+                  {
+                      "path":  "mods/sophisticatedbackpacks-1.20.1-3.24.59.1960.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  1129298,
+                      "sha256":  "E5B76AF26FBFDE2A200B5C8A9A83A5A77D9AA8A7C6757558783B3DFA37E75E4B"
+                  },
+                  {
+                      "path":  "mods/sophisticatedcore-1.20.1-1.3.65.2126.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  1608481,
+                      "sha256":  "E87A272C9F46BD7379AFCFC24FC528429B65A6E4E58606971E616890CE0C1DCF"
+                  },
+                  {
+                      "path":  "mods/spiceoflife_classic-forge-2.11.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  114928,
+                      "sha256":  "9341CF0DA09EC4D4FD92C03C99565820BAED6CFC35DD7B8C92F115B16635CD45"
+                  },
+                  {
+                      "path":  "mods/structure_layout_optimizer-forge-1.0.11.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  246413,
+                      "sha256":  "14BFC4B1E82EA24118402FCCD90DFFDE45FA6D9E2238BFAA19A43B3FB88EE49C"
+                  },
+                  {
+                      "path":  "mods/TerraBlender-forge-1.20.1-3.0.1.10.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  107532,
+                      "sha256":  "C109016F46CA9BDAE69976BF080BBF2E8E5968CB66C0A78845F8CA6AF5DBBEB1"
+                  },
+                  {
+                      "path":  "mods/titanium-1.20.1-3.8.34.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  622073,
+                      "sha256":  "9C7781E6E6A82B1D3A8B0E6DDBE4FDF660C697D3DF4305B2065C39C5B33673F8"
+                  },
+                  {
+                      "path":  "mods/toofast-1.20-0.4.3.5.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  3875,
+                      "sha256":  "5DC0FC5687C43AD9CEC522EBB6EDA9D9C84EDC5B0C401721E91450B1EF57DE5A"
+                  },
+                  {
+                      "path":  "mods/ToolBelt-1.20.1-1.20.03.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  253933,
+                      "sha256":  "9C1B8C52D848055D7A4C60989F5B36247431C11D84A2E2975BB1CCFCA2663030"
+                  },
+                  {
+                      "path":  "mods/torchmaster-20.1.9.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  119348,
+                      "sha256":  "7C8984A2DC11C29147D0677958E9146A18578068BC00FBFCB1CDDBAA60557682"
+                  },
+                  {
+                      "path":  "mods/TreeChop-1.20.1-forge-0.19.0-fixed.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  517225,
+                      "sha256":  "219FBE5BF8D862DC7B524CA5A0151F66BBA4D53A01010858E136A9E8C4D55D4F"
+                  },
+                  {
+                      "path":  "mods/usclb-0.0.26.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  642849,
+                      "sha256":  "E0783A0698022A99890DFA98BAFA04ABE1FFCBA98361DCB1BE333B62CDD9A105"
+                  },
+                  {
+                      "path":  "mods/xaerominimap-forge-1.20.1-26.2.0.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  2182785,
+                      "sha256":  "67B3CCFE92280ED5EE9E58207DA47A73FE452AEF4295239B6430C292B74039B9"
+                  },
+                  {
+                      "path":  "mods/xaeroworldmap-forge-1.20.1-1.42.0.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  1409051,
+                      "sha256":  "BD70E7D7DFD720F15FBD4B1CA7E6B2617D4C51A3C5105D53AAB0D96B07CBF59F"
+                  },
+                  {
+                      "path":  "mods/xtonesreworked-1.0.4-F_1.20.1-47.2.0.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  1315408,
+                      "sha256":  "038D9F376CA7C49CBC2B04C831751BD64DCEEA936EFAD598A7A50667B0AB9A1A"
+                  },
+                  {
+                      "path":  "mods/YeetusExperimentus-Forge-2.3.1-build.6+mc1.20.1.jar",
+                      "kind":  "mod",
+                      "state":  "enabled",
+                      "size":  568278,
+                      "sha256":  "6DACF5EA0CEC5D6D53E7D002D4A06AC4FA5F7EC665F3932BB6566136E6A7F8ED"
+                  }
+              ]
+}

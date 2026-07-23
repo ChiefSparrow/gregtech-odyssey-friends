@@ -128,11 +128,17 @@ try {
         'modlist.html',
         'README-FIRST.md',
         'INSTALL-AI.json',
+        'CLIENT-MOD-LOCK.json',
+        'VERIFY-CLIENT.ps1',
         'RELEASE-MANIFEST.json',
         'CHANGELOG.md',
         'THIRD-PARTY.md',
         'overrides/README-FIRST.md',
-        'overrides/INSTALL-AI.json'
+        'overrides/INSTALL-AI.json',
+        'overrides/CLIENT-MOD-LOCK.json',
+        'overrides/VERIFY-CLIENT.ps1',
+        'overrides/config/gtocore.yaml',
+        'overrides/config/defaultoptions-common.toml'
     )) {
         [void](Get-Entry $requiredRoot)
     }
@@ -178,6 +184,85 @@ try {
     }
 
     $releaseManifest = Read-EntryText 'RELEASE-MANIFEST.json' | ConvertFrom-Json
+    if ($releaseManifest.package.version -ne $Config.packageVersion) {
+        throw "Release manifest package version mismatch: $($releaseManifest.package.version)"
+    }
+    $clientLock = Read-EntryText 'CLIENT-MOD-LOCK.json' | ConvertFrom-Json
+    if ($clientLock.schema -ne 'gto-friends-client-lock/v1') {
+        throw "Unexpected client lock schema: $($clientLock.schema)"
+    }
+    if ($clientLock.package.version -ne $Config.packageVersion) {
+        throw "Client lock package version mismatch: $($clientLock.package.version)"
+    }
+    $readmeFirst = Read-EntryText 'README-FIRST.md'
+    $overrideReadmeFirst = Read-EntryText 'overrides/README-FIRST.md'
+    if (
+        $readmeFirst -ne $overrideReadmeFirst -or
+        $readmeFirst -notmatch 'Java 21' -or
+        $readmeFirst -notmatch 'GTOCore.+Easy' -or
+        $readmeFirst -notmatch 'Normal'
+    ) {
+        throw 'README-FIRST.md copies are stale or inconsistent.'
+    }
+    $installAiText = Read-EntryText 'INSTALL-AI.json'
+    $overrideInstallAiText = Read-EntryText 'overrides/INSTALL-AI.json'
+    if ($installAiText -ne $overrideInstallAiText) {
+        throw 'INSTALL-AI.json copies differ.'
+    }
+    $clientVerifierText = Read-EntryText 'VERIFY-CLIENT.ps1'
+    $overrideClientVerifierText = Read-EntryText 'overrides/VERIFY-CLIENT.ps1'
+    $repositoryClientVerifierText = Get-Content -LiteralPath (
+        Join-Path $PSScriptRoot 'VERIFY-CLIENT.ps1'
+    ) -Raw -Encoding UTF8
+    if (
+        $clientVerifierText -ne $overrideClientVerifierText -or
+        $clientVerifierText -ne $repositoryClientVerifierText
+    ) {
+        throw 'Packaged VERIFY-CLIENT.ps1 differs from repository source.'
+    }
+    $installAi = $installAiText | ConvertFrom-Json
+    if (
+        $installAi.requirements.java -notmatch '^21' -or
+        $installAi.difficulty_model.gtocore_pack_mode -ne 'Easy' -or
+        $installAi.difficulty_model.vanilla_new_world_difficulty -ne 'NORMAL' -or
+        $installAi.difficulty_model.vanilla_difficulty_locked -ne $false
+    ) {
+        throw 'INSTALL-AI.json has stale Java or difficulty requirements.'
+    }
+    if (
+        [int]$clientLock.counts.mods -ne [int]$Config.clientLock.expectedModFiles -or
+        [int]$clientLock.counts.resourcePacks -ne [int]$Config.clientLock.expectedResourcePacks
+    ) {
+        throw 'Client lock file counts do not match pack-config.json.'
+    }
+    $lockPaths = @($clientLock.files | ForEach-Object path)
+    if (@($lockPaths | Group-Object | Where-Object Count -ne 1).Count -gt 0) {
+        throw 'Duplicate paths found in client lock.'
+    }
+    foreach ($lockedFile in $clientLock.files) {
+        if ($lockedFile.sha256 -notmatch '^[A-F0-9]{64}$' -or [long]$lockedFile.size -le 0) {
+            throw "Invalid client lock entry: $($lockedFile.path)"
+        }
+    }
+    $rootLockHash = Get-EntryHash (Get-Entry 'CLIENT-MOD-LOCK.json')
+    $overrideLockHash = Get-EntryHash (Get-Entry 'overrides/CLIENT-MOD-LOCK.json')
+    if ($rootLockHash -ne $overrideLockHash -or $rootLockHash -ne $releaseManifest.exactClientLock.sha256) {
+        throw 'Client lock copies or release-manifest hash do not match.'
+    }
+    $embeddedLockedFiles = 0
+    foreach ($lockedFile in $clientLock.files) {
+        $embeddedPath = 'overrides/' + $lockedFile.path
+        if ($entryNames -contains $embeddedPath) {
+            $embeddedHash = Get-EntryHash (Get-Entry $embeddedPath)
+            if ($embeddedHash -ne $lockedFile.sha256) {
+                throw "Embedded file does not match client lock: $embeddedPath"
+            }
+            $embeddedLockedFiles++
+        }
+    }
+    if ($embeddedLockedFiles -lt 6) {
+        throw "Expected at least 6 embedded client-lock files, found $embeddedLockedFiles"
+    }
     foreach ($artifact in $releaseManifest.customArtifacts) {
         $entry = Get-Entry $artifact.archivePath
         $actual = Get-EntryHash $entry
@@ -211,6 +296,34 @@ try {
         'overrides/shaderpacks/ComplementaryReimagined_r5.6.1 + EuphoriaPatches_1.7.7.txt'
     )) {
         [void](Get-Entry $sharedConfig)
+    }
+
+    $gtoConfig = Read-EntryText 'overrides/config/gtocore.yaml'
+    $gtoConfig = $gtoConfig.Replace("`r`n", "`n").Replace("`r", "`n")
+    if ($gtoConfig -cne "gamePlay:`n  difficulty: Easy`n") {
+        throw 'GTOCore preset must be the minimal Easy YAML.'
+    }
+    $defaultOptions = Read-EntryText 'overrides/config/defaultoptions-common.toml'
+    $defaultOptions = $defaultOptions.Replace("`r`n", "`n").Replace("`r", "`n")
+    if (
+        [regex]::Matches(
+            $defaultOptions,
+            '(?m)^[ \t]*defaultDifficulty[ \t]*='
+        ).Count -ne 1 -or
+        [regex]::Matches(
+            $defaultOptions,
+            '(?m)^[ \t]*defaultDifficulty[ \t]*=[ \t]*"NORMAL"[ \t]*(?:#.*)?$'
+        ).Count -ne 1 -or
+        [regex]::Matches(
+            $defaultOptions,
+            '(?m)^[ \t]*lockDifficulty[ \t]*='
+        ).Count -ne 1 -or
+        [regex]::Matches(
+            $defaultOptions,
+            '(?m)^[ \t]*lockDifficulty[ \t]*=[ \t]*false[ \t]*(?:#.*)?$'
+        ).Count -ne 1
+    ) {
+        throw 'Vanilla difficulty default must be NORMAL and unlocked.'
     }
 
     $checksumPath = "$ArchivePath.sha256"
