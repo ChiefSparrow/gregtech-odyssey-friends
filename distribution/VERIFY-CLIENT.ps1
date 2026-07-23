@@ -73,6 +73,105 @@ elseif (-not $AllowExtraMods) {
     }
 }
 
+$gtoConfigPath = Join-Path $MinecraftDirectory 'config\gtocore.yaml'
+if (-not (Test-Path -LiteralPath $gtoConfigPath -PathType Leaf)) {
+    $errors.Add('MISSING: config/gtocore.yaml')
+}
+else {
+    $gtoConfig = Get-Content -LiteralPath $gtoConfigPath -Raw -Encoding UTF8
+    $gtoConfig = $gtoConfig.Replace("`r`n", "`n").Replace("`r", "`n")
+    $gtoLines = $gtoConfig.Split("`n")
+    $directChildIndentation = $null
+    $gamePlaySections = 0
+    $inGamePlay = $false
+    foreach ($line in $gtoLines) {
+        $trimmed = $line.Trim()
+        if (-not $trimmed -or $trimmed.StartsWith('#')) {
+            continue
+        }
+        $indentation = ([regex]::Match($line, '^[ \t]*')).Length
+        if ($indentation -eq 0) {
+            $inGamePlay = $trimmed -eq 'gamePlay:'
+            if ($inGamePlay) {
+                $gamePlaySections++
+            }
+        }
+        elseif (
+            $inGamePlay -and
+            ($null -eq $directChildIndentation -or $indentation -lt $directChildIndentation)
+        ) {
+            $directChildIndentation = $indentation
+        }
+    }
+    $easyMatches = 0
+    $wrongGamePlayDifficulty = $false
+    $inGamePlay = $false
+    foreach ($line in $gtoLines) {
+        $trimmed = $line.Trim()
+        if (-not $trimmed -or $trimmed.StartsWith('#')) {
+            continue
+        }
+        $indentation = ([regex]::Match($line, '^[ \t]*')).Length
+        if ($indentation -eq 0) {
+            $inGamePlay = $trimmed -eq 'gamePlay:'
+            continue
+        }
+        if (
+            $inGamePlay -and
+            $indentation -eq $directChildIndentation -and
+            $trimmed -match '^difficulty[ \t]*:'
+        ) {
+            $value = ($trimmed -replace '^difficulty[ \t]*:[ \t]*', '') -replace '[ \t]*#.*$', ''
+            if ($value.Trim() -eq 'Easy') {
+                $easyMatches++
+            }
+            else {
+                $wrongGamePlayDifficulty = $true
+            }
+        }
+    }
+    if (
+        $gamePlaySections -ne 1 -or
+        $easyMatches -ne 1 -or
+        $wrongGamePlayDifficulty
+    ) {
+        $errors.Add('CONFIG: GTO pack mode must be Easy')
+    }
+}
+
+$defaultOptionsPath = Join-Path $MinecraftDirectory 'config\defaultoptions-common.toml'
+if (-not (Test-Path -LiteralPath $defaultOptionsPath -PathType Leaf)) {
+    $errors.Add('MISSING: config/defaultoptions-common.toml')
+}
+else {
+    $defaultOptions = Get-Content -LiteralPath $defaultOptionsPath -Raw -Encoding UTF8
+    $defaultOptions = $defaultOptions.Replace("`r`n", "`n").Replace("`r", "`n")
+    $normalLines = [regex]::Matches(
+        $defaultOptions,
+        '(?m)^[ \t]*defaultDifficulty[ \t]*=[ \t]*"NORMAL"[ \t]*(?:#.*)?$'
+    )
+    $allDifficultyLines = [regex]::Matches(
+        $defaultOptions,
+        '(?m)^[ \t]*defaultDifficulty[ \t]*='
+    )
+    $unlockedLines = [regex]::Matches(
+        $defaultOptions,
+        '(?m)^[ \t]*lockDifficulty[ \t]*=[ \t]*false[ \t]*(?:#.*)?$'
+    )
+    $allLockLines = [regex]::Matches(
+        $defaultOptions,
+        '(?m)^[ \t]*lockDifficulty[ \t]*='
+    )
+    if (
+        $allDifficultyLines.Count -ne 1 -or
+        $normalLines.Count -ne 1 -or
+        $allLockLines.Count -ne 1 -or
+        $unlockedLines.Count -ne 1
+    ) {
+        $errors.Add('CONFIG: vanilla difficulty default must be NORMAL and unlocked')
+    }
+}
+
 if ($errors.Count -gt 0) {
     Write-Host 'CLIENT VERIFICATION FAILED' -ForegroundColor Red
     foreach ($message in $errors) {

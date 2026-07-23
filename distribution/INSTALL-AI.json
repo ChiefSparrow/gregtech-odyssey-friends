@@ -12,19 +12,27 @@
     "licensed_minecraft_java_account": true,
     "minecraft": "1.20.1",
     "forge": "47.4.20",
-    "java": "17",
+    "java": "21 (64-bit)",
     "recommended_ram_mib": 10240,
     "acceptable_ram_mib": {
       "minimum": 8192,
       "maximum": 12288
     }
   },
+  "difficulty_model": {
+    "gtocore_pack_mode": "Easy",
+    "vanilla_new_world_difficulty": "NORMAL",
+    "vanilla_difficulty_locked": false,
+    "warning": "Do not copy a world created in GTO Normal or Expert into this Easy instance; GTO world mode is persistent and is not safely downgraded."
+  },
   "installation": [
     "Download the modpack ZIP from GitHub Releases, not Source code.zip.",
     "Import the ZIP directly into Prism Launcher.",
     "Allow Prism to download all CurseForge dependencies.",
     "Select a licensed Microsoft/Minecraft account.",
+    "Select a 64-bit Java 21 runtime in Prism Launcher.",
     "Assign 8192-12288 MiB RAM and launch.",
+    "Verify config/gtocore.yaml has gamePlay.difficulty Easy; vanilla defaultDifficulty remains NORMAL and unlocked.",
     "On first launch allow Euphoria Patcher to generate the patched shader.",
     "If necessary select ComplementaryReimagined_r5.6.1 + EuphoriaPatches_1.7.7 in the shader menu.",
     "Close Minecraft and run VERIFY-CLIENT.ps1 from the instance minecraft directory.",
@@ -55,6 +63,8 @@
   },
   "server_notes": {
     "server_address": null,
+    "gtocore_config_before_first_world": "gamePlay.difficulty: Easy",
+    "server_properties_difficulty": "normal",
     "required_shared_mods": [
       "gto-terminal-fix-1.0.0.jar",
       "gto-farming-fix-1.0.1.jar",

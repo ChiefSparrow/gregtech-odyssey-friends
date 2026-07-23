@@ -31,39 +31,54 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URL;
+import java.nio.channels.FileChannel;
+import java.nio.channels.FileLock;
+import java.nio.channels.OverlappingFileLockException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.AtomicMoveNotSupportedException;
 import java.nio.file.FileVisitResult;
 import java.nio.file.Files;
+import java.nio.file.LinkOption;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.SimpleFileVisitor;
 import java.nio.file.StandardCopyOption;
+import java.nio.file.StandardOpenOption;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.security.CodeSource;
 import java.security.MessageDigest;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Enumeration;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Set;
 import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipInputStream;
 
 public final class GtoTLauncherInstaller {
     private static final String PACK_NAME = "GregTech Odyssey — Friends Edition";
-    private static final String PACK_VERSION = "1.0.3";
-    private static final String PREVIOUS_PACK_VERSION = "1.0.2";
+    private static final String PACK_VERSION = "1.0.4";
+    private static final List<String> PREVIOUS_PACK_VERSIONS =
+            Collections.unmodifiableList(Arrays.asList("1.0.3", "1.0.2"));
     private static final String MINECRAFT_VERSION = "1.20.1";
     private static final String FORGE_VERSION = "47.4.20";
     private static final String FORGE_PROFILE_ID =
             MINECRAFT_VERSION + "-forge-" + FORGE_VERSION;
+    private static final String JAVA_RUNTIME_COMPONENT = "java-runtime-delta";
+    private static final int GAME_JAVA_MAJOR = 21;
     private static final String MARKER_FILE = "GTO-FRIENDS-INSTALLED.txt";
+    private static final String RECOVERY_FILE =
+            "GTO-FRIENDS-INSTALL-IN-PROGRESS.txt";
     private static final String USER_AGENT =
-            "GTO-Friends-TLauncher-Installer/1.0.3 "
+            "GTO-Friends-TLauncher-Installer/1.0.4 "
                     + "(https://github.com/ChiefSparrow/gregtech-odyssey-friends)";
     private static final DownloadEntry FORGE_INSTALLER =
             new DownloadEntry(
@@ -87,6 +102,24 @@ public final class GtoTLauncherInstaller {
                             + "1.20.1.json",
                     "официальное описание Minecraft 1.20.1"
             );
+    private static final DownloadEntry TEMURIN_JAVA_21 =
+            new DownloadEntry(
+                    ".gto-runtime/OpenJDK21U-jre_x64_windows_hotspot_"
+                            + "21.0.11_10.zip",
+                    49005708L,
+                    "BE26677AAA20B39A62EDCAAB4C8857A8B76673B0F45ABC0B6143B142B62717E4",
+                    "https://github.com/adoptium/temurin21-binaries/releases/"
+                            + "download/jdk-21.0.11%2B10/"
+                            + "OpenJDK21U-jre_x64_windows_hotspot_21.0.11_10.zip",
+                    "Eclipse Temurin JRE 21.0.11+10"
+            );
+    private static final LockedEntry ORIGINAL_FORGE_PROFILE =
+            new LockedEntry(
+                    "versions/1.20.1-forge-47.4.20/"
+                            + "1.20.1-forge-47.4.20.json",
+                    16629L,
+                    "67E2756069A09F292EE1364702DB212591D35C212AEF14E42D47B6D458CC433C"
+            );
     private static final LockedEntry[] FORGE_RUNTIME_LOCK = {
             new LockedEntry(
                     "versions/1.20.1/1.20.1.json",
@@ -96,8 +129,8 @@ public final class GtoTLauncherInstaller {
             new LockedEntry(
                     "versions/1.20.1-forge-47.4.20/"
                             + "1.20.1-forge-47.4.20.json",
-                    16629L,
-                    "67E2756069A09F292EE1364702DB212591D35C212AEF14E42D47B6D458CC433C"
+                    16727L,
+                    "01F9B3EF16826B6848FBCAF1F639124FC3060DB2ADE219B58C8E25A2E206A09B"
             ),
             new LockedEntry(
                     "versions/1.20.1/1.20.1.jar",
@@ -318,16 +351,70 @@ public final class GtoTLauncherInstaller {
     }
 
     private static void install(Path target, Progress progress) throws Exception {
-        requireJava17OrNewer();
         target = target.toAbsolutePath().normalize();
-        validateTarget(target);
-        boolean repairExisting = hasSupportedMarker(target);
-
+        Path currentJavaHome = Paths.get(System.getProperty("java.home"))
+                .toAbsolutePath()
+                .normalize();
+        Path managedJavaHome = javaRuntimeComponentRoot(target)
+                .toAbsolutePath()
+                .normalize();
+        if (currentJavaHome.startsWith(managedJavaHome)) {
+            throw new IOException(
+                    "Установщик запущен из Java, которую он должен обновить. "
+                            + "Закройте TLauncher и запустите "
+                            + "INSTALL-GTO-TLAUNCHER.bat ещё раз; BAT использует "
+                            + "отдельную Java TLauncher."
+            );
+        }
         Path parent = target.getParent();
         if (parent == null) {
             throw new IOException("Не удалось определить родительскую папку: " + target);
         }
         Files.createDirectories(parent);
+        Path lockPath = parent.resolve(
+                "." + target.getFileName() + ".gto-install.lock"
+        );
+        boolean acquired = false;
+        try (FileChannel channel = FileChannel.open(
+                lockPath,
+                StandardOpenOption.CREATE,
+                StandardOpenOption.WRITE
+        )) {
+            FileLock lock;
+            try {
+                lock = channel.tryLock();
+            } catch (OverlappingFileLockException error) {
+                lock = null;
+            }
+            if (lock == null) {
+                throw new IOException(
+                        "Для этой игровой папки уже запущен другой установщик GTO."
+                );
+            }
+            acquired = true;
+            try {
+                installLocked(target, parent, progress);
+            } finally {
+                lock.release();
+            }
+        } finally {
+            if (acquired) {
+                try {
+                    Files.deleteIfExists(lockPath);
+                } catch (IOException cleanupError) {
+                    progress.log("Не удалось удалить файл блокировки: " + lockPath);
+                }
+            }
+        }
+    }
+
+    private static void installLocked(
+            Path target,
+            Path parent,
+            Progress progress
+    ) throws Exception {
+        validateTarget(target);
+        boolean repairExisting = hasSupportedMarker(target);
 
         Path staging = parent.resolve(
                         "." + target.getFileName() + ".gto-installing-"
@@ -351,21 +438,32 @@ public final class GtoTLauncherInstaller {
                 progress.update(10, "Проверка сборки");
                 verifyClient(target);
 
-                progress.update(20, "Установка Forge");
+                progress.update(20, "Установка Java 21");
                 extractPayloadFile(staging, "README-TLAUNCHER.txt");
+                prepareEasyPackConfig(target, staging, progress);
+                prepareVanillaDefaults(target, staging, progress);
+                installJava21Runtime(staging, progress);
+                verifyJava21Runtime(staging);
+
+                progress.update(58, "Установка Forge");
                 installForgeRuntime(staging, progress);
                 verifyForgeRuntime(staging);
 
-                progress.update(85, "Копирование Forge");
+                progress.update(88, "Копирование исправлений");
+                rejectUnsafeLinks(target);
+                replaceManagedJavaRuntime(staging, target);
+                deleteTree(javaRuntimePlatformRoot(staging));
                 copyTree(staging, target);
 
                 progress.update(96, "Финальная проверка");
                 verifyClient(target);
                 verifyForgeRuntime(target);
+                verifyJava21Runtime(target);
+                verifyPackConfigurationAfterUpdate(target);
                 writeMarker(target);
 
                 progress.update(100, "Готово");
-                progress.log("Локальный профиль Forge исправлен.");
+                progress.log("Локальный профиль Forge и Java 21 исправлены.");
                 progress.log("Выберите в TLauncher: " + FORGE_PROFILE_ID);
                 return;
             }
@@ -392,22 +490,35 @@ public final class GtoTLauncherInstaller {
             progress.update(88, "Проверка");
             progress.log("Полная проверка модов и ресурсов…");
             verifyClient(staging);
+            verifyCleanPackConfiguration(staging);
             progress.log("Проверка временной сборки пройдена.");
 
-            progress.update(90, "Установка Forge");
+            progress.update(90, "Установка Java 21");
+            installJava21Runtime(staging, progress);
+            verifyJava21Runtime(staging);
+            progress.log("Приватная Java 21 проверена.");
+
+            progress.update(93, "Установка Forge");
             installForgeRuntime(staging, progress);
             verifyForgeRuntime(staging);
             progress.log("Локальный профиль Forge проверен.");
 
-            progress.update(95, "Копирование");
+            progress.update(96, "Копирование");
             Files.createDirectories(target);
             Files.deleteIfExists(target.resolve(MARKER_FILE));
+            writeRecoveryMarker(target);
+            rejectUnsafeLinks(target);
+            replaceManagedJavaRuntime(staging, target);
+            deleteTree(javaRuntimePlatformRoot(staging));
             copyTree(staging, target);
 
             progress.update(98, "Финальная проверка");
             verifyClient(target);
             verifyForgeRuntime(target);
+            verifyJava21Runtime(target);
+            verifyCleanPackConfiguration(target);
             writeMarker(target);
+            Files.deleteIfExists(target.resolve(RECOVERY_FILE));
             progress.log("Финальная проверка пройдена.");
 
             progress.update(100, "Готово");
@@ -434,7 +545,25 @@ public final class GtoTLauncherInstaller {
             return;
         }
         if (hasSupportedMarker(target)) {
+            rejectUnsafeLinks(target);
             return;
+        }
+        if (hasRecoveryMarker(target)) {
+            rejectUnsafeLinks(target);
+            if (hasExistingWorld(target)) {
+                throw new IOException(
+                        "В незавершённой установке неожиданно появились миры. "
+                                + "Выберите новую пустую папку."
+                );
+            }
+            return;
+        }
+        rejectUnsafeLinks(target);
+        if (hasExistingWorld(target)) {
+            throw new IOException(
+                    "В выбранной папке уже есть миры Minecraft. "
+                            + "Выберите отдельную пустую папку для GTO Friends Easy."
+            );
         }
         Path mods = target.resolve("mods");
         if (directoryHasFiles(mods)) {
@@ -454,8 +583,15 @@ public final class GtoTLauncherInstaller {
     }
 
     private static boolean hasSupportedMarker(Path target) {
-        return hasMarkerVersion(target, PACK_VERSION)
-                || hasMarkerVersion(target, PREVIOUS_PACK_VERSION);
+        if (hasMarkerVersion(target, PACK_VERSION)) {
+            return true;
+        }
+        for (String version : PREVIOUS_PACK_VERSIONS) {
+            if (hasMarkerVersion(target, version)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private static boolean hasMarkerVersion(Path target, String version) {
@@ -472,7 +608,25 @@ public final class GtoTLauncherInstaller {
                     && lines.contains("client-verification=passed");
             return baseMarker
                     && (!PACK_VERSION.equals(version)
-                    || lines.contains("forge-runtime-verification=passed"));
+                    || (lines.contains("forge-runtime-verification=passed")
+                    && lines.contains("java-runtime-verification=passed")
+                    && lines.contains("pack-mode-default=GTO-Easy")
+                    && lines.contains("vanilla-difficulty-default=NORMAL")));
+        } catch (IOException ignored) {
+            return false;
+        }
+    }
+
+    private static boolean hasRecoveryMarker(Path target) {
+        Path marker = target.resolve(RECOVERY_FILE);
+        if (!Files.isRegularFile(marker)) {
+            return false;
+        }
+        try {
+            List<String> lines = Files.readAllLines(marker, StandardCharsets.UTF_8);
+            return lines.contains(PACK_NAME)
+                    && lines.contains("target-version=" + PACK_VERSION)
+                    && lines.contains("status=install-in-progress");
         } catch (IOException ignored) {
             return false;
         }
@@ -494,24 +648,432 @@ public final class GtoTLauncherInstaller {
                 : Paths.get(System.getProperty("user.home"));
         Path normalMinecraft = root.resolve(".minecraft");
         Path currentPack = root.resolve(".gto-friends-" + PACK_VERSION);
-        Path previousPack = root.resolve(".gto-friends-" + PREVIOUS_PACK_VERSION);
-        if (hasSupportedMarker(currentPack)) {
+        if (hasSupportedMarker(currentPack) || hasRecoveryMarker(currentPack)) {
             return currentPack;
         }
-        if (hasSupportedMarker(previousPack)) {
-            return previousPack;
+        for (String version : PREVIOUS_PACK_VERSIONS) {
+            Path previousPack = root.resolve(".gto-friends-" + version);
+            if (hasSupportedMarker(previousPack)) {
+                return previousPack;
+            }
         }
-        if (hasSupportedMarker(normalMinecraft)) {
+        if (hasSupportedMarker(normalMinecraft) || hasRecoveryMarker(normalMinecraft)) {
             return normalMinecraft;
         }
         try {
             if (!directoryHasFiles(normalMinecraft.resolve("mods"))
-                    && !directoryHasFiles(normalMinecraft.resolve("config"))) {
+                    && !directoryHasFiles(normalMinecraft.resolve("config"))
+                    && !hasExistingWorld(normalMinecraft)) {
                 return normalMinecraft;
             }
         } catch (IOException ignored) {
         }
         return currentPack;
+    }
+
+    private static void prepareEasyPackConfig(
+            Path installedTarget,
+            Path staging,
+            Progress progress
+    ) throws Exception {
+        if (hasExistingWorld(installedTarget)) {
+            Path existingConfig =
+                    installedTarget.resolve("config").resolve("gtocore.yaml");
+            try {
+                requireGtoEasy(existingConfig);
+            } catch (IOException error) {
+                throw new IOException(
+                        "В выбранной папке найден мир, созданный не в режиме GTO Easy. "
+                                + "Его нельзя безопасно понизить. Укажите новую пустую "
+                                + "игровую папку для Friends Edition Easy; старая папка "
+                                + "не изменена.",
+                        error
+                );
+            }
+            progress.log(
+                    "Найдены существующие миры GTO Easy. Их режим сохранён без изменений."
+            );
+            return;
+        }
+
+        Path installedConfig = installedTarget.resolve("config").resolve("gtocore.yaml");
+        if (!Files.isRegularFile(installedConfig)) {
+            extractPayloadFile(staging, "config/gtocore.yaml");
+            progress.log("Установлен режим сборки GTO: Easy.");
+            return;
+        }
+
+        String current = new String(
+                Files.readAllBytes(installedConfig),
+                StandardCharsets.UTF_8
+        );
+        String updated = replaceGtoDifficultyWithEasy(current);
+        Path stagedConfig = staging.resolve("config").resolve("gtocore.yaml");
+        if (updated == null) {
+            throw new IOException(
+                    "Не удалось безопасно изменить только gamePlay.difficulty в "
+                            + installedConfig + ". Исправьте или удалите этот файл "
+                            + "только после резервной копии."
+            );
+        } else {
+            writeUtf8Atomically(stagedConfig, updated);
+            progress.log(
+                    "Режим сборки GTO изменён на Easy; остальные настройки сохранены."
+            );
+        }
+        requireGtoEasy(stagedConfig);
+    }
+
+    private static void prepareVanillaDefaults(
+            Path installedTarget,
+            Path staging,
+            Progress progress
+    ) throws Exception {
+        Path installedConfig = installedTarget
+                .resolve("config")
+                .resolve("defaultoptions-common.toml");
+        if (!Files.isRegularFile(installedConfig)) {
+            extractPayloadFile(staging, "config/defaultoptions-common.toml");
+            requireVanillaNormalDefaults(
+                    staging.resolve("config").resolve("defaultoptions-common.toml")
+            );
+            progress.log("Установлена ванильная сложность по умолчанию: Normal.");
+            return;
+        }
+
+        String current = new String(
+                Files.readAllBytes(installedConfig),
+                StandardCharsets.UTF_8
+        );
+        String withDifficulty = replaceActiveSetting(
+                current,
+                "defaultDifficulty",
+                "\"NORMAL\""
+        );
+        String updated = withDifficulty != null
+                ? replaceActiveSetting(withDifficulty, "lockDifficulty", "false")
+                : null;
+        if (updated == null) {
+            throw new IOException(
+                    "Не удалось безопасно обновить defaultoptions-common.toml. "
+                            + "Исправьте дублирующиеся или отсутствующие параметры "
+                            + "defaultDifficulty/lockDifficulty."
+            );
+        }
+
+        Path stagedConfig = staging
+                .resolve("config")
+                .resolve("defaultoptions-common.toml");
+        writeUtf8Atomically(stagedConfig, updated);
+        requireVanillaNormalDefaults(stagedConfig);
+        progress.log("Ванильная сложность новых миров оставлена Normal.");
+    }
+
+    private static String replaceActiveSetting(
+            String text,
+            String key,
+            String expectedValue
+    ) {
+        int position = 0;
+        int matchStart = -1;
+        int matchEnd = -1;
+        String replacement = null;
+        while (position <= text.length()) {
+            int newline = text.indexOf('\n', position);
+            int rawEnd = newline >= 0 ? newline : text.length();
+            int contentEnd = rawEnd;
+            if (contentEnd > position && text.charAt(contentEnd - 1) == '\r') {
+                contentEnd--;
+            }
+            String line = text.substring(position, contentEnd);
+            String trimmed = line.trim();
+            if (!trimmed.isEmpty() && !trimmed.startsWith("#")) {
+                int separator = line.indexOf('=');
+                if (separator >= 0
+                        && line.substring(0, separator).trim().equals(key)) {
+                    if (matchStart >= 0) {
+                        return null;
+                    }
+                    String suffix = line.substring(separator + 1);
+                    int comment = suffix.indexOf('#');
+                    String inlineComment = comment >= 0
+                            ? " " + suffix.substring(comment).trim()
+                            : "";
+                    matchStart = position;
+                    matchEnd = contentEnd;
+                    replacement = line.substring(0, separator + 1)
+                            + " " + expectedValue + inlineComment;
+                }
+            }
+            if (newline < 0) {
+                break;
+            }
+            position = newline + 1;
+        }
+        if (matchStart < 0 || replacement == null) {
+            return null;
+        }
+        return text.substring(0, matchStart)
+                + replacement
+                + text.substring(matchEnd);
+    }
+
+    private static boolean hasExistingWorld(Path root) throws IOException {
+        Path saves = root.resolve("saves");
+        if (!Files.isDirectory(saves)) {
+            return false;
+        }
+        try (java.util.stream.Stream<Path> paths = Files.walk(saves, 2)) {
+            return paths.anyMatch(path -> {
+                if (!Files.isRegularFile(path)) {
+                    return false;
+                }
+                String name = path.getFileName().toString();
+                return name.equals("level.dat") || name.equals("level.dat_old");
+            });
+        }
+    }
+
+    private static String replaceGtoDifficultyWithEasy(String text) {
+        int directChildIndentation = directChildIndentation(text, "gamePlay");
+        if (directChildIndentation < 1) {
+            return null;
+        }
+        int position = 0;
+        boolean inGamePlay = false;
+        int matchStart = -1;
+        int matchEnd = -1;
+        String replacement = null;
+
+        while (position <= text.length()) {
+            int newline = text.indexOf('\n', position);
+            int rawEnd = newline >= 0 ? newline : text.length();
+            int contentEnd = rawEnd;
+            if (contentEnd > position && text.charAt(contentEnd - 1) == '\r') {
+                contentEnd--;
+            }
+            String line = text.substring(position, contentEnd);
+            String trimmed = line.trim();
+            int indentation = 0;
+            while (indentation < line.length()) {
+                char value = line.charAt(indentation);
+                if (value != ' ' && value != '\t') {
+                    break;
+                }
+                indentation++;
+            }
+
+            if (!trimmed.isEmpty() && !trimmed.startsWith("#")) {
+                if (indentation == 0) {
+                    inGamePlay = trimmed.equals("gamePlay:");
+                } else if (inGamePlay
+                        && indentation == directChildIndentation
+                        && trimmed.startsWith("difficulty:")) {
+                    if (!trimmed.substring("difficulty:".length()).trim().isEmpty()) {
+                        if (matchStart >= 0) {
+                            return null;
+                        }
+                        matchStart = position;
+                        matchEnd = contentEnd;
+                        replacement =
+                                line.substring(0, indentation) + "difficulty: Easy";
+                    }
+                }
+            }
+
+            if (newline < 0) {
+                break;
+            }
+            position = newline + 1;
+        }
+
+        if (matchStart < 0 || replacement == null) {
+            return null;
+        }
+        return text.substring(0, matchStart)
+                + replacement
+                + text.substring(matchEnd);
+    }
+
+    private static void verifyCleanPackConfiguration(Path root) throws IOException {
+        requireGtoEasy(root.resolve("config").resolve("gtocore.yaml"));
+        requireVanillaNormalDefaults(
+                root.resolve("config").resolve("defaultoptions-common.toml")
+        );
+    }
+
+    private static void verifyPackConfigurationAfterUpdate(Path root)
+            throws IOException {
+        requireGtoEasy(root.resolve("config").resolve("gtocore.yaml"));
+        requireVanillaNormalDefaults(
+                root.resolve("config").resolve("defaultoptions-common.toml")
+        );
+    }
+
+    private static void requireGtoEasy(Path config) throws IOException {
+        if (!Files.isRegularFile(config)) {
+            throw new IOException("Отсутствует config/gtocore.yaml.");
+        }
+        String text = new String(Files.readAllBytes(config), StandardCharsets.UTF_8);
+        if (!hasSingleNestedSetting(text, "gamePlay", "difficulty", "Easy")) {
+            throw new IOException("Режим сборки GTO должен быть Easy.");
+        }
+    }
+
+    private static void requireVanillaNormalDefaults(Path config)
+            throws IOException {
+        if (!Files.isRegularFile(config)) {
+            throw new IOException("Отсутствует config/defaultoptions-common.toml.");
+        }
+        String text = new String(Files.readAllBytes(config), StandardCharsets.UTF_8);
+        if (!hasSingleActiveSetting(text, "defaultDifficulty", "\"NORMAL\"")
+                || !hasSingleActiveSetting(text, "lockDifficulty", "false")) {
+            throw new IOException(
+                    "Ванильная сложность должна быть NORMAL и не заблокирована."
+            );
+        }
+    }
+
+    private static boolean hasSingleNestedSetting(
+            String text,
+            String section,
+            String key,
+            String expectedValue
+    ) {
+        int directChildIndentation = directChildIndentation(text, section);
+        if (directChildIndentation < 1) {
+            return false;
+        }
+        int position = 0;
+        boolean inSection = false;
+        int matches = 0;
+        while (position <= text.length()) {
+            int newline = text.indexOf('\n', position);
+            int rawEnd = newline >= 0 ? newline : text.length();
+            int contentEnd = rawEnd;
+            if (contentEnd > position && text.charAt(contentEnd - 1) == '\r') {
+                contentEnd--;
+            }
+            String line = text.substring(position, contentEnd);
+            String trimmed = line.trim();
+            int indentation = line.length() - stripLeadingWhitespace(line).length();
+            if (!trimmed.isEmpty() && !trimmed.startsWith("#")) {
+                if (indentation == 0) {
+                    inSection = trimmed.equals(section + ":");
+                } else if (inSection
+                        && indentation == directChildIndentation
+                        && trimmed.startsWith(key + ":")) {
+                    String value = trimmed.substring((key + ":").length()).trim();
+                    int comment = value.indexOf('#');
+                    if (comment >= 0) {
+                        value = value.substring(0, comment).trim();
+                    }
+                    if (value.equals(expectedValue)) {
+                        matches++;
+                    } else {
+                        return false;
+                    }
+                }
+            }
+            if (newline < 0) {
+                break;
+            }
+            position = newline + 1;
+        }
+        return matches == 1;
+    }
+
+    private static int directChildIndentation(String text, String section) {
+        int position = 0;
+        boolean inSection = false;
+        int sectionCount = 0;
+        int minimumIndentation = Integer.MAX_VALUE;
+        while (position <= text.length()) {
+            int newline = text.indexOf('\n', position);
+            int rawEnd = newline >= 0 ? newline : text.length();
+            int contentEnd = rawEnd;
+            if (contentEnd > position && text.charAt(contentEnd - 1) == '\r') {
+                contentEnd--;
+            }
+            String line = text.substring(position, contentEnd);
+            String trimmed = line.trim();
+            int indentation = line.length() - stripLeadingWhitespace(line).length();
+            if (!trimmed.isEmpty() && !trimmed.startsWith("#")) {
+                if (indentation == 0) {
+                    inSection = trimmed.equals(section + ":");
+                    if (inSection) {
+                        sectionCount++;
+                    }
+                } else if (inSection) {
+                    minimumIndentation = Math.min(minimumIndentation, indentation);
+                }
+            }
+            if (newline < 0) {
+                break;
+            }
+            position = newline + 1;
+        }
+        return sectionCount == 1 && minimumIndentation != Integer.MAX_VALUE
+                ? minimumIndentation
+                : -1;
+    }
+
+    private static String stripLeadingWhitespace(String text) {
+        int index = 0;
+        while (index < text.length()) {
+            char value = text.charAt(index);
+            if (value != ' ' && value != '\t') {
+                break;
+            }
+            index++;
+        }
+        return text.substring(index);
+    }
+
+    private static boolean hasSingleActiveSetting(
+            String text,
+            String key,
+            String expectedValue
+    ) {
+        int matches = 0;
+        for (String line : text.split("\\r?\\n", -1)) {
+            String trimmed = line.trim();
+            if (trimmed.isEmpty() || trimmed.startsWith("#")) {
+                continue;
+            }
+            int separator = trimmed.indexOf('=');
+            if (separator < 0
+                    || !trimmed.substring(0, separator).trim().equals(key)) {
+                continue;
+            }
+            String value = trimmed.substring(separator + 1).trim();
+            int comment = value.indexOf('#');
+            if (comment >= 0) {
+                value = value.substring(0, comment).trim();
+            }
+            if (!value.equals(expectedValue)) {
+                return false;
+            }
+            matches++;
+        }
+        return matches == 1;
+    }
+
+    private static void writeUtf8Atomically(Path destination, String text)
+            throws IOException {
+        Files.createDirectories(destination.getParent());
+        Path temporary = destination.resolveSibling(
+                destination.getFileName() + ".tmp-" + UUID.randomUUID().toString()
+        );
+        try {
+            Files.write(
+                    temporary,
+                    text.getBytes(StandardCharsets.UTF_8)
+            );
+            moveAtomically(temporary, destination);
+        } finally {
+            Files.deleteIfExists(temporary);
+        }
     }
 
     private static void extractPayload(Path staging) throws Exception {
@@ -695,7 +1257,9 @@ public final class GtoTLauncherInstaller {
                     && !host.endsWith(".forgecdn.net")
                     && !host.equals("maven.minecraftforge.net")
                     && !host.equals("files.minecraftforge.net")
-                    && !host.equals("piston-meta.mojang.com")) {
+                    && !host.equals("piston-meta.mojang.com")
+                    && !host.equals("github.com")
+                    && !host.equals("release-assets.githubusercontent.com")) {
                 throw new IOException(
                         "Запрещённый узел загрузки: " + current.getHost()
                 );
@@ -795,7 +1359,15 @@ public final class GtoTLauncherInstaller {
     }
 
     private static String sha256(Path file) throws Exception {
-        MessageDigest digest = MessageDigest.getInstance("SHA-256");
+        return digestFile(file, "SHA-256");
+    }
+
+    private static String sha1(Path file) throws Exception {
+        return digestFile(file, "SHA-1");
+    }
+
+    private static String digestFile(Path file, String algorithm) throws Exception {
+        MessageDigest digest = MessageDigest.getInstance(algorithm);
         try (InputStream input =
                      new BufferedInputStream(Files.newInputStream(file))) {
             byte[] buffer = new byte[1024 * 128];
@@ -888,6 +1460,71 @@ public final class GtoTLauncherInstaller {
         progress.log("Фиксация официального описания Minecraft 1.20.1…");
         Path vanillaJson = safeResolve(root, VANILLA_VERSION_JSON.destination);
         downloadWithRetries(VANILLA_VERSION_JSON, vanillaJson, progress);
+        patchForgeProfileForJava21(root);
+    }
+
+    private static void patchForgeProfileForJava21(Path root) throws Exception {
+        Path profile = safeResolve(root, ORIGINAL_FORGE_PROFILE.path);
+        LockedEntry patchedProfile = FORGE_RUNTIME_LOCK[1];
+        if (matches(profile, patchedProfile.size, patchedProfile.sha256)) {
+            return;
+        }
+        if (!matches(
+                profile,
+                ORIGINAL_FORGE_PROFILE.size,
+                ORIGINAL_FORGE_PROFILE.sha256
+        )) {
+            throw new IOException(
+                    "Исходный локальный профиль Forge не совпал с проверенным эталоном."
+            );
+        }
+
+        String text = new String(
+                Files.readAllBytes(profile),
+                StandardCharsets.UTF_8
+        );
+        String needle = "    \"inheritsFrom\": \"" + MINECRAFT_VERSION + "\",";
+        String replacement = needle + "\n"
+                + "    \"javaVersion\": {\n"
+                + "        \"component\": \"" + JAVA_RUNTIME_COMPONENT + "\",\n"
+                + "        \"majorVersion\": " + GAME_JAVA_MAJOR + "\n"
+                + "    },";
+        if (countOccurrences(text, needle) != 1) {
+            throw new IOException(
+                    "Не удалось однозначно закрепить Java 21 в профиле Forge."
+            );
+        }
+
+        Path temporary = profile.resolveSibling(profile.getFileName() + ".java21.tmp");
+        Files.deleteIfExists(temporary);
+        try {
+            Files.write(
+                    temporary,
+                    text.replace(needle, replacement).getBytes(StandardCharsets.UTF_8)
+            );
+            if (!matches(
+                    temporary,
+                    patchedProfile.size,
+                    patchedProfile.sha256
+            )) {
+                throw new IOException(
+                        "Патч Java 21 создал неожиданный профиль Forge."
+                );
+            }
+            moveAtomically(temporary, profile);
+        } finally {
+            Files.deleteIfExists(temporary);
+        }
+    }
+
+    private static int countOccurrences(String text, String needle) {
+        int count = 0;
+        int position = 0;
+        while ((position = text.indexOf(needle, position)) >= 0) {
+            count++;
+            position += needle.length();
+        }
+        return count;
     }
 
     private static void writeEmptyLauncherProfiles(Path profiles)
@@ -907,7 +1544,15 @@ public final class GtoTLauncherInstaller {
             Path forgeTemp
     )
             throws Exception {
-        Path javaExecutable = currentJavaExecutable();
+        Path javaExecutable = javaRuntimeComponentRoot(root)
+                .resolve("bin")
+                .resolve("java.exe");
+        if (!isJava21X64(javaExecutable)) {
+            throw new IOException(
+                    "Forge должен устанавливаться через проверенную Java 21: "
+                            + javaExecutable
+            );
+        }
         ProcessBuilder builder = new ProcessBuilder(
                 javaExecutable.toString(),
                 "-Djava.net.preferIPv4Stack=true",
@@ -960,53 +1605,386 @@ public final class GtoTLauncherInstaller {
         }
     }
 
-    private static void requireJava17OrNewer() throws IOException {
-        String specification =
-                System.getProperty("java.specification.version", "0");
-        String featureText = specification.startsWith("1.")
-                ? specification.substring(2)
-                : specification;
-        int separator = featureText.indexOf('.');
-        if (separator >= 0) {
-            featureText = featureText.substring(0, separator);
+    private static void installJava21Runtime(
+            Path root,
+            Progress progress
+    ) throws Exception {
+        Path currentHome = Paths.get(
+                System.getProperty("java.home")
+        ).toAbsolutePath().normalize();
+        Path currentJava = currentHome.resolve("bin").resolve("java.exe");
+        if (isJava21X64(currentJava)) {
+            progress.log(
+                    "Найдена подходящая Java 21. Создаётся приватная копия для GTO…"
+            );
+            installJavaHome(root, currentHome);
+            return;
         }
 
-        int feature;
+        progress.log(
+                "Java 21 не найдена. Скачивание проверенной Eclipse Temurin "
+                        + "21.0.11+10…"
+        );
+        Path runtimeDirectory = root.resolve(".gto-runtime");
+        Path archive = safeResolve(root, TEMURIN_JAVA_21.destination);
+        Path extraction = runtimeDirectory.resolve("java21-extract");
         try {
-            feature = Integer.parseInt(featureText);
-        } catch (NumberFormatException error) {
-            throw new IOException(
-                    "Не удалось определить версию Java: " + specification,
-                    error
-            );
-        }
-        if (feature < 17) {
-            throw new IOException(
-                    "Для установки Forge нужна Java 17 или новее. "
-                            + "Сейчас используется Java " + specification
-                            + ". Запустите TLauncher один раз и повторите."
-            );
+            Files.createDirectories(runtimeDirectory);
+            downloadWithRetries(TEMURIN_JAVA_21, archive, progress);
+            extractJavaArchive(archive, extraction);
+            Path javaHome = findExtractedJavaHome(extraction);
+            if (javaHome == null) {
+                throw new IOException(
+                        "В архиве Eclipse Temurin не найдена Java 21 x64."
+                );
+            }
+            installJavaHome(root, javaHome);
+        } finally {
+            if (Files.isDirectory(runtimeDirectory)) {
+                deleteTree(runtimeDirectory);
+            }
         }
     }
 
-    private static Path currentJavaExecutable() throws IOException {
-        String executableName =
-                System.getProperty("os.name", "")
-                        .toLowerCase(Locale.ROOT)
-                        .contains("win")
-                        ? "java.exe"
-                        : "java";
-        Path executable = Paths.get(
-                System.getProperty("java.home"),
-                "bin",
-                executableName
-        ).toAbsolutePath().normalize();
-        if (!Files.isRegularFile(executable)) {
+    private static void installJavaHome(Path root, Path javaHome)
+            throws Exception {
+        Path platformRoot = javaRuntimePlatformRoot(root);
+        if (Files.exists(platformRoot)) {
+            deleteTree(platformRoot);
+        }
+        Path componentRoot = javaRuntimeComponentRoot(root);
+        Files.createDirectories(componentRoot);
+        copyTree(javaHome, componentRoot);
+
+        Files.deleteIfExists(platformRoot.resolve(".version"));
+        writeTLauncherJavaManifest(root);
+        verifyJava21Runtime(root);
+    }
+
+    private static Path javaRuntimePlatformRoot(Path root) {
+        return root.resolve("runtime")
+                .resolve(JAVA_RUNTIME_COMPONENT)
+                .resolve("windows");
+    }
+
+    private static Path javaRuntimeComponentRoot(Path root) {
+        return javaRuntimePlatformRoot(root).resolve(JAVA_RUNTIME_COMPONENT);
+    }
+
+    private static Path javaRuntimeManifest(Path root) {
+        return javaRuntimePlatformRoot(root)
+                .resolve(JAVA_RUNTIME_COMPONENT + ".sha1");
+    }
+
+    private static void extractJavaArchive(Path archive, Path extraction)
+            throws Exception {
+        if (Files.exists(extraction)) {
+            deleteTree(extraction);
+        }
+        Files.createDirectories(extraction);
+        int entries = 0;
+        long extractedBytes = 0L;
+        Set<String> extractedPaths = new HashSet<String>();
+        try (ZipInputStream zip = new ZipInputStream(
+                new BufferedInputStream(Files.newInputStream(archive))
+        )) {
+            ZipEntry entry;
+            byte[] buffer = new byte[1024 * 128];
+            while ((entry = zip.getNextEntry()) != null) {
+                entries++;
+                if (entries > 10000) {
+                    throw new IOException("Слишком много файлов в архиве Java 21.");
+                }
+                String relative = entry.getName().replace('\\', '/');
+                if (relative.isEmpty()
+                        || !isSafeWindowsArchivePath(relative)) {
+                    throw new IOException(
+                            "Небезопасный путь в архиве Java 21: " + entry.getName()
+                    );
+                }
+                Path destination = safeResolve(extraction, relative);
+                String normalizedKey = extraction.relativize(destination)
+                        .toString()
+                        .toLowerCase(Locale.ROOT);
+                if (!extractedPaths.add(normalizedKey)) {
+                    throw new IOException(
+                            "Повторяющийся путь в архиве Java 21: " + entry.getName()
+                    );
+                }
+                if (entry.isDirectory()) {
+                    Files.createDirectories(destination);
+                    zip.closeEntry();
+                    continue;
+                }
+                Files.createDirectories(destination.getParent());
+                try (OutputStream output = Files.newOutputStream(destination)) {
+                    int read;
+                    while ((read = zip.read(buffer)) >= 0) {
+                        if (read == 0) {
+                            continue;
+                        }
+                        output.write(buffer, 0, read);
+                        extractedBytes += read;
+                        if (extractedBytes > 450L * 1024L * 1024L) {
+                            throw new IOException(
+                                    "Распакованный архив Java 21 превысил безопасный размер."
+                            );
+                        }
+                    }
+                }
+                zip.closeEntry();
+            }
+        }
+        if (entries < 50) {
+            throw new IOException("Архив Java 21 выглядит неполным.");
+        }
+    }
+
+    private static boolean isSafeWindowsArchivePath(String relative) {
+        if (relative.startsWith("/")
+                || relative.startsWith("\\")
+                || relative.contains(":")) {
+            return false;
+        }
+        String[] segments = relative.split("/");
+        for (String segment : segments) {
+            if (segment.isEmpty()
+                    || segment.equals(".")
+                    || segment.equals("..")
+                    || segment.endsWith(".")
+                    || segment.endsWith(" ")) {
+                return false;
+            }
+            String base = segment;
+            int extension = base.indexOf('.');
+            if (extension >= 0) {
+                base = base.substring(0, extension);
+            }
+            String upper = base.toUpperCase(Locale.ROOT);
+            if (upper.equals("CON")
+                    || upper.equals("PRN")
+                    || upper.equals("AUX")
+                    || upper.equals("NUL")
+                    || upper.matches("COM[1-9]")
+                    || upper.matches("LPT[1-9]")) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private static Path findExtractedJavaHome(Path extraction)
+            throws IOException {
+        List<Path> candidates = new ArrayList<Path>();
+        try (java.util.stream.Stream<Path> paths = Files.walk(extraction, 4)) {
+            paths.filter(path ->
+                            Files.isRegularFile(path)
+                                    && path.getFileName().toString().equalsIgnoreCase(
+                                    "java.exe"
+                            )
+                                    && path.getParent() != null
+                                    && path.getParent().getFileName().toString()
+                                    .equalsIgnoreCase("bin")
+                    )
+                    .forEach(path -> candidates.add(path.getParent().getParent()));
+        }
+        for (Path candidate : candidates) {
+            if (Files.isRegularFile(
+                    candidate.resolve("bin").resolve("java.exe")
+            )
+                    && Files.isRegularFile(
+                    candidate.resolve("bin").resolve("javaw.exe")
+            )) {
+                return candidate;
+            }
+        }
+        return null;
+    }
+
+    private static boolean isJava21X64(Path javaExecutable) {
+        return java21ProbeError(javaExecutable) == null;
+    }
+
+    private static String java21ProbeError(Path javaExecutable) {
+        if (!Files.isRegularFile(javaExecutable)) {
+            return "файл java.exe отсутствует";
+        }
+        Process process = null;
+        try {
+            ProcessBuilder builder = new ProcessBuilder(
+                    javaExecutable.toString(),
+                    "-XshowSettings:properties",
+                    "-version"
+            );
+            builder.redirectErrorStream(true);
+            process = builder.start();
+            final Process runningProcess = process;
+            final StringBuilder output = new StringBuilder();
+            final boolean[] tooLarge = new boolean[]{false};
+            final IOException[] readError = new IOException[]{null};
+            Thread readerThread = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try (BufferedReader reader = new BufferedReader(
+                            new InputStreamReader(
+                                    runningProcess.getInputStream(),
+                                    StandardCharsets.UTF_8
+                            )
+                    )) {
+                        String line;
+                        while ((line = reader.readLine()) != null) {
+                            if (output.length() + line.length() < 128 * 1024) {
+                                output.append(line).append('\n');
+                            } else {
+                                tooLarge[0] = true;
+                            }
+                        }
+                    } catch (IOException error) {
+                        readError[0] = error;
+                    }
+                }
+            }, "gto-java21-probe");
+            readerThread.setDaemon(true);
+            readerThread.start();
+            if (!process.waitFor(15, TimeUnit.SECONDS)) {
+                process.destroyForcibly();
+                readerThread.join(2000L);
+                return "проверка java.exe превысила 15 секунд";
+            }
+            readerThread.join(2000L);
+            if (readerThread.isAlive()) {
+                return "не удалось прочитать диагностический вывод java.exe";
+            }
+            if (readError[0] != null) {
+                return "не удалось прочитать java.exe: " + readError[0].getMessage();
+            }
+            if (tooLarge[0]) {
+                return "java.exe вернула слишком большой диагностический вывод";
+            }
+            int exitCode = process.exitValue();
+            String details = output.toString();
+            if (exitCode != 0) {
+                return "java.exe завершилась с кодом " + exitCode;
+            }
+            if (!details.matches(
+                    "(?s).*java\\.specification\\.version\\s*=\\s*21(?:\\s|$).*"
+            )) {
+                return "java.exe не подтвердила specification version 21";
+            }
+            if (!details.matches(
+                    "(?s).*sun\\.arch\\.data\\.model\\s*=\\s*64(?:\\s|$).*"
+            )) {
+                return "java.exe не подтвердила 64-битную архитектуру";
+            }
+            return null;
+        } catch (Exception error) {
+            return error.getClass().getSimpleName() + ": " + error.getMessage();
+        } finally {
+            if (process != null && process.isAlive()) {
+                process.destroyForcibly();
+            }
+        }
+    }
+
+    private static void writeTLauncherJavaManifest(Path root)
+            throws Exception {
+        Path componentRoot = javaRuntimeComponentRoot(root);
+        List<Path> files = new ArrayList<Path>();
+        try (java.util.stream.Stream<Path> paths = Files.walk(componentRoot)) {
+            paths.filter(Files::isRegularFile).forEach(files::add);
+        }
+        Collections.sort(files, new Comparator<Path>() {
+            @Override
+            public int compare(Path left, Path right) {
+                return manifestRelative(componentRoot, left).compareTo(
+                        manifestRelative(componentRoot, right)
+                );
+            }
+        });
+        if (files.size() < 50) {
+            throw new IOException("Приватная Java 21 выглядит неполной.");
+        }
+
+        Path manifest = javaRuntimeManifest(root);
+        Files.createDirectories(manifest.getParent());
+        Path temporary = manifest.resolveSibling(
+                manifest.getFileName() + ".tmp-" + UUID.randomUUID().toString()
+        );
+        try (BufferedWriter writer =
+                     Files.newBufferedWriter(temporary, StandardCharsets.UTF_8)) {
+            for (Path file : files) {
+                writer.write(manifestRelative(componentRoot, file));
+                writer.write(" /#// ");
+                writer.write(sha1(file).toLowerCase(Locale.ROOT));
+                writer.write(" 0");
+                writer.newLine();
+            }
+        }
+        try {
+            moveAtomically(temporary, manifest);
+        } finally {
+            Files.deleteIfExists(temporary);
+        }
+    }
+
+    private static String manifestRelative(Path root, Path file) {
+        return root.relativize(file).toString();
+    }
+
+    private static void verifyJava21Runtime(Path root) throws Exception {
+        Path componentRoot = javaRuntimeComponentRoot(root);
+        Path java = componentRoot.resolve("bin").resolve("java.exe");
+        Path javaw = componentRoot.resolve("bin").resolve("javaw.exe");
+        String probeError = java21ProbeError(java);
+        if (probeError != null || !Files.isRegularFile(javaw)) {
             throw new IOException(
-                    "Не найден исполняемый файл Java: " + executable
+                    "Приватная Java должна быть 64-битной Java 21: "
+                            + (probeError != null
+                            ? probeError
+                            : "файл javaw.exe отсутствует")
             );
         }
-        return executable;
+
+        Path manifest = javaRuntimeManifest(root);
+        if (!Files.isRegularFile(manifest)) {
+            throw new IOException("Отсутствует манифест приватной Java 21.");
+        }
+        List<String> lines = Files.readAllLines(manifest, StandardCharsets.UTF_8);
+        if (lines.size() < 50) {
+            throw new IOException("Манифест приватной Java 21 неполон.");
+        }
+        Set<String> expectedFiles = new HashSet<String>();
+        for (String line : lines) {
+            String[] fields = line.split("/#// ", -1);
+            String relative = fields.length == 2 ? fields[0].trim() : "";
+            String[] hashFields = fields.length == 2
+                    ? fields[1].trim().split("\\s+")
+                    : new String[0];
+            if (fields.length != 2
+                    || relative.isEmpty()
+                    || !fields[0].equals(relative + " ")
+                    || hashFields.length != 2
+                    || !hashFields[0].matches("[a-f0-9]{40}")
+                    || !hashFields[1].equals("0")
+                    || !expectedFiles.add(relative.toLowerCase(Locale.ROOT))) {
+                throw new IOException("Повреждён манифест приватной Java 21.");
+            }
+            Path file = safeResolve(componentRoot, relative);
+            if (!Files.isRegularFile(file)
+                    || !sha1(file).equalsIgnoreCase(hashFields[0])) {
+                throw new IOException(
+                        "Не совпал файл приватной Java 21: " + relative
+                );
+            }
+        }
+        try (java.util.stream.Stream<Path> files = Files.walk(componentRoot)) {
+            long actualFiles = files.filter(Files::isRegularFile).count();
+            if (actualFiles != expectedFiles.size()) {
+                throw new IOException(
+                        "В приватной Java 21 обнаружены лишние или пропущенные файлы."
+                );
+            }
+        }
     }
 
     private static void verifyForgeRuntime(Path root) throws Exception {
@@ -1032,6 +2010,12 @@ public final class GtoTLauncherInstaller {
                 || !profileText.contains(
                         "\"inheritsFrom\": \"" + MINECRAFT_VERSION + "\""
                 )
+                || !profileText.contains(
+                        "\"component\": \"" + JAVA_RUNTIME_COMPONENT + "\""
+                )
+                || !profileText.contains(
+                        "\"majorVersion\": " + GAME_JAVA_MAJOR
+                )
                 || profileText.contains("default_user_jvm")) {
             throw new IOException(
                     "Некорректное описание локального профиля Forge."
@@ -1049,6 +2033,96 @@ public final class GtoTLauncherInstaller {
             throw new IOException("Небезопасный путь в манифесте: " + relative);
         }
         return result;
+    }
+
+    private static void rejectUnsafeLinks(Path root) throws IOException {
+        if (!Files.exists(root, LinkOption.NOFOLLOW_LINKS)) {
+            return;
+        }
+        final Path normalizedRoot = root.toAbsolutePath().normalize();
+        final Path realRoot = normalizedRoot.toRealPath();
+        try (java.util.stream.Stream<Path> paths = Files.walk(normalizedRoot)) {
+            for (Path path : (Iterable<Path>) paths::iterator) {
+                BasicFileAttributes attributes = Files.readAttributes(
+                        path,
+                        BasicFileAttributes.class,
+                        LinkOption.NOFOLLOW_LINKS
+                );
+                if (attributes.isSymbolicLink() || attributes.isOther()) {
+                    throw new IOException(
+                            "Символические ссылки и точки повторного анализа "
+                                    + "запрещены в игровой папке: " + path
+                    );
+                }
+                Path real = path.toRealPath();
+                if (!real.startsWith(realRoot)) {
+                    throw new IOException(
+                            "Путь выходит за пределы игровой папки: " + path
+                    );
+                }
+            }
+        }
+    }
+
+    private static void replaceManagedJavaRuntime(Path staging, Path target)
+            throws Exception {
+        Path source = javaRuntimePlatformRoot(staging);
+        Path destination = javaRuntimePlatformRoot(target);
+        if (!Files.isDirectory(source)) {
+            throw new IOException("Во временной папке отсутствует Java 21.");
+        }
+        Files.createDirectories(destination.getParent());
+        Path backup = destination.resolveSibling(
+                destination.getFileName() + ".gto-backup-"
+                        + UUID.randomUUID().toString()
+        );
+        boolean hadPrevious = Files.exists(destination);
+        if (hadPrevious) {
+            moveAtomically(destination, backup);
+        }
+        try {
+            copyTree(source, destination);
+            verifyJava21Runtime(target);
+        } catch (Exception error) {
+            try {
+                if (Files.exists(destination)) {
+                    deleteTree(destination);
+                }
+                if (hadPrevious && Files.exists(backup)) {
+                    moveAtomically(backup, destination);
+                }
+            } catch (Exception rollbackError) {
+                error.addSuppressed(rollbackError);
+            }
+            throw error;
+        }
+        if (hadPrevious && Files.exists(backup)) {
+            try {
+                deleteTree(backup);
+            } catch (IOException ignored) {
+                // The verified new runtime is already committed. A locked old
+                // backup is safer to leave behind than to roll back to a
+                // partially deleted runtime.
+            }
+        }
+    }
+
+    private static void moveAtomically(Path source, Path destination)
+            throws IOException {
+        try {
+            Files.move(
+                    source,
+                    destination,
+                    StandardCopyOption.REPLACE_EXISTING,
+                    StandardCopyOption.ATOMIC_MOVE
+            );
+        } catch (AtomicMoveNotSupportedException ignored) {
+            Files.move(
+                    source,
+                    destination,
+                    StandardCopyOption.REPLACE_EXISTING
+            );
+        }
     }
 
     private static void copyTree(final Path source, final Path target)
@@ -1072,12 +2146,21 @@ public final class GtoTLauncherInstaller {
                 Path relative = source.relativize(file);
                 Path destination = target.resolve(relative);
                 Files.createDirectories(destination.getParent());
-                Files.copy(
-                        file,
-                        destination,
-                        StandardCopyOption.REPLACE_EXISTING,
-                        StandardCopyOption.COPY_ATTRIBUTES
+                Path temporary = destination.resolveSibling(
+                        destination.getFileName() + ".gto-copy-"
+                                + UUID.randomUUID().toString() + ".tmp"
                 );
+                try {
+                    Files.copy(
+                            file,
+                            temporary,
+                            StandardCopyOption.REPLACE_EXISTING,
+                            StandardCopyOption.COPY_ATTRIBUTES
+                    );
+                    moveAtomically(temporary, destination);
+                } finally {
+                    Files.deleteIfExists(temporary);
+                }
                 return FileVisitResult.CONTINUE;
             }
         });
@@ -1131,6 +2214,17 @@ public final class GtoTLauncherInstaller {
             writer.newLine();
             writer.write("forge-runtime-verification=passed");
             writer.newLine();
+            writer.write("java-runtime=" + JAVA_RUNTIME_COMPONENT + "-"
+                    + GAME_JAVA_MAJOR);
+            writer.newLine();
+            writer.write("java-runtime-verification=passed");
+            writer.newLine();
+            writer.write("pack-mode-default=GTO-Easy");
+            writer.newLine();
+            writer.write("vanilla-difficulty-default=NORMAL");
+            writer.newLine();
+            writer.write("existing-world-mode=preserved");
+            writer.newLine();
         }
         try {
             Files.move(
@@ -1150,16 +2244,25 @@ public final class GtoTLauncherInstaller {
         }
     }
 
+    private static void writeRecoveryMarker(Path target) throws IOException {
+        Path marker = target.resolve(RECOVERY_FILE);
+        String text = PACK_NAME + "\n"
+                + "target-version=" + PACK_VERSION + "\n"
+                + "status=install-in-progress\n";
+        writeUtf8Atomically(marker, text);
+    }
+
     private static String launchInstructions(Path target) {
-        return "Готово. Сборка и локальный Forge проверены по SHA-256.\n\n"
+        return "Готово. Сборка, локальный Forge и приватная Java 21 проверены.\n\n"
                 + "1. Полностью перезапустите TLauncher.\n"
                 + "2. В настройках укажите игровую папку:\n" + target + "\n"
                 + "3. Выберите локальную версию " + FORGE_PROFILE_ID + ".\n"
                 + "   НЕ выбирайте удалённую запись «Forge 1.20.1».\n"
                 + "4. Отключите «Принудительное обновление».\n"
-                + "5. Для игры выберите Java 17.\n"
-                + "6. Выделите 8192–12288 МБ RAM (рекомендуется 10240).\n"
-                + "7. Введите постоянный ник и запускайте игру.";
+                + "5. Оставьте выбор Java по умолчанию: профиль сам использует установленную Java 21.\n"
+                + "6. Не выбирайте вручную Java 8 или Java 17.\n"
+                + "7. Выделите 8192–12288 МБ RAM (рекомендуется 10240).\n"
+                + "8. Введите постоянный ник и запускайте игру.";
     }
 
     private static void printLaunchInstructions(Path target) {

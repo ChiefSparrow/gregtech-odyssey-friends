@@ -154,7 +154,8 @@ try {
         throw 'Packaged launcher BAT must be ASCII-only with CRLF line endings.'
     }
     if (
-        [regex]::Matches($batchText, 'if exist "%%~fJ"').Count -ne 4 -or
+        [regex]::Matches($batchText, 'if exist "%%~fJ"').Count -ne 3 -or
+        $batchText -match '(?i)%APPDATA%\\\.minecraft\\runtime' -or
         $batchText -notmatch '(?m)^start "" /wait "%JAVA%" -jar "%INSTALLER%"\r?$'
     ) {
         throw 'Launcher BAT does not safely locate and start Java.'
@@ -265,23 +266,52 @@ try {
         'https://maven.minecraftforge.net/net/minecraftforge/forge/',
         '584F92FBAE08AD68F5E18610A375A850AF3678158E03F7145EA65DB00060C0B2',
         'https://piston-meta.mojang.com/v1/packages/',
+        'BE26677AAA20B39A62EDCAAB4C8857A8B76673B0F45ABC0B6143B142B62717E4',
+        'https://github.com/adoptium/temurin21-binaries/releases/',
+        'release-assets.githubusercontent.com',
+        'java-runtime-delta',
+        'GAME_JAVA_MAJOR = 21',
+        '\"majorVersion\": " + GAME_JAVA_MAJOR',
+        'installJava21Runtime(staging, progress)',
+        'prepareEasyPackConfig(target, staging, progress)',
+        'prepareVanillaDefaults(target, staging, progress)',
+        'replaceManagedJavaRuntime(staging, target)',
+        'rejectUnsafeLinks(target)',
+        'channel.tryLock()',
+        'writeRecoveryMarker(target)',
+        'java-runtime-verification=passed',
+        'pack-mode-default=GTO-Easy',
+        'vanilla-difficulty-default=NORMAL',
         'default_user_jvm',
         'forge-runtime-verification=passed',
         '-Djava.io.tmpdir=',
         'extractPayloadFile(staging, "README-TLAUNCHER.txt")',
-        'if (hasSupportedMarker(normalMinecraft))'
+        'hasRecoveryMarker(normalMinecraft)'
     )) {
         if (-not $repositorySource.Contains($requiredSourceText)) {
             throw "Java source misses Forge bootstrap invariant: $requiredSourceText"
         }
     }
+    $expectedVersionConstant =
+        'private static final String PACK_VERSION = "' + $Config.packageVersion + '";'
+    if (-not $repositorySource.Contains($expectedVersionConstant)) {
+        throw "Java installer PACK_VERSION differs from pack-config.json."
+    }
 
     $packagedReadme = Read-EntryText (Get-Entry $outer 'README-TLAUNCHER.txt')
+    $repositoryReadme = Get-Content -LiteralPath (
+        Join-Path $PSScriptRoot 'tlauncher-installer\README-TLAUNCHER.txt'
+    ) -Raw -Encoding UTF8
     if (
+        $packagedReadme -ne $repositoryReadme -or
         $packagedReadme -notmatch '1\.20\.1-forge-47\.4\.20' -or
-        $packagedReadme -notmatch 'Forge 1\.20\.1'
+        $packagedReadme -notmatch 'Forge 1\.20\.1' -or
+        $packagedReadme -notmatch 'Java 21' -or
+        $packagedReadme -notmatch 'GTO Easy' -or
+        $packagedReadme -notmatch 'Normal' -or
+        $packagedReadme -notmatch [regex]::Escape($Config.packageVersion)
     ) {
-        throw 'Packaged README does not identify the safe local Forge profile.'
+        throw 'Packaged README is stale or incomplete.'
     }
 
     $checksums = Read-EntryText (Get-Entry $outer 'SHA256SUMS.txt')
@@ -317,6 +347,8 @@ try {
             'downloads.tsv',
             'client-lock.tsv',
             'payload/README-TLAUNCHER.txt',
+            'payload/config/gtocore.yaml',
+            'payload/config/defaultoptions-common.toml',
             'payload/mods/gto-terminal-fix-1.0.0.jar',
             'payload/mods/gto-farming-fix-1.0.1.jar',
             'payload/mods/gtocore-forge-1.20.1-0.5.6-beta.jar',
@@ -326,8 +358,51 @@ try {
         }
 
         $manifest = Read-EntryText (Get-Entry $jar 'META-INF/MANIFEST.MF')
-        if ($manifest -notmatch '(?m)^Main-Class: GtoTLauncherInstaller\r?$') {
-            throw 'Installer JAR has no correct Main-Class.'
+        $implementationVersionPattern =
+            '(?m)^Implementation-Version: ' +
+            [regex]::Escape([string]$Config.packageVersion) +
+            '\r?$'
+        if (
+            $manifest -notmatch '(?m)^Main-Class: GtoTLauncherInstaller\r?$' -or
+            $manifest -notmatch $implementationVersionPattern
+        ) {
+            throw 'Installer JAR has no correct main class or package version.'
+        }
+        $payloadReadme = Read-EntryText (
+            Get-Entry $jar 'payload/README-TLAUNCHER.txt'
+        )
+        if ($payloadReadme -ne $packagedReadme) {
+            throw 'Outer and embedded TLauncher README files differ.'
+        }
+
+        $gtoConfig = Read-EntryText (Get-Entry $jar 'payload/config/gtocore.yaml')
+        $gtoConfig = $gtoConfig.Replace("`r`n", "`n").Replace("`r", "`n")
+        if ($gtoConfig -cne "gamePlay:`n  difficulty: Easy`n") {
+            throw 'TLauncher payload does not contain the minimal GTO Easy preset.'
+        }
+        $defaultOptions = Read-EntryText (
+            Get-Entry $jar 'payload/config/defaultoptions-common.toml'
+        )
+        $defaultOptions = $defaultOptions.Replace("`r`n", "`n").Replace("`r", "`n")
+        if (
+            [regex]::Matches(
+                $defaultOptions,
+                '(?m)^[ \t]*defaultDifficulty[ \t]*='
+            ).Count -ne 1 -or
+            [regex]::Matches(
+                $defaultOptions,
+                '(?m)^[ \t]*defaultDifficulty[ \t]*=[ \t]*"NORMAL"[ \t]*(?:#.*)?$'
+            ).Count -ne 1 -or
+            [regex]::Matches(
+                $defaultOptions,
+                '(?m)^[ \t]*lockDifficulty[ \t]*='
+            ).Count -ne 1 -or
+            [regex]::Matches(
+                $defaultOptions,
+                '(?m)^[ \t]*lockDifficulty[ \t]*=[ \t]*false[ \t]*(?:#.*)?$'
+            ).Count -ne 1
+        ) {
+            throw 'TLauncher payload vanilla difficulty is not NORMAL and unlocked.'
         }
 
         $classEntry = Get-Entry $jar 'GtoTLauncherInstaller.class'
@@ -465,6 +540,11 @@ try {
             $_.FullName.StartsWith('payload/.gto-runtime/', [StringComparison]::OrdinalIgnoreCase)
         }).Count -gt 0) {
             throw 'Temporary Forge bootstrap files leaked into payload.'
+        }
+        if (@($jar.Entries | Where-Object {
+            $_.FullName.StartsWith('payload/runtime/', [StringComparison]::OrdinalIgnoreCase)
+        }).Count -gt 0) {
+            throw 'A Java runtime leaked into the static payload instead of verified installation.'
         }
 
         Write-Host 'TLAUNCHER INSTALLER VERIFICATION PASSED'
