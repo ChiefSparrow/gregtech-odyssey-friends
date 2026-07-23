@@ -1,7 +1,7 @@
 {
   "packageName": "GregTech Odyssey — Friends Edition",
-  "packageVersion": "1.0.0",
-  "manifestVersion": "0.5.6-friends.1.0.0",
+  "packageVersion": "1.0.1",
+  "manifestVersion": "0.5.6-friends.1.0.1",
   "author": "ChiefSparrow",
   "base": {
     "name": "GregTech Odyssey",
@@ -12,6 +12,12 @@
   "forceRequiredProjectIds": [
     581495
   ],
+  "clientLock": {
+    "fileName": "CLIENT-MOD-LOCK.json",
+    "verificationScript": "VERIFY-CLIENT.ps1",
+    "expectedModFiles": 176,
+    "expectedResourcePacks": 2
+  },
   "curseForgeAdditions": [
     {
       "name": "HT's TreeChop 0.19.0 fixed",

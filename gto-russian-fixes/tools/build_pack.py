@@ -9,6 +9,7 @@ from pathlib import Path
 from langlib import load_translation_file
 
 PROJECT = Path(__file__).resolve().parents[1]
+ZIP_TIMESTAMP = (1980, 1, 1, 0, 0, 0)
 
 
 def main() -> None:
@@ -76,7 +77,16 @@ def main() -> None:
     with zipfile.ZipFile(output, "w", compression=zipfile.ZIP_DEFLATED) as archive:
         for path in sorted((PROJECT / "pack").rglob("*")):
             if path.is_file():
-                archive.write(path, path.relative_to(PROJECT / "pack").as_posix())
+                relative_path = path.relative_to(PROJECT / "pack").as_posix()
+                info = zipfile.ZipInfo(relative_path, date_time=ZIP_TIMESTAMP)
+                info.compress_type = zipfile.ZIP_DEFLATED
+                info.external_attr = 0o100644 << 16
+                archive.writestr(
+                    info,
+                    path.read_bytes(),
+                    compress_type=zipfile.ZIP_DEFLATED,
+                    compresslevel=9,
+                )
     print(output)
 
 

@@ -193,10 +193,18 @@ try {
 
     $readmeSource = Join-Path $PSScriptRoot 'README-FIRST.md'
     $aiSource = Join-Path $PSScriptRoot 'INSTALL-AI.json'
+    $clientLockSource = Join-Path $PSScriptRoot $Config.clientLock.fileName
+    $clientVerifierSource = Join-Path $PSScriptRoot $Config.clientLock.verificationScript
+    Assert-File $clientLockSource 'client mod lock'
+    Assert-File $clientVerifierSource 'client verification script'
     Copy-Item -LiteralPath $readmeSource -Destination (Join-Path $staging 'README-FIRST.md') -Force
     Copy-Item -LiteralPath $aiSource -Destination (Join-Path $staging 'INSTALL-AI.json') -Force
+    Copy-Item -LiteralPath $clientLockSource -Destination (Join-Path $staging $Config.clientLock.fileName) -Force
+    Copy-Item -LiteralPath $clientVerifierSource -Destination (Join-Path $staging $Config.clientLock.verificationScript) -Force
     Copy-Item -LiteralPath $readmeSource -Destination (Join-Path $stagingOverrides 'README-FIRST.md') -Force
     Copy-Item -LiteralPath $aiSource -Destination (Join-Path $stagingOverrides 'INSTALL-AI.json') -Force
+    Copy-Item -LiteralPath $clientLockSource -Destination (Join-Path $stagingOverrides $Config.clientLock.fileName) -Force
+    Copy-Item -LiteralPath $clientVerifierSource -Destination (Join-Path $stagingOverrides $Config.clientLock.verificationScript) -Force
     Copy-Item -LiteralPath (Join-Path $RepoRoot 'CHANGELOG.md') -Destination (Join-Path $staging 'CHANGELOG.md') -Force
     Copy-Item -LiteralPath (Join-Path $RepoRoot 'THIRD-PARTY.md') -Destination (Join-Path $staging 'THIRD-PARTY.md') -Force
 
@@ -223,6 +231,13 @@ try {
                 sha256 = $_.sha256
             }
         })
+        exactClientLock = [ordered]@{
+            fileName = $Config.clientLock.fileName
+            verificationScript = $Config.clientLock.verificationScript
+            expectedModFiles = [int]$Config.clientLock.expectedModFiles
+            expectedResourcePacks = [int]$Config.clientLock.expectedResourcePacks
+            sha256 = (Get-FileHash -LiteralPath $clientLockSource -Algorithm SHA256).Hash
+        }
         privacy = [ordered]@{
             packagingMode = 'verified base plus explicit allowlist'
             personalInstanceRead = $false
@@ -252,14 +267,31 @@ try {
             $false
         )
         try {
+            $fixedZipTime = [DateTimeOffset]::new(
+                1980,
+                1,
+                1,
+                0,
+                0,
+                0,
+                [TimeSpan]::Zero
+            )
             foreach ($file in Get-ChildItem -LiteralPath $staging -Recurse -File | Sort-Object FullName) {
                 $relativeName = $file.FullName.Substring($staging.Length + 1).Replace('\', '/')
-                [void][IO.Compression.ZipFileExtensions]::CreateEntryFromFile(
-                    $outputZip,
-                    $file.FullName,
+                $zipEntry = $outputZip.CreateEntry(
                     $relativeName,
                     [IO.Compression.CompressionLevel]::Optimal
                 )
+                $zipEntry.LastWriteTime = $fixedZipTime
+                $sourceStream = [IO.File]::OpenRead($file.FullName)
+                $entryStream = $zipEntry.Open()
+                try {
+                    $sourceStream.CopyTo($entryStream)
+                }
+                finally {
+                    $entryStream.Dispose()
+                    $sourceStream.Dispose()
+                }
             }
         }
         finally {

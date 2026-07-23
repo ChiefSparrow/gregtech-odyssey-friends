@@ -1,5 +1,5 @@
 {
-  "schema": "gto-friends-install-contract/v1",
+  "schema": "gto-friends-install-contract/v2",
   "human_language": "ru-RU",
   "artifact_kind": "CurseForge modpack ZIP importable by Prism Launcher",
   "artifact_pattern": "GregTech-Odyssey-Friends-0.5.6-v*.zip",
@@ -26,7 +26,9 @@
     "Select a licensed Microsoft/Minecraft account.",
     "Assign 8192-12288 MiB RAM and launch.",
     "On first launch allow Euphoria Patcher to generate the patched shader.",
-    "If necessary select ComplementaryReimagined_r5.6.1 + EuphoriaPatches_1.7.7 in the shader menu."
+    "If necessary select ComplementaryReimagined_r5.6.1 + EuphoriaPatches_1.7.7 in the shader menu.",
+    "Close Minecraft and run VERIFY-CLIENT.ps1 from the instance minecraft directory.",
+    "Do not join the server unless the verifier prints CLIENT VERIFICATION PASSED."
   ],
   "update_policy": {
     "method": "Import a new release as a separate Prism instance.",
@@ -69,12 +71,16 @@
   "verification": {
     "checksum_file_pattern": "*.sha256",
     "repository_script": "distribution/verify-release.ps1",
-    "success_condition": "script exits 0 and prints VERIFICATION PASSED"
+    "client_lock": "CLIENT-MOD-LOCK.json",
+    "client_script": "VERIFY-CLIENT.ps1",
+    "expected_mod_files": 176,
+    "pinned_dependency_rule": "Every CurseForge dependency uses an exact projectID and fileID; no latest-version resolution is permitted.",
+    "success_condition": "release script prints VERIFICATION PASSED and installed-client script prints CLIENT VERIFICATION PASSED"
   },
   "troubleshooting": {
     "dependency_download_failed": "Retry later or open Prism settings and re-authenticate CurseForge if requested.",
     "out_of_memory": "Set 8192-12288 MiB, close heavy applications, and do not allocate all system RAM.",
     "shader_missing": "Verify Oculus and Euphoria Patcher are installed, launch once, then select the generated shader manually.",
-    "server_mod_mismatch": "Use exactly the same Friends Edition release on client and server."
+    "server_mod_mismatch": "Run VERIFY-CLIENT.ps1. Do not connect until it prints CLIENT VERIFICATION PASSED."
   }
 }
