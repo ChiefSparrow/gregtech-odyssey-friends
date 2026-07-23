@@ -55,12 +55,12 @@ import java.util.jar.JarFile;
 
 public final class GtoTLauncherInstaller {
     private static final String PACK_NAME = "GregTech Odyssey — Friends Edition";
-    private static final String PACK_VERSION = "1.0.1";
+    private static final String PACK_VERSION = "1.0.2";
     private static final String MINECRAFT_VERSION = "1.20.1";
     private static final String FORGE_VERSION = "47.4.20";
     private static final String MARKER_FILE = "GTO-FRIENDS-INSTALLED.txt";
     private static final String USER_AGENT =
-            "GTO-Friends-TLauncher-Installer/1.0.1 "
+            "GTO-Friends-TLauncher-Installer/1.0.2 "
                     + "(https://github.com/ChiefSparrow/gregtech-odyssey-friends)";
 
     private GtoTLauncherInstaller() {

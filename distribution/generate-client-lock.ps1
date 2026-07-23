@@ -6,6 +6,10 @@ param(
 )
 
 $ErrorActionPreference = 'Stop'
+$RepoRoot = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path
+$Config = Get-Content -LiteralPath (Join-Path $PSScriptRoot 'pack-config.json') `
+    -Raw -Encoding UTF8 |
+    ConvertFrom-Json
 if (-not $OutputPath) {
     $OutputPath = Join-Path $PSScriptRoot 'CLIENT-MOD-LOCK.json'
 }
@@ -49,7 +53,6 @@ foreach ($resourceName in @(
     }
 }
 
-$RepoRoot = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path
 $locallyBuiltFiles = @(
     [pscustomobject]@{
         relativePath = 'mods/gto-terminal-fix-1.0.0.jar'
@@ -93,7 +96,7 @@ $lock = [ordered]@{
     schema = 'gto-friends-client-lock/v1'
     package = [ordered]@{
         name = 'GregTech Odyssey — Friends Edition'
-        version = '1.0.1'
+        version = [string]$Config.packageVersion
         minecraft = '1.20.1'
         forge = '47.4.20'
     }

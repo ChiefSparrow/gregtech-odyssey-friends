@@ -56,6 +56,18 @@ function Write-Utf8NoBom {
     [IO.File]::WriteAllText($Path, $Text, $utf8NoBom)
 }
 
+function Write-AsciiBatch {
+    param([string]$SourcePath, [string]$DestinationPath)
+
+    $text = [IO.File]::ReadAllText($SourcePath, [Text.Encoding]::UTF8)
+    if ($text -match '[^\x09\x0A\x0D\x20-\x7E]') {
+        throw "Launcher BAT must be ASCII-only: $SourcePath"
+    }
+    $text = $text.Replace("`r`n", "`n").Replace("`r", "`n").TrimEnd("`n")
+    $text = $text.Replace("`n", "`r`n") + "`r`n"
+    [IO.File]::WriteAllText($DestinationPath, $text, [Text.Encoding]::ASCII)
+}
+
 function New-DeterministicZip {
     param(
         [string]$SourceDirectory,
@@ -240,7 +252,7 @@ try {
     Write-Host 'Packing deterministic installer JAR...'
     New-DeterministicZip -SourceDirectory $jarRoot -OutputPath $jarOutput -ManifestFirst
 
-    Copy-Item -LiteralPath $batchPath -Destination (Join-Path $packageRoot 'INSTALL-GTO-TLAUNCHER.bat')
+    Write-AsciiBatch $batchPath (Join-Path $packageRoot 'INSTALL-GTO-TLAUNCHER.bat')
     Copy-Item -LiteralPath $readmePath -Destination (Join-Path $packageRoot 'README-TLAUNCHER.txt')
     Copy-Item -LiteralPath (Join-Path $RepoRoot 'THIRD-PARTY.md') -Destination $packageRoot
 

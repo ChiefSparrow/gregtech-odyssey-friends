@@ -47,6 +47,20 @@ function Read-EntryText {
     }
 }
 
+function Read-EntryBytes {
+    param([IO.Compression.ZipArchiveEntry]$Entry)
+    $stream = $Entry.Open()
+    $memory = New-Object IO.MemoryStream
+    try {
+        $stream.CopyTo($memory)
+        return ,$memory.ToArray()
+    }
+    finally {
+        $memory.Dispose()
+        $stream.Dispose()
+    }
+}
+
 function Get-EntryHash {
     param([IO.Compression.ZipArchiveEntry]$Entry)
     $stream = $Entry.Open()
@@ -62,6 +76,16 @@ function Get-EntryHash {
     finally {
         $stream.Dispose()
     }
+}
+
+function ConvertTo-WindowsBatchText {
+    param([string]$Text)
+
+    if ($Text -match '[^\x09\x0A\x0D\x20-\x7E]') {
+        throw 'Launcher BAT source must be ASCII-only.'
+    }
+    $Text = $Text.Replace("`r`n", "`n").Replace("`r", "`n").TrimEnd("`n")
+    return $Text.Replace("`n", "`r`n") + "`r`n"
 }
 
 $checksumPath = "$ArchivePath.sha256"
@@ -92,12 +116,42 @@ try {
         throw "Unexpected outer archive entries: $($outer.Entries.Count)"
     }
 
-    $batchText = Read-EntryText (Get-Entry $outer 'INSTALL-GTO-TLAUNCHER.bat')
+    $batchEntry = Get-Entry $outer 'INSTALL-GTO-TLAUNCHER.bat'
+    $batchBytes = Read-EntryBytes $batchEntry
+    if ($batchBytes.Count -eq 0 -or $batchBytes[0] -ne [byte][char]'@') {
+        throw 'Packaged launcher BAT must begin with @ and have no BOM.'
+    }
+    for ($byteIndex = 0; $byteIndex -lt $batchBytes.Count; $byteIndex++) {
+        $value = $batchBytes[$byteIndex]
+        if ($value -gt 0x7F) {
+            throw "Packaged launcher BAT contains a non-ASCII byte at $byteIndex."
+        }
+        if ($value -eq 0x0A -and (
+            $byteIndex -eq 0 -or $batchBytes[$byteIndex - 1] -ne 0x0D
+        )) {
+            throw "Packaged launcher BAT contains a bare LF at $byteIndex."
+        }
+        if ($value -eq 0x0D -and (
+            $byteIndex + 1 -ge $batchBytes.Count -or
+            $batchBytes[$byteIndex + 1] -ne 0x0A
+        )) {
+            throw "Packaged launcher BAT contains a bare CR at $byteIndex."
+        }
+    }
+    $batchText = [Text.Encoding]::ASCII.GetString($batchBytes)
     $repositoryBatch = Get-Content -LiteralPath (
         Join-Path $PSScriptRoot 'tlauncher-installer\INSTALL-GTO-TLAUNCHER.bat'
     ) -Raw -Encoding UTF8
-    if ($batchText -ne $repositoryBatch) {
+    $expectedBatch = ConvertTo-WindowsBatchText $repositoryBatch
+    if ($batchText -cne $expectedBatch) {
         throw 'Packaged launcher BAT differs from repository source.'
+    }
+    if (
+        $batchText -match '[^\x09\x0A\x0D\x20-\x7E]' -or
+        $batchText -match '(?<!\r)\n' -or
+        -not $batchText.EndsWith("`r`n", [StringComparison]::Ordinal)
+    ) {
+        throw 'Packaged launcher BAT must be ASCII-only with CRLF line endings.'
     }
     if (
         [regex]::Matches($batchText, 'if exist "%%~fJ"').Count -ne 3 -or
@@ -114,6 +168,87 @@ try {
     )) {
         if ($batchText -match $forbiddenPattern) {
             throw "Unsafe launcher BAT pattern found: $forbiddenPattern"
+        }
+    }
+
+    $smokeRoot = Join-Path $env:TEMP (
+        'GTO Installer BAT Smoke Кириллица ! ' + [Guid]::NewGuid().ToString('N')
+    )
+    New-Item -ItemType Directory -Path $smokeRoot | Out-Null
+    try {
+        $smokeBatch = Join-Path $smokeRoot 'INSTALL-GTO-TLAUNCHER.bat'
+        [IO.File]::WriteAllBytes($smokeBatch, $batchBytes)
+        Push-Location $smokeRoot
+        try {
+            $smokeOutput = @(
+                & $env:ComSpec /d /c 'INSTALL-GTO-TLAUNCHER.bat < nul' 2>&1
+            ) -join "`n"
+            $smokeExitCode = $LASTEXITCODE
+        }
+        finally {
+            Pop-Location
+        }
+        if (
+            $smokeExitCode -ne 1 -or
+            $smokeOutput -notmatch 'ERROR: GTO-TLauncher-Installer\.jar was not found' -or
+            $smokeOutput -match '(?i)not recognized as an internal or external command' -or
+            $smokeOutput -match '(?i)syntax of the command is incorrect'
+        ) {
+            throw "Launcher BAT smoke test failed (exit $smokeExitCode):`n$smokeOutput"
+        }
+
+        [IO.File]::WriteAllBytes(
+            (Join-Path $smokeRoot 'GTO-TLauncher-Installer.jar'),
+            [byte[]]@()
+        )
+        $emptyAppData = Join-Path $smokeRoot 'Empty AppData'
+        $emptyLocalAppData = Join-Path $smokeRoot 'Empty LocalAppData'
+        New-Item -ItemType Directory -Path $emptyAppData, $emptyLocalAppData |
+            Out-Null
+        $oldPath = $env:Path
+        $oldAppData = $env:APPDATA
+        $oldLocalAppData = $env:LOCALAPPDATA
+        try {
+            $env:Path = "$env:SystemRoot\System32;$env:SystemRoot"
+            $env:APPDATA = $emptyAppData
+            $env:LOCALAPPDATA = $emptyLocalAppData
+            Push-Location $smokeRoot
+            try {
+                $javaSmokeOutput = @(
+                    & $env:ComSpec /d /c 'INSTALL-GTO-TLAUNCHER.bat < nul' 2>&1
+                ) -join "`n"
+                $javaSmokeExitCode = $LASTEXITCODE
+            }
+            finally {
+                Pop-Location
+            }
+        }
+        finally {
+            $env:Path = $oldPath
+            $env:APPDATA = $oldAppData
+            $env:LOCALAPPDATA = $oldLocalAppData
+        }
+        if (
+            $javaSmokeExitCode -ne 2 -or
+            $javaSmokeOutput -notmatch 'Java was not found' -or
+            $javaSmokeOutput -match '(?i)not recognized as an internal or external command' -or
+            $javaSmokeOutput -match '(?i)syntax of the command is incorrect'
+        ) {
+            throw "Launcher Java-detection smoke test failed " +
+                "(exit $javaSmokeExitCode):`n$javaSmokeOutput"
+        }
+    }
+    finally {
+        if (Test-Path -LiteralPath $smokeRoot) {
+            $resolvedSmokeRoot = (Resolve-Path -LiteralPath $smokeRoot).Path
+            $resolvedTemp = [IO.Path]::GetFullPath($env:TEMP).TrimEnd('\') + '\'
+            if (-not ($resolvedSmokeRoot + '\').StartsWith(
+                $resolvedTemp,
+                [StringComparison]::OrdinalIgnoreCase
+            )) {
+                throw "Refusing to remove unsafe smoke-test path: $resolvedSmokeRoot"
+            }
+            Remove-Item -LiteralPath $resolvedSmokeRoot -Recurse -Force
         }
     }
 

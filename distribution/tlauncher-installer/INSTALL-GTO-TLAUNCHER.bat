@@ -1,13 +1,12 @@
 @echo off
-setlocal EnableExtensions
-chcp 65001 >nul
+setlocal EnableExtensions DisableDelayedExpansion
 title GregTech Odyssey Friends - TLauncher Installer
 
 set "INSTALLER=%~dp0GTO-TLauncher-Installer.jar"
 if not exist "%INSTALLER%" (
   echo.
-  echo ОШИБКА: рядом с этим файлом нет GTO-TLauncher-Installer.jar
-  echo Полностью распакуйте скачанный ZIP и запустите файл снова.
+  echo ERROR: GTO-TLauncher-Installer.jar was not found next to this file.
+  echo Extract the complete downloaded ZIP, then run this file again.
   echo.
   pause
   exit /b 1
@@ -28,9 +27,9 @@ if not defined JAVA if exist "%LOCALAPPDATA%\TLauncher" (
 
 if not defined JAVA (
   echo.
-  echo Java не найдена.
-  echo Установите TLauncher, запустите через него любую версию Minecraft один раз,
-  echo закройте игру и повторно откройте этот файл.
+  echo Java was not found.
+  echo Install TLauncher and start any Minecraft version through it once.
+  echo Close the game and TLauncher, then run this file again.
   echo.
   pause
   exit /b 2
@@ -39,8 +38,8 @@ if not defined JAVA (
 start "" /wait "%JAVA%" -jar "%INSTALLER%"
 if errorlevel 1 (
   echo.
-  echo Установщик завершился с ошибкой.
-  echo Откройте README-TLAUNCHER.txt или сообщите владельцу сборки.
+  echo The installer exited with an error.
+  echo Read README-TLAUNCHER.txt or contact the modpack owner.
   echo.
   pause
   exit /b 3

@@ -20,7 +20,7 @@
 
 1. Запустите через TLauncher любую версию Minecraft один раз и закройте её.
 2. Скачайте и полностью распакуйте
-   [`GTO-Friends-TLauncher-Installer-v1.0.1.zip`](https://github.com/ChiefSparrow/gregtech-odyssey-friends/releases/latest/download/GTO-Friends-TLauncher-Installer-v1.0.1.zip).
+   [`GTO-Friends-TLauncher-Installer-v1.0.2.zip`](https://github.com/ChiefSparrow/gregtech-odyssey-friends/releases/latest/download/GTO-Friends-TLauncher-Installer-v1.0.2.zip).
 3. Дважды нажмите `INSTALL-GTO-TLAUNCHER.bat`, затем
    **Установить сборку**.
 4. В TLauncher укажите показанную игровую папку, Minecraft `1.20.1`,
@@ -63,7 +63,7 @@
 
 Оригинальные моды, TreeChop и шейдерные компоненты скачиваются лаунчером с
 CurseForge. Это не поиск «последней версии»: `manifest.json` фиксирует точные
-пары `projectID + fileID`. Версия 1.0.1 дополнительно содержит
+пары `projectID + fileID`. Начиная с версии 1.0.1 сборка дополнительно содержит
 `CLIENT-MOD-LOCK.json` с размером и SHA-256 каждого файла и строгий проверяющий
 скрипт. Поэтому несовпавшая, пропущенная или лишняя версия обнаруживается до
 подключения к серверу.

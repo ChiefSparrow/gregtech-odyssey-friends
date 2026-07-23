@@ -15,7 +15,7 @@
    затем полностью закройте игру и лаунчер. Это нужно, чтобы TLauncher установил
    свою Java.
 2. Скачайте
-   [`GTO-Friends-TLauncher-Installer-v1.0.1.zip`](https://github.com/ChiefSparrow/gregtech-odyssey-friends/releases/latest/download/GTO-Friends-TLauncher-Installer-v1.0.1.zip).
+   [`GTO-Friends-TLauncher-Installer-v1.0.2.zip`](https://github.com/ChiefSparrow/gregtech-odyssey-friends/releases/latest/download/GTO-Friends-TLauncher-Installer-v1.0.2.zip).
    Не скачивайте `Source code.zip`.
 3. Полностью распакуйте ZIP в обычную папку. Не запускайте файл прямо из окна
    архиватора.
