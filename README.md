@@ -20,15 +20,16 @@
 
 1. Запустите через TLauncher любую версию Minecraft один раз и закройте её.
 2. Скачайте и полностью распакуйте
-   [`GTO-Friends-TLauncher-Installer-v1.0.2.zip`](https://github.com/ChiefSparrow/gregtech-odyssey-friends/releases/latest/download/GTO-Friends-TLauncher-Installer-v1.0.2.zip).
+   [`GTO-Friends-TLauncher-Installer-v1.0.3.zip`](https://github.com/ChiefSparrow/gregtech-odyssey-friends/releases/latest/download/GTO-Friends-TLauncher-Installer-v1.0.3.zip).
 3. Дважды нажмите `INSTALL-GTO-TLAUNCHER.bat`, затем
    **Установить сборку**.
-4. В TLauncher укажите показанную игровую папку, Minecraft `1.20.1`,
-   Forge `47.4.20` **без значка TL**, Java 17 и `10240 МБ` памяти.
+4. Полностью перезапустите TLauncher, укажите показанную игровую папку и
+   выберите локальную версию `1.20.1-forge-47.4.20`, Java 17 и `10240 МБ`
+   памяти. Запись `Forge 1.20.1` не выбирайте.
 
 Установщик не требует прав администратора, не меняет реестр и проверяет SHA-256
-каждой загрузки и всех 177 обязательных файлов. Подробности и безопасная
-проверка архива описаны в
+каждой загрузки, всех 177 обязательных файлов и локального Forge. Подробности и
+безопасная проверка архива описаны в
 [инструкции для TLauncher](INSTALL-TLAUNCHER-NO-LICENSE.md).
 
 ## Краткая установка с лицензией через Prism

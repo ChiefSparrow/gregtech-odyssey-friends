@@ -55,13 +55,68 @@ import java.util.jar.JarFile;
 
 public final class GtoTLauncherInstaller {
     private static final String PACK_NAME = "GregTech Odyssey — Friends Edition";
-    private static final String PACK_VERSION = "1.0.2";
+    private static final String PACK_VERSION = "1.0.3";
+    private static final String PREVIOUS_PACK_VERSION = "1.0.2";
     private static final String MINECRAFT_VERSION = "1.20.1";
     private static final String FORGE_VERSION = "47.4.20";
+    private static final String FORGE_PROFILE_ID =
+            MINECRAFT_VERSION + "-forge-" + FORGE_VERSION;
     private static final String MARKER_FILE = "GTO-FRIENDS-INSTALLED.txt";
     private static final String USER_AGENT =
-            "GTO-Friends-TLauncher-Installer/1.0.2 "
+            "GTO-Friends-TLauncher-Installer/1.0.3 "
                     + "(https://github.com/ChiefSparrow/gregtech-odyssey-friends)";
+    private static final DownloadEntry FORGE_INSTALLER =
+            new DownloadEntry(
+                    ".gto-runtime/forge-" + MINECRAFT_VERSION + "-"
+                            + FORGE_VERSION + "-installer.jar",
+                    8835110L,
+                    "0EBCF198609F925E0018842A79473EF74FDA78534F86D82F2C0FDB26449C1FA4",
+                    "https://maven.minecraftforge.net/net/minecraftforge/forge/"
+                            + MINECRAFT_VERSION + "-" + FORGE_VERSION
+                            + "/forge-" + MINECRAFT_VERSION + "-"
+                            + FORGE_VERSION + "-installer.jar",
+                    "официальный установщик Forge " + FORGE_VERSION
+            );
+    private static final DownloadEntry VANILLA_VERSION_JSON =
+            new DownloadEntry(
+                    "versions/1.20.1/1.20.1.json",
+                    34974L,
+                    "584F92FBAE08AD68F5E18610A375A850AF3678158E03F7145EA65DB00060C0B2",
+                    "https://piston-meta.mojang.com/v1/packages/"
+                            + "8a4e093bfaa91de10c17af807570cdd64468bf67/"
+                            + "1.20.1.json",
+                    "официальное описание Minecraft 1.20.1"
+            );
+    private static final LockedEntry[] FORGE_RUNTIME_LOCK = {
+            new LockedEntry(
+                    "versions/1.20.1/1.20.1.json",
+                    34974L,
+                    "584F92FBAE08AD68F5E18610A375A850AF3678158E03F7145EA65DB00060C0B2"
+            ),
+            new LockedEntry(
+                    "versions/1.20.1-forge-47.4.20/"
+                            + "1.20.1-forge-47.4.20.json",
+                    16629L,
+                    "67E2756069A09F292EE1364702DB212591D35C212AEF14E42D47B6D458CC433C"
+            ),
+            new LockedEntry(
+                    "versions/1.20.1/1.20.1.jar",
+                    23028853L,
+                    "56B71336D2B4FDFFD197F56595B0DA93E32A946F78F382A299B8F4B92758BB0F"
+            ),
+            new LockedEntry(
+                    "libraries/net/minecraftforge/forge/1.20.1-47.4.20/"
+                            + "forge-1.20.1-47.4.20-client.jar",
+                    4848917L,
+                    "AD9F1DA4F4AE6121C3FD4EC6A67B0E89BB7466D7039879B75D7CB9592C0E5605"
+            ),
+            new LockedEntry(
+                    "libraries/net/minecraftforge/forge/1.20.1-47.4.20/"
+                            + "forge-1.20.1-47.4.20-universal.jar",
+                    2507935L,
+                    "3B203EA6105326B8A6D7BEA8327C2793DBFFBAA8E574C9C6626FE6D787591874"
+            )
+    };
 
     private GtoTLauncherInstaller() {
     }
@@ -263,8 +318,10 @@ public final class GtoTLauncherInstaller {
     }
 
     private static void install(Path target, Progress progress) throws Exception {
+        requireJava17OrNewer();
         target = target.toAbsolutePath().normalize();
         validateTarget(target);
+        boolean repairExisting = hasSupportedMarker(target);
 
         Path parent = target.getParent();
         if (parent == null) {
@@ -286,6 +343,33 @@ public final class GtoTLauncherInstaller {
         try {
             progress.log("Целевая папка: " + target);
             progress.log("Временная папка: " + staging);
+            if (repairExisting) {
+                progress.log(
+                        "Найдена установленная Friends Edition. "
+                                + "Моды повторно скачиваться не будут."
+                );
+                progress.update(10, "Проверка сборки");
+                verifyClient(target);
+
+                progress.update(20, "Установка Forge");
+                extractPayloadFile(staging, "README-TLAUNCHER.txt");
+                installForgeRuntime(staging, progress);
+                verifyForgeRuntime(staging);
+
+                progress.update(85, "Копирование Forge");
+                copyTree(staging, target);
+
+                progress.update(96, "Финальная проверка");
+                verifyClient(target);
+                verifyForgeRuntime(target);
+                writeMarker(target);
+
+                progress.update(100, "Готово");
+                progress.log("Локальный профиль Forge исправлен.");
+                progress.log("Выберите в TLauncher: " + FORGE_PROFILE_ID);
+                return;
+            }
+
             progress.log("Распаковка файлов сборки…");
             extractPayload(staging);
 
@@ -310,13 +394,19 @@ public final class GtoTLauncherInstaller {
             verifyClient(staging);
             progress.log("Проверка временной сборки пройдена.");
 
-            progress.update(92, "Копирование");
+            progress.update(90, "Установка Forge");
+            installForgeRuntime(staging, progress);
+            verifyForgeRuntime(staging);
+            progress.log("Локальный профиль Forge проверен.");
+
+            progress.update(95, "Копирование");
             Files.createDirectories(target);
             Files.deleteIfExists(target.resolve(MARKER_FILE));
             copyTree(staging, target);
 
-            progress.update(97, "Финальная проверка");
+            progress.update(98, "Финальная проверка");
             verifyClient(target);
+            verifyForgeRuntime(target);
             writeMarker(target);
             progress.log("Финальная проверка пройдена.");
 
@@ -343,7 +433,7 @@ public final class GtoTLauncherInstaller {
         if (!Files.exists(target)) {
             return;
         }
-        if (hasValidMarker(target)) {
+        if (hasSupportedMarker(target)) {
             return;
         }
         Path mods = target.resolve("mods");
@@ -363,18 +453,26 @@ public final class GtoTLauncherInstaller {
         }
     }
 
-    private static boolean hasValidMarker(Path target) {
+    private static boolean hasSupportedMarker(Path target) {
+        return hasMarkerVersion(target, PACK_VERSION)
+                || hasMarkerVersion(target, PREVIOUS_PACK_VERSION);
+    }
+
+    private static boolean hasMarkerVersion(Path target, String version) {
         Path marker = target.resolve(MARKER_FILE);
         if (!Files.isRegularFile(marker)) {
             return false;
         }
         try {
             List<String> lines = Files.readAllLines(marker, StandardCharsets.UTF_8);
-            return lines.contains(PACK_NAME)
-                    && lines.contains("pack-version=" + PACK_VERSION)
+            boolean baseMarker = lines.contains(PACK_NAME)
+                    && lines.contains("pack-version=" + version)
                     && lines.contains("minecraft=" + MINECRAFT_VERSION)
                     && lines.contains("forge=" + FORGE_VERSION)
                     && lines.contains("client-verification=passed");
+            return baseMarker
+                    && (!PACK_VERSION.equals(version)
+                    || lines.contains("forge-runtime-verification=passed"));
         } catch (IOException ignored) {
             return false;
         }
@@ -395,6 +493,17 @@ public final class GtoTLauncherInstaller {
                 ? Paths.get(appData)
                 : Paths.get(System.getProperty("user.home"));
         Path normalMinecraft = root.resolve(".minecraft");
+        Path currentPack = root.resolve(".gto-friends-" + PACK_VERSION);
+        Path previousPack = root.resolve(".gto-friends-" + PREVIOUS_PACK_VERSION);
+        if (hasSupportedMarker(currentPack)) {
+            return currentPack;
+        }
+        if (hasSupportedMarker(previousPack)) {
+            return previousPack;
+        }
+        if (hasSupportedMarker(normalMinecraft)) {
+            return normalMinecraft;
+        }
         try {
             if (!directoryHasFiles(normalMinecraft.resolve("mods"))
                     && !directoryHasFiles(normalMinecraft.resolve("config"))) {
@@ -402,7 +511,7 @@ public final class GtoTLauncherInstaller {
             }
         } catch (IOException ignored) {
         }
-        return root.resolve(".gto-friends-" + PACK_VERSION);
+        return currentPack;
     }
 
     private static void extractPayload(Path staging) throws Exception {
@@ -440,6 +549,19 @@ public final class GtoTLauncherInstaller {
                     Files.copy(input, destination, StandardCopyOption.REPLACE_EXISTING);
                 }
             }
+        }
+    }
+
+    private static void extractPayloadFile(Path staging, String relative) throws IOException {
+        Path destination = safeResolve(staging, relative);
+        String resourceName = "/payload/" + relative.replace('\\', '/');
+        InputStream stream = GtoTLauncherInstaller.class.getResourceAsStream(resourceName);
+        if (stream == null) {
+            throw new IOException("В установщике отсутствует файл: " + resourceName);
+        }
+        Files.createDirectories(destination.getParent());
+        try (InputStream input = new BufferedInputStream(stream)) {
+            Files.copy(input, destination, StandardCopyOption.REPLACE_EXISTING);
         }
     }
 
@@ -570,7 +692,10 @@ public final class GtoTLauncherInstaller {
             }
             String host = current.getHost().toLowerCase(Locale.ROOT);
             if (!host.equals("edge.forgecdn.net")
-                    && !host.endsWith(".forgecdn.net")) {
+                    && !host.endsWith(".forgecdn.net")
+                    && !host.equals("maven.minecraftforge.net")
+                    && !host.equals("files.minecraftforge.net")
+                    && !host.equals("piston-meta.mojang.com")) {
                 throw new IOException(
                         "Запрещённый узел загрузки: " + current.getHost()
                 );
@@ -725,6 +850,195 @@ public final class GtoTLauncherInstaller {
         }
     }
 
+    private static void installForgeRuntime(Path root, Progress progress)
+            throws Exception {
+        Files.createDirectories(root);
+        Path profiles = root.resolve("launcher_profiles.json");
+        if (Files.exists(profiles)) {
+            throw new IOException(
+                    "Во временной папке неожиданно найден launcher_profiles.json."
+            );
+        }
+
+        Path runtimeDirectory = root.resolve(".gto-runtime");
+        Files.createDirectories(runtimeDirectory);
+        Path forgeTemp = runtimeDirectory.resolve("tmp");
+        Files.createDirectories(forgeTemp);
+        Path installer = safeResolve(root, FORGE_INSTALLER.destination);
+        try {
+            writeEmptyLauncherProfiles(profiles);
+            progress.log(
+                    "Получение официального Forge " + FORGE_VERSION
+                            + " с maven.minecraftforge.net…"
+            );
+            downloadWithRetries(FORGE_INSTALLER, installer, progress);
+
+            progress.log(
+                    "Создание локального профиля " + FORGE_PROFILE_ID
+                            + ". Это может занять несколько минут…"
+            );
+            runForgeInstaller(root, installer, forgeTemp);
+        } finally {
+            Files.deleteIfExists(profiles);
+            if (Files.isDirectory(runtimeDirectory)) {
+                deleteTree(runtimeDirectory);
+            }
+        }
+
+        progress.log("Фиксация официального описания Minecraft 1.20.1…");
+        Path vanillaJson = safeResolve(root, VANILLA_VERSION_JSON.destination);
+        downloadWithRetries(VANILLA_VERSION_JSON, vanillaJson, progress);
+    }
+
+    private static void writeEmptyLauncherProfiles(Path profiles)
+            throws IOException {
+        Files.write(
+                profiles,
+                Collections.singletonList(
+                        "{\"profiles\":{},\"settings\":{},\"version\":3}"
+                ),
+                StandardCharsets.UTF_8
+        );
+    }
+
+    private static void runForgeInstaller(
+            Path root,
+            Path installer,
+            Path forgeTemp
+    )
+            throws Exception {
+        Path javaExecutable = currentJavaExecutable();
+        ProcessBuilder builder = new ProcessBuilder(
+                javaExecutable.toString(),
+                "-Djava.net.preferIPv4Stack=true",
+                "-Djava.io.tmpdir=" + forgeTemp.toString(),
+                "-jar",
+                installer.toString(),
+                "--installClient",
+                root.toString()
+        );
+        builder.directory(installer.getParent().toFile());
+        builder.redirectErrorStream(true);
+
+        Process process = builder.start();
+        List<String> tail = new ArrayList<String>();
+        try (BufferedReader reader = new BufferedReader(
+                new InputStreamReader(
+                        process.getInputStream(),
+                        StandardCharsets.UTF_8
+                )
+        )) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                if (line.trim().isEmpty()) {
+                    continue;
+                }
+                tail.add(line);
+                if (tail.size() > 100) {
+                    tail.remove(0);
+                }
+            }
+        }
+
+        int exitCode;
+        try {
+            exitCode = process.waitFor();
+        } catch (InterruptedException error) {
+            process.destroyForcibly();
+            Thread.currentThread().interrupt();
+            throw error;
+        }
+        if (exitCode != 0) {
+            StringBuilder details = new StringBuilder();
+            for (String line : tail) {
+                details.append(System.lineSeparator()).append(line);
+            }
+            throw new IOException(
+                    "Официальный установщик Forge завершился с кодом "
+                            + exitCode + "." + details
+            );
+        }
+    }
+
+    private static void requireJava17OrNewer() throws IOException {
+        String specification =
+                System.getProperty("java.specification.version", "0");
+        String featureText = specification.startsWith("1.")
+                ? specification.substring(2)
+                : specification;
+        int separator = featureText.indexOf('.');
+        if (separator >= 0) {
+            featureText = featureText.substring(0, separator);
+        }
+
+        int feature;
+        try {
+            feature = Integer.parseInt(featureText);
+        } catch (NumberFormatException error) {
+            throw new IOException(
+                    "Не удалось определить версию Java: " + specification,
+                    error
+            );
+        }
+        if (feature < 17) {
+            throw new IOException(
+                    "Для установки Forge нужна Java 17 или новее. "
+                            + "Сейчас используется Java " + specification
+                            + ". Запустите TLauncher один раз и повторите."
+            );
+        }
+    }
+
+    private static Path currentJavaExecutable() throws IOException {
+        String executableName =
+                System.getProperty("os.name", "")
+                        .toLowerCase(Locale.ROOT)
+                        .contains("win")
+                        ? "java.exe"
+                        : "java";
+        Path executable = Paths.get(
+                System.getProperty("java.home"),
+                "bin",
+                executableName
+        ).toAbsolutePath().normalize();
+        if (!Files.isRegularFile(executable)) {
+            throw new IOException(
+                    "Не найден исполняемый файл Java: " + executable
+            );
+        }
+        return executable;
+    }
+
+    private static void verifyForgeRuntime(Path root) throws Exception {
+        for (LockedEntry entry : FORGE_RUNTIME_LOCK) {
+            Path file = safeResolve(root, entry.path);
+            if (!matches(file, entry.size, entry.sha256)) {
+                throw new IOException(
+                        "Не совпадает файл локального Forge: " + entry.path
+                );
+            }
+        }
+
+        Path profile = safeResolve(
+                root,
+                "versions/" + FORGE_PROFILE_ID + "/"
+                        + FORGE_PROFILE_ID + ".json"
+        );
+        String profileText = new String(
+                Files.readAllBytes(profile),
+                StandardCharsets.UTF_8
+        );
+        if (!profileText.contains("\"id\": \"" + FORGE_PROFILE_ID + "\"")
+                || !profileText.contains(
+                        "\"inheritsFrom\": \"" + MINECRAFT_VERSION + "\""
+                )
+                || profileText.contains("default_user_jvm")) {
+            throw new IOException(
+                    "Некорректное описание локального профиля Forge."
+            );
+        }
+    }
+
     private static Path safeResolve(Path root, String relative) throws IOException {
         String normalizedRelative = relative.replace('/', File.separatorChar);
         Path result = root.resolve(normalizedRelative)
@@ -811,7 +1125,11 @@ public final class GtoTLauncherInstaller {
             writer.newLine();
             writer.write("forge=" + FORGE_VERSION);
             writer.newLine();
+            writer.write("forge-profile=" + FORGE_PROFILE_ID);
+            writer.newLine();
             writer.write("client-verification=passed");
+            writer.newLine();
+            writer.write("forge-runtime-verification=passed");
             writer.newLine();
         }
         try {
@@ -833,13 +1151,15 @@ public final class GtoTLauncherInstaller {
     }
 
     private static String launchInstructions(Path target) {
-        return "Готово. Файлы проверены по SHA-256.\n\n"
-                + "1. Откройте настройки TLauncher.\n"
-                + "2. Укажите игровую папку:\n" + target + "\n"
-                + "3. Выберите Forge " + MINECRAFT_VERSION + "-" + FORGE_VERSION
-                + " без значка TL.\n"
-                + "4. Выделите 8192–12288 МБ RAM (рекомендуется 10240).\n"
-                + "5. Введите постоянный ник и запускайте игру.";
+        return "Готово. Сборка и локальный Forge проверены по SHA-256.\n\n"
+                + "1. Полностью перезапустите TLauncher.\n"
+                + "2. В настройках укажите игровую папку:\n" + target + "\n"
+                + "3. Выберите локальную версию " + FORGE_PROFILE_ID + ".\n"
+                + "   НЕ выбирайте удалённую запись «Forge 1.20.1».\n"
+                + "4. Отключите «Принудительное обновление».\n"
+                + "5. Для игры выберите Java 17.\n"
+                + "6. Выделите 8192–12288 МБ RAM (рекомендуется 10240).\n"
+                + "7. Введите постоянный ник и запускайте игру.";
     }
 
     private static void printLaunchInstructions(Path target) {

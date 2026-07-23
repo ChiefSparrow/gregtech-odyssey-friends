@@ -13,8 +13,10 @@ if not exist "%INSTALLER%" (
 )
 
 set "JAVA="
-for /f "delims=" %%J in ('where javaw.exe 2^>nul') do if not defined JAVA set "JAVA=%%J"
 
+if exist "%APPDATA%\.tlauncher\starter\jre_default" (
+  for /r "%APPDATA%\.tlauncher\starter\jre_default" %%J in (javaw.exe) do if exist "%%~fJ" if not defined JAVA set "JAVA=%%~fJ"
+)
 if not defined JAVA if exist "%APPDATA%\.minecraft\runtime" (
   for /r "%APPDATA%\.minecraft\runtime" %%J in (javaw.exe) do if exist "%%~fJ" if not defined JAVA set "JAVA=%%~fJ"
 )
@@ -23,6 +25,9 @@ if not defined JAVA if exist "%APPDATA%\.tlauncher" (
 )
 if not defined JAVA if exist "%LOCALAPPDATA%\TLauncher" (
   for /r "%LOCALAPPDATA%\TLauncher" %%J in (javaw.exe) do if exist "%%~fJ" if not defined JAVA set "JAVA=%%~fJ"
+)
+if not defined JAVA (
+  for /f "delims=" %%J in ('where javaw.exe 2^>nul') do if not defined JAVA set "JAVA=%%J"
 )
 
 if not defined JAVA (

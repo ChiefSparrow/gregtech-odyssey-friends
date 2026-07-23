@@ -154,7 +154,7 @@ try {
         throw 'Packaged launcher BAT must be ASCII-only with CRLF line endings.'
     }
     if (
-        [regex]::Matches($batchText, 'if exist "%%~fJ"').Count -ne 3 -or
+        [regex]::Matches($batchText, 'if exist "%%~fJ"').Count -ne 4 -or
         $batchText -notmatch '(?m)^start "" /wait "%JAVA%" -jar "%INSTALLER%"\r?$'
     ) {
         throw 'Launcher BAT does not safely locate and start Java.'
@@ -258,6 +258,30 @@ try {
     ) -Raw -Encoding UTF8
     if ((Read-EntryText $sourceEntry) -ne $repositorySource) {
         throw 'Packaged Java source differs from repository source.'
+    }
+    foreach ($requiredSourceText in @(
+        '1.20.1-forge-47.4.20',
+        '0EBCF198609F925E0018842A79473EF74FDA78534F86D82F2C0FDB26449C1FA4',
+        'https://maven.minecraftforge.net/net/minecraftforge/forge/',
+        '584F92FBAE08AD68F5E18610A375A850AF3678158E03F7145EA65DB00060C0B2',
+        'https://piston-meta.mojang.com/v1/packages/',
+        'default_user_jvm',
+        'forge-runtime-verification=passed',
+        '-Djava.io.tmpdir=',
+        'extractPayloadFile(staging, "README-TLAUNCHER.txt")',
+        'if (hasSupportedMarker(normalMinecraft))'
+    )) {
+        if (-not $repositorySource.Contains($requiredSourceText)) {
+            throw "Java source misses Forge bootstrap invariant: $requiredSourceText"
+        }
+    }
+
+    $packagedReadme = Read-EntryText (Get-Entry $outer 'README-TLAUNCHER.txt')
+    if (
+        $packagedReadme -notmatch '1\.20\.1-forge-47\.4\.20' -or
+        $packagedReadme -notmatch 'Forge 1\.20\.1'
+    ) {
+        throw 'Packaged README does not identify the safe local Forge profile.'
     }
 
     $checksums = Read-EntryText (Get-Entry $outer 'SHA256SUMS.txt')
@@ -430,11 +454,17 @@ try {
             'payload/servers.dat',
             'payload/options.txt',
             'payload/usercache.json',
-            'payload/usernamecache.json'
+            'payload/usernamecache.json',
+            'payload/launcher_profiles.json'
         )) {
             if (@($jar.Entries | Where-Object FullName -eq $forbidden).Count -gt 0) {
                 throw "Private payload file found: $forbidden"
             }
+        }
+        if (@($jar.Entries | Where-Object {
+            $_.FullName.StartsWith('payload/.gto-runtime/', [StringComparison]::OrdinalIgnoreCase)
+        }).Count -gt 0) {
+            throw 'Temporary Forge bootstrap files leaked into payload.'
         }
 
         Write-Host 'TLAUNCHER INSTALLER VERIFICATION PASSED'
