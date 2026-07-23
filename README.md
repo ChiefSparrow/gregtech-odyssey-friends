@@ -7,7 +7,16 @@
 [Releases](https://github.com/ChiefSparrow/gregtech-odyssey-friends/releases).
 Скачивать исходники через зелёную кнопку **Code** для установки игры не нужно.
 
-## Установка для игрока
+## Выберите инструкцию
+
+- **Есть лицензия Minecraft:** используйте
+  [полную инструкцию для Prism Launcher](INSTALL-PRISM-LICENSED.md).
+- **Нет лицензии, запуск через TLauncher:** используйте
+  [отдельную инструкцию для TLauncher](INSTALL-TLAUNCHER-NO-LICENSE.md).
+  Релизный CurseForge ZIP нельзя импортировать в TLauncher напрямую: сначала
+  точные зависимости подготавливаются и проверяются через Prism.
+
+## Краткая установка с лицензией через Prism
 
 1. Установите [Prism Launcher](https://prismlauncher.org/download/).
 2. Скачайте последний файл
