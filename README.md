@@ -10,11 +10,31 @@
 ## Выберите инструкцию
 
 - **Есть лицензия Minecraft:** используйте
-  [полную инструкцию для Prism Launcher](INSTALL-PRISM-LICENSED.md).
+  [one-click установщик с portable Prism Launcher](INSTALL-PRISM-LICENSED.md).
+  Отдельно устанавливать Prism, Java или Forge и вручную импортировать сборку
+  не нужно.
 - **Нет лицензии, запуск через TLauncher:** используйте
   [отдельную инструкцию для TLauncher](INSTALL-TLAUNCHER-NO-LICENSE.md).
   Скачайте отдельный `GTO-Friends-TLauncher-Installer-*.zip`: Prism для этого
   варианта не нужен, точные зависимости установщик скачает и проверит сам.
+
+## Краткая установка с лицензией
+
+1. Скачайте и полностью распакуйте
+   [`GTO-Friends-Licensed-Prism-Installer-v1.0.4.zip`](https://github.com/ChiefSparrow/gregtech-odyssey-friends/releases/latest/download/GTO-Friends-Licensed-Prism-Installer-v1.0.4.zip).
+2. Закройте Minecraft и все окна Prism Launcher.
+3. Дважды нажмите `INSTALL-GTO-LICENSED.bat` и дождитесь окончания установки.
+4. В открывшемся Prism войдите в Microsoft-аккаунт, на котором куплена
+   Minecraft: Java Edition: **кнопка аккаунта → Manage Accounts → Add
+   Microsoft**.
+5. Выберите **GregTech Odyssey — Friends Edition** и нажмите
+   **Launch / Запустить**.
+
+Установщик ставит отдельный официальный portable Prism Launcher 11.0.3
+(MinGW x64), приватную Temurin Java 21 и точную Friends Edition 1.0.4 со всеми
+нашими исправлениями. Ручной импорт ZIP, выбор Forge и настройка Java не нужны.
+Полная инструкция, обновление и решение типовых проблем описаны в
+[инструкции для лицензии](INSTALL-PRISM-LICENSED.md).
 
 ## Краткая установка через TLauncher
 
@@ -32,21 +52,6 @@
 каждой загрузки, всех 177 обязательных файлов, локального Forge и Java 21.
 Подробности и безопасная проверка архива описаны в
 [инструкции для TLauncher](INSTALL-TLAUNCHER-NO-LICENSE.md).
-
-## Краткая установка с лицензией через Prism
-
-1. Установите [Prism Launcher](https://prismlauncher.org/download/).
-2. Скачайте последний файл
-   `GregTech-Odyssey-Friends-0.5.6-v*.zip` из Releases.
-3. В Prism Launcher нажмите **Добавить сборку → Импорт → файл ZIP**.
-4. Войдите в лицензионный Microsoft/Minecraft-аккаунт.
-5. Выделите сборке **8–12 ГБ RAM**. Для слабого компьютера начните с 8 ГБ.
-6. Выберите **64-битную Java 21**.
-7. Запустите сборку. Первый запуск дольше обычного: лаунчер скачивает моды, а
-   Euphoria Patcher один раз создаёт лицензионно корректную версию шейдера.
-8. Закройте игру, откройте папку экземпляра и запустите
-   `VERIFY-CLIENT.ps1`. Результат `CLIENT VERIFICATION PASSED` подтверждает,
-   что все 176 модов совпадают с эталоном байт-в-байт.
 
 Если шейдер не включился при самом первом запуске, откройте
 **Настройки → Графика → Наборы шейдеров** и выберите
@@ -84,21 +89,26 @@ CurseForge. Это не поиск «последней версии»: `manifes
 - Easy Villagers: `1.20.1-1.1.39`
 - Режим прогрессии GTOCore: `Easy`.
 - Ванильная сложность новых миров: `Normal`, без блокировки.
-- Клиенту нужна 64-битная Java 21. TLauncher-установщик ставит приватную копию
-  автоматически; в Prism нужно выбрать Java 21.
+- Клиенту нужна 64-битная Java 21. Оба one-click установщика ставят отдельную
+  приватную копию автоматически.
 - Сервер должен использовать ту же базовую версию и серверные версии обоих
   `gto-*-fix` модов. Шейдеры и Oculus серверу не нужны.
 
 ## Обновление без потери миров
 
-Импортируйте новый ZIP как отдельную сборку. После успешного запуска перенесите
-только нужные `saves` из старого экземпляра или подключитесь к тому же серверу.
-Не заменяйте старую папку целиком: так проще откатиться при проблеме.
+Для проверки или восстановления лицензированной 1.0.4 повторно запустите её
+`INSTALL-GTO-LICENSED.bat`, выбрав прежнюю папку установки. Переходите с ней
+на будущую версию в той же папке только при явном указании совместимости в
+описании нового релиза; иначе используйте отдельную папку. Перед операцией
+закройте Minecraft и Prism. Установщик сохраняет Microsoft-аккаунт, настройки
+Prism, миры, серверы, скриншоты и карты Xaero. TLauncher-версия обновляется
+своим `INSTALL-GTO-TLAUNCHER.bat` по правилам её инструкции.
 
 Режим GTO записывается внутрь мира отдельно от ванильной сложности. Мир,
 созданный в GTO `Normal` или `Expert`, нельзя молча понизить до `Easy`:
-TLauncher-установщик остановит такое обновление до изменения папки. Для этой
-редакции создайте отдельную чистую папку и новый мир после установки Easy.
+оба установщика остановят такое обновление до изменения файлов. Для этой
+редакции выберите отдельную чистую папку и создайте новый мир после установки
+GTO Easy.
 
 ## Для разработчика или нейросети
 
@@ -120,6 +130,10 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\distribution\VERIFY-CL
 # Отдельный воспроизводимый установщик для TLauncher
 powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\distribution\build-tlauncher-installer.ps1
 powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\distribution\verify-tlauncher-installer.ps1
+
+# Отдельный воспроизводимый one-click установщик с portable Prism
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\distribution\build-prism-installer.ps1
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\distribution\verify-prism-installer.ps1
 ```
 
 Скрипт принимает только официальный базовый архив с зафиксированной SHA-256 и
