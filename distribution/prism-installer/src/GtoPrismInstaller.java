@@ -78,7 +78,7 @@ import java.util.zip.ZipInputStream;
 public final class GtoPrismInstaller {
     private static final String PACK_NAME =
             "GregTech Odyssey — Friends Edition";
-    private static final String PACK_VERSION = "1.0.4";
+    private static final String PACK_VERSION = "1.1.0";
     private static final String MINECRAFT_VERSION = "1.20.1";
     private static final String FORGE_VERSION = "47.4.20";
     private static final String PRISM_VERSION = "11.0.3";
@@ -92,15 +92,44 @@ public final class GtoPrismInstaller {
             "gto-temurin-21.lock.tsv";
     private static final String CLIENT_LOCK_FILE =
             "GTO-FRIENDS-CLIENT-LOCK.tsv";
-    /*
-     * This is the first licensed installer, so there are no genuine prior
-     * licensed releases yet.  A future release must add only versions for
-     * which it also embeds and tests an explicit migration.
-     */
+    private static final String MOD_STATE_MIGRATION_SOURCE_VERSION = "1.0.4";
     private static final List<String> PREVIOUS_PACK_VERSIONS =
-            Collections.emptyList();
+            Collections.unmodifiableList(Arrays.asList(
+                    MOD_STATE_MIGRATION_SOURCE_VERSION
+            ));
+    private static final List<ModStateMigration> MOD_STATE_MIGRATIONS =
+            Collections.unmodifiableList(Arrays.asList(
+                    new ModStateMigration(
+                            "mods/chisel-forge-2.0.0+mc1.20.1.jar.disabled",
+                            "mods/chisel-forge-2.0.0+mc1.20.1.jar"
+                    ),
+                    new ModStateMigration(
+                            "mods/factory_blocks-forge-1.4.0+mc1.20.1.jar.disabled",
+                            "mods/factory_blocks-forge-1.4.0+mc1.20.1.jar"
+                    ),
+                    new ModStateMigration(
+                            "mods/FramedBlocks-9.4.3.jar.disabled",
+                            "mods/FramedBlocks-9.4.3.jar"
+                    ),
+                    new ModStateMigration(
+                            "mods/HangGlider-v8.0.1-1.20.1-Forge.jar.disabled",
+                            "mods/HangGlider-v8.0.1-1.20.1-Forge.jar"
+                    ),
+                    new ModStateMigration(
+                            "mods/kleeslabs-forge-1.20.1-15.0.12.jar.disabled",
+                            "mods/kleeslabs-forge-1.20.1-15.0.12.jar"
+                    ),
+                    new ModStateMigration(
+                            "mods/Measurements-forge-1.20.1-2.0.1.jar.disabled",
+                            "mods/Measurements-forge-1.20.1-2.0.1.jar"
+                    ),
+                    new ModStateMigration(
+                            "mods/Pretty Rain-1.20.1-Forge-1.1.3.jar.disabled",
+                            "mods/Pretty Rain-1.20.1-Forge-1.1.3.jar"
+                    )
+            ));
     private static final String USER_AGENT =
-            "GTO-Friends-Licensed-Prism-Installer/1.0.4 "
+            "GTO-Friends-Licensed-Prism-Installer/1.1.0 "
                     + "(https://github.com/ChiefSparrow/"
                     + "gregtech-odyssey-friends)";
     private static final DownloadEntry PRISM_ARCHIVE =
@@ -635,9 +664,30 @@ public final class GtoPrismInstaller {
 
         ensurePrismClosed(target);
         rejectManagedLinks(target);
-        verifySupportedMarker(target);
+        String installedVersion = verifySupportedMarkerVersion(target);
         verifyPrismDistribution(prismRoot(target));
-        verifyClientForUpdate(gameRoot(target));
+        List<PreparedModStateMigration> modStateMigrations;
+        if (PACK_VERSION.equals(installedVersion)) {
+            verifyClientForUpdate(gameRoot(target));
+            modStateMigrations =
+                    Collections.<PreparedModStateMigration>emptyList();
+        } else if (MOD_STATE_MIGRATION_SOURCE_VERSION.equals(
+                installedVersion
+        )) {
+            modStateMigrations = verifyClientForModStateMigration(
+                    gameRoot(target)
+            );
+            progress.log(
+                    "Проверена миграция семи модов из 1.0.4: "
+                            + modStateMigrations.size()
+                            + " ещё нужно включить."
+            );
+        } else {
+            throw new IOException(
+                    "Для установленной версии нет проверенной миграции: "
+                            + installedVersion
+            );
+        }
         guardExistingWorld(gameRoot(target));
         verifyFileCanBeUpdated(
                 prismRoot(target).resolve("prismlauncher.exe"),
@@ -673,6 +723,13 @@ public final class GtoPrismInstaller {
                     gameRoot(target),
                     gameRoot(staging),
                     configUpdates
+            );
+
+            progress.update(54, "Включение модов");
+            prepareModStateMigrationFiles(
+                    gameRoot(target),
+                    gameRoot(staging),
+                    modStateMigrations
             );
 
             progress.update(58, "Профиль Prism");
@@ -714,6 +771,26 @@ public final class GtoPrismInstaller {
                     javaLockPath(staging),
                     javaLockPath(target)
             );
+            for (PreparedModStateMigration migration : modStateMigrations) {
+                transaction.addFile(
+                        safeResolve(
+                                gameRoot(staging),
+                                migration.migration.enabledPath
+                        ),
+                        safeResolve(
+                                gameRoot(target),
+                                migration.migration.enabledPath
+                        )
+                );
+                transaction.removeFile(
+                        safeResolve(
+                                gameRoot(target),
+                                migration.migration.disabledPath
+                        ),
+                        migration.locked.size,
+                        migration.locked.sha256
+                );
+            }
             for (String relative : configUpdates) {
                 transaction.replaceFile(
                         safeResolve(gameRoot(staging), relative),
@@ -1423,7 +1500,48 @@ public final class GtoPrismInstaller {
 
     private static List<LockedEntry> loadClientLock()
             throws IOException {
-        return loadLock("/client-lock.tsv", 177, 177);
+        List<LockedEntry> lock = loadLock("/client-lock.tsv", 177, 177);
+        verifyModStateMigrationLock(lock);
+        return lock;
+    }
+
+    private static void verifyModStateMigrationLock(
+            List<LockedEntry> lock
+    ) throws IOException {
+        if (MOD_STATE_MIGRATIONS.size() != 7
+                || PREVIOUS_PACK_VERSIONS.size() != 1
+                || !PREVIOUS_PACK_VERSIONS.contains(
+                MOD_STATE_MIGRATION_SOURCE_VERSION
+        )) {
+            throw new IOException(
+                    "Нарушен контракт миграции модов 1.0.4 -> 1.1.0."
+            );
+        }
+
+        Set<String> lockedPaths = new HashSet<String>();
+        for (LockedEntry entry : lock) {
+            lockedPaths.add(entry.path.toLowerCase(Locale.ROOT));
+        }
+        Set<String> migrationPaths = new HashSet<String>();
+        for (ModStateMigration migration : MOD_STATE_MIGRATIONS) {
+            String disabled = migration.disabledPath.toLowerCase(Locale.ROOT);
+            String enabled = migration.enabledPath.toLowerCase(Locale.ROOT);
+            if (!migration.disabledPath.endsWith(".disabled")
+                    || !migration.disabledPath.substring(
+                    0,
+                    migration.disabledPath.length() - ".disabled".length()
+            ).equals(migration.enabledPath)
+                    || !migrationPaths.add(disabled)
+                    || !migrationPaths.add(enabled)
+                    || lockedPaths.contains(disabled)
+                    || !lockedPaths.contains(enabled)) {
+                throw new IOException(
+                        "Client lock не соответствует точной миграции модов: "
+                                + migration.disabledPath + " -> "
+                                + migration.enabledPath
+                );
+            }
+        }
     }
 
     private static List<LockedEntry> loadPrismLock()
@@ -1712,6 +1830,144 @@ public final class GtoPrismInstaller {
         verifyClient(root, false);
     }
 
+    private static List<PreparedModStateMigration>
+    verifyClientForModStateMigration(Path root) throws Exception {
+        List<LockedEntry> lock = loadClientLock();
+        Map<String, ModStateMigration> migrations =
+                new HashMap<String, ModStateMigration>();
+        for (ModStateMigration migration : MOD_STATE_MIGRATIONS) {
+            migrations.put(
+                    migration.enabledPath.toLowerCase(Locale.ROOT),
+                    migration
+            );
+        }
+
+        Set<String> expectedMods = new HashSet<String>();
+        List<PreparedModStateMigration> pending =
+                new ArrayList<PreparedModStateMigration>();
+        for (LockedEntry entry : lock) {
+            if (entry.path.startsWith("config/")) {
+                continue;
+            }
+
+            ModStateMigration migration = migrations.get(
+                    entry.path.toLowerCase(Locale.ROOT)
+            );
+            if (migration == null) {
+                Path file = safeResolve(root, entry.path);
+                if (!matches(file, entry.size, entry.sha256)) {
+                    throw new IOException(
+                            "Файл сборки не совпадает с эталоном: "
+                                    + entry.path
+                    );
+                }
+                if (entry.path.startsWith("mods/")) {
+                    expectedMods.add(
+                            entry.path.substring("mods/".length())
+                                    .toLowerCase(Locale.ROOT)
+                    );
+                }
+                continue;
+            }
+
+            Path disabled = safeResolve(root, migration.disabledPath);
+            Path enabled = safeResolve(root, migration.enabledPath);
+            boolean hasDisabled = Files.exists(
+                    disabled,
+                    LinkOption.NOFOLLOW_LINKS
+            );
+            boolean hasEnabled = Files.exists(
+                    enabled,
+                    LinkOption.NOFOLLOW_LINKS
+            );
+            if (hasDisabled == hasEnabled) {
+                throw new IOException(
+                        "Для миграции должен существовать ровно один вариант "
+                                + "мода: " + migration.disabledPath + " или "
+                                + migration.enabledPath
+                );
+            }
+
+            Path selected = hasEnabled ? enabled : disabled;
+            String selectedRelative = hasEnabled
+                    ? migration.enabledPath
+                    : migration.disabledPath;
+            if (!matches(selected, entry.size, entry.sha256)) {
+                throw new IOException(
+                        "Мод миграции не совпадает с эталоном: "
+                                + selectedRelative
+                );
+            }
+            verifyFileCanBeUpdated(selected, "Minecraft");
+            expectedMods.add(
+                    selectedRelative.substring("mods/".length())
+                            .toLowerCase(Locale.ROOT)
+            );
+            if (hasDisabled) {
+                pending.add(new PreparedModStateMigration(
+                        migration,
+                        entry
+                ));
+            }
+        }
+        verifyNoExtraMods(root, expectedMods);
+        return pending;
+    }
+
+    private static void prepareModStateMigrationFiles(
+            Path installedGame,
+            Path stagedGame,
+            List<PreparedModStateMigration> migrations
+    ) throws Exception {
+        for (PreparedModStateMigration prepared : migrations) {
+            Path source = safeResolve(
+                    installedGame,
+                    prepared.migration.disabledPath
+            );
+            if (!matches(
+                    source,
+                    prepared.locked.size,
+                    prepared.locked.sha256
+            )) {
+                throw new IOException(
+                        "Исходный мод изменился после проверки: "
+                                + prepared.migration.disabledPath
+                );
+            }
+
+            Path destination = safeResolve(
+                    stagedGame,
+                    prepared.migration.enabledPath
+            );
+            Files.createDirectories(destination.getParent());
+            Path temporary = destination.resolveSibling(
+                    destination.getFileName() + ".migration-"
+                            + UUID.randomUUID().toString() + ".tmp"
+            );
+            try {
+                Files.copy(
+                        source,
+                        temporary,
+                        StandardCopyOption.REPLACE_EXISTING,
+                        StandardCopyOption.COPY_ATTRIBUTES
+                );
+                if (!matches(
+                        temporary,
+                        prepared.locked.size,
+                        prepared.locked.sha256
+                )) {
+                    throw new IOException(
+                            "Подготовленная копия мода не прошла проверку: "
+                                    + prepared.migration.enabledPath
+                    );
+                }
+                moveAtomically(temporary, destination);
+            } finally {
+                Files.deleteIfExists(temporary);
+            }
+        }
+    }
+
     private static void verifyClient(
             Path root,
             boolean requireExactManagedConfigs
@@ -1737,6 +1993,22 @@ public final class GtoPrismInstaller {
             }
         }
 
+        verifyNoExtraMods(root, expectedMods);
+        if (requireExactManagedConfigs) {
+            requireGtoEasy(
+                    root.resolve("config").resolve("gtocore.yaml")
+            );
+            requireVanillaNormalDefaults(
+                    root.resolve("config")
+                            .resolve("defaultoptions-common.toml")
+            );
+        }
+    }
+
+    private static void verifyNoExtraMods(
+            Path root,
+            Set<String> expectedMods
+    ) throws Exception {
         Path mods = root.resolve("mods");
         rejectUnsafeLinks(mods, null);
         if (!Files.isDirectory(mods)) {
@@ -1769,15 +2041,6 @@ public final class GtoPrismInstaller {
                     );
                 }
             }
-        }
-        if (requireExactManagedConfigs) {
-            requireGtoEasy(
-                    root.resolve("config").resolve("gtocore.yaml")
-            );
-            requireVanillaNormalDefaults(
-                    root.resolve("config")
-                            .resolve("defaultoptions-common.toml")
-            );
         }
     }
 
@@ -2938,6 +3201,70 @@ public final class GtoPrismInstaller {
                 );
             }
 
+            Path oldMod = target.resolve("mods").resolve(
+                    "migration-test.jar.disabled"
+            );
+            Path newMod = target.resolve("mods").resolve(
+                    "migration-test.jar"
+            );
+            Path stagedMod = sandbox.resolve("staged-migration-test.jar");
+            Files.createDirectories(oldMod.getParent());
+            Files.write(oldMod, oldValue);
+            Files.write(stagedMod, oldValue);
+            String oldModHash = sha256(oldMod);
+
+            UpdateTransaction migrationRollback =
+                    new UpdateTransaction(sandbox, target);
+            migrationRollback.addFile(stagedMod, newMod);
+            migrationRollback.removeFile(
+                    oldMod,
+                    oldValue.length,
+                    oldModHash
+            );
+            if (Files.exists(oldMod, LinkOption.NOFOLLOW_LINKS)
+                    || !Arrays.equals(
+                    Files.readAllBytes(newMod),
+                    oldValue
+            )) {
+                throw new IOException(
+                        "Transaction self-check did not migrate a mod."
+                );
+            }
+            migrationRollback.rollback();
+            if (!Arrays.equals(Files.readAllBytes(oldMod), oldValue)
+                    || Files.exists(newMod, LinkOption.NOFOLLOW_LINKS)) {
+                throw new IOException(
+                        "Transaction self-check did not roll back a mod "
+                                + "migration."
+                );
+            }
+
+            Files.write(stagedMod, oldValue);
+            UpdateTransaction migrationCommit =
+                    new UpdateTransaction(sandbox, target);
+            Path migrationBackupRoot = migrationCommit.backupRoot;
+            migrationCommit.addFile(stagedMod, newMod);
+            migrationCommit.removeFile(
+                    oldMod,
+                    oldValue.length,
+                    oldModHash
+            );
+            migrationCommit.commit();
+            if (Files.exists(oldMod, LinkOption.NOFOLLOW_LINKS)
+                    || !Arrays.equals(
+                    Files.readAllBytes(newMod),
+                    oldValue
+            )
+                    || Files.exists(
+                    migrationBackupRoot,
+                    LinkOption.NOFOLLOW_LINKS
+            )) {
+                throw new IOException(
+                        "Transaction self-check did not commit a mod "
+                                + "migration."
+                );
+            }
+
             Path failingSource = sandbox.resolve("failing-value.txt");
             Files.write(failingSource, newValue);
             UpdateTransaction failing =
@@ -3722,22 +4049,22 @@ public final class GtoPrismInstaller {
 
     private static boolean hasSupportedMarker(Path root) {
         try {
-            verifySupportedMarker(root);
+            verifySupportedMarkerVersion(root);
             return true;
         } catch (Exception ignored) {
             return false;
         }
     }
 
-    private static void verifySupportedMarker(Path root)
+    private static String verifySupportedMarkerVersion(Path root)
             throws Exception {
         try {
             verifyMarker(root);
-            return;
+            return PACK_VERSION;
         } catch (Exception currentError) {
             for (String previous : PREVIOUS_PACK_VERSIONS) {
                 if (hasPersistedMarkerVersion(root, previous)) {
-                    return;
+                    return previous;
                 }
             }
             throw currentError;
@@ -4002,6 +4329,32 @@ public final class GtoPrismInstaller {
         }
     }
 
+    private static final class ModStateMigration {
+        private final String disabledPath;
+        private final String enabledPath;
+
+        private ModStateMigration(
+                String disabledPath,
+                String enabledPath
+        ) {
+            this.disabledPath = disabledPath;
+            this.enabledPath = enabledPath;
+        }
+    }
+
+    private static final class PreparedModStateMigration {
+        private final ModStateMigration migration;
+        private final LockedEntry locked;
+
+        private PreparedModStateMigration(
+                ModStateMigration migration,
+                LockedEntry locked
+        ) {
+            this.migration = migration;
+            this.locked = locked;
+        }
+    }
+
     private enum InstallationKind {
         CLEAN,
         RECOVER,
@@ -4087,6 +4440,60 @@ public final class GtoPrismInstaller {
                     hadPrevious
             ));
             moveAtomically(source, normalizedDestination);
+        }
+
+        private void addFile(Path source, Path destination)
+                throws Exception {
+            if (!Files.isRegularFile(source, LinkOption.NOFOLLOW_LINKS)) {
+                throw new IOException(
+                        "Нет подготовленного файла: " + source
+                );
+            }
+            Path normalizedDestination =
+                    checkedDestination(destination);
+            if (Files.exists(
+                    normalizedDestination,
+                    LinkOption.NOFOLLOW_LINKS
+            )) {
+                throw new IOException(
+                        "Новый путь миграции неожиданно занят: "
+                                + normalizedDestination
+                );
+            }
+            Path backup = backupFor(normalizedDestination);
+            replaced.add(new ReplacedPath(
+                    normalizedDestination,
+                    backup,
+                    false
+            ));
+            moveAtomically(source, normalizedDestination);
+        }
+
+        private void removeFile(
+                Path destination,
+                long expectedSize,
+                String expectedSha256
+        ) throws Exception {
+            Path normalizedDestination =
+                    checkedDestination(destination);
+            if (!matches(
+                    normalizedDestination,
+                    expectedSize,
+                    expectedSha256
+            )) {
+                throw new IOException(
+                        "Удаляемый файл изменился после проверки: "
+                                + normalizedDestination
+                );
+            }
+            Path backup = backupFor(normalizedDestination);
+            Files.createDirectories(backup.getParent());
+            moveAtomically(normalizedDestination, backup);
+            replaced.add(new ReplacedPath(
+                    normalizedDestination,
+                    backup,
+                    true
+            ));
         }
 
         private void replaceDirectory(Path source, Path destination)

@@ -519,12 +519,12 @@ try {
         Get-FileHash -LiteralPath $canonicalClientArchive -Algorithm SHA256
     ).Hash
     if (
-        $canonicalClientFile.Length -ne 69961102 -or
+        $canonicalClientFile.Length -ne 69963667 -or
         $canonicalClientHash -cne (
-            '8E72B022E52D64D5B5DF08F7A282F9A2F1A9CB239825F2E7FA7A3E2DB0599571'
+            '0CDF2E2FB9CF14DEC9587CD3F596FFBFC64784AA1CAFD93245F8B16DF9CEF4B1'
         )
     ) {
-        throw 'Canonical client archive is not the pinned Friends Edition 1.0.4 release.'
+        throw 'Canonical client archive is not the pinned Friends Edition 1.1.0 release.'
     }
     $expectedProvenance = @(
         'schema=gto-friends-licensed-installer-provenance/v1',
@@ -575,6 +575,10 @@ try {
         'requireGtoEasy',
         'requireVanillaNormalDefaults',
         'guardExistingWorld',
+        'verifyClientForModStateMigration',
+        'prepareModStateMigrationFiles',
+        'transaction.addFile',
+        'transaction.removeFile',
         'verifyLockedDirectory(root, lock, "UserData")',
         'rejectUnsafeLinks',
         'channel.tryLock()',
@@ -589,6 +593,55 @@ try {
         'private static final String PACK_VERSION = "' + $Config.packageVersion + '";'
     if (-not $repositorySource.Contains($expectedVersionConstant)) {
         throw 'Java installer PACK_VERSION differs from pack-config.json.'
+    }
+    if (
+        [regex]::Matches(
+            $repositorySource,
+            'new\s+ModStateMigration\s*\('
+        ).Count -ne 7 -or
+        -not $repositorySource.Contains(
+            'MOD_STATE_MIGRATION_SOURCE_VERSION = "1.0.4";'
+        )
+    ) {
+        throw 'Java installer does not contain the exact seven-mod 1.0.4 migration.'
+    }
+    $expectedModStateMigrations = @(
+        @(
+            'mods/chisel-forge-2.0.0+mc1.20.1.jar.disabled',
+            'mods/chisel-forge-2.0.0+mc1.20.1.jar'
+        ),
+        @(
+            'mods/factory_blocks-forge-1.4.0+mc1.20.1.jar.disabled',
+            'mods/factory_blocks-forge-1.4.0+mc1.20.1.jar'
+        ),
+        @(
+            'mods/FramedBlocks-9.4.3.jar.disabled',
+            'mods/FramedBlocks-9.4.3.jar'
+        ),
+        @(
+            'mods/HangGlider-v8.0.1-1.20.1-Forge.jar.disabled',
+            'mods/HangGlider-v8.0.1-1.20.1-Forge.jar'
+        ),
+        @(
+            'mods/kleeslabs-forge-1.20.1-15.0.12.jar.disabled',
+            'mods/kleeslabs-forge-1.20.1-15.0.12.jar'
+        ),
+        @(
+            'mods/Measurements-forge-1.20.1-2.0.1.jar.disabled',
+            'mods/Measurements-forge-1.20.1-2.0.1.jar'
+        ),
+        @(
+            'mods/Pretty Rain-1.20.1-Forge-1.1.3.jar.disabled',
+            'mods/Pretty Rain-1.20.1-Forge-1.1.3.jar'
+        )
+    )
+    foreach ($migration in $expectedModStateMigrations) {
+        if (
+            -not $repositorySource.Contains('"' + $migration[0] + '"') -or
+            -not $repositorySource.Contains('"' + $migration[1] + '"')
+        ) {
+            throw "Java installer misses mod migration: $($migration -join ' -> ')"
+        }
     }
     if (
         [regex]::Matches(
@@ -869,6 +922,19 @@ try {
         )) {
             if ($clientRows.path -contains $removedTheme) {
                 throw "Disabled AE theme remained in installed lock: $removedTheme"
+            }
+        }
+        foreach ($migration in $expectedModStateMigrations) {
+            if (
+                $clientRows.path -contains $migration[0] -or
+                $clientRows.path -notcontains $migration[1] -or
+                $downloads.destination -contains $migration[0] -or
+                $downloads.destination -notcontains $migration[1]
+            ) {
+                throw (
+                    'Enabled-mod migration is stale in client lock/downloads: ' +
+                    ($migration -join ' -> ')
+                )
             }
         }
         if ($clientRows.path -notcontains 'shaderpacks/ComplementaryReimagined_r5.6.1.zip') {

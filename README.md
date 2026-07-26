@@ -21,7 +21,7 @@
 ## Краткая установка с лицензией
 
 1. Скачайте и полностью распакуйте
-   [`GTO-Friends-Licensed-Prism-Installer-v1.0.4.zip`](https://github.com/ChiefSparrow/gregtech-odyssey-friends/releases/latest/download/GTO-Friends-Licensed-Prism-Installer-v1.0.4.zip).
+   [`GTO-Friends-Licensed-Prism-Installer-v1.1.0.zip`](https://github.com/ChiefSparrow/gregtech-odyssey-friends/releases/latest/download/GTO-Friends-Licensed-Prism-Installer-v1.1.0.zip).
 2. Закройте Minecraft и все окна Prism Launcher.
 3. Дважды нажмите `INSTALL-GTO-LICENSED.bat` и дождитесь окончания установки.
 4. В открывшемся Prism войдите в Microsoft-аккаунт, на котором куплена
@@ -31,7 +31,7 @@
    **Launch / Запустить**.
 
 Установщик ставит отдельный официальный portable Prism Launcher 11.0.3
-(MinGW x64), приватную Temurin Java 21 и точную Friends Edition 1.0.4 со всеми
+(MinGW x64), приватную Temurin Java 21 и точную Friends Edition 1.1.0 со всеми
 нашими исправлениями. Ручной импорт ZIP, выбор Forge и настройка Java не нужны.
 Полная инструкция, обновление и решение типовых проблем описаны в
 [инструкции для лицензии](INSTALL-PRISM-LICENSED.md).
@@ -40,7 +40,7 @@
 
 1. Запустите через TLauncher любую версию Minecraft один раз и закройте её.
 2. Скачайте и полностью распакуйте
-   [`GTO-Friends-TLauncher-Installer-v1.0.4.zip`](https://github.com/ChiefSparrow/gregtech-odyssey-friends/releases/latest/download/GTO-Friends-TLauncher-Installer-v1.0.4.zip).
+   [`GTO-Friends-TLauncher-Installer-v1.1.0.zip`](https://github.com/ChiefSparrow/gregtech-odyssey-friends/releases/latest/download/GTO-Friends-TLauncher-Installer-v1.1.0.zip).
 3. Дважды нажмите `INSTALL-GTO-TLAUNCHER.bat`, затем
    **Установить сборку**.
 4. Полностью перезапустите TLauncher, укажите показанную игровую папку и
@@ -68,6 +68,8 @@
 - TreeChop и Panda's Falling Trees — быстрая рубка и физическое падение дерева.
 - Oculus + официальный Complementary Reimagined r5.6.1 + Euphoria Patches
   1.7.7, а также перенесённый пользовательский пресет FreshEdit.
+- Включены штатные моды сборки: Chisel Reborn, Factory Blocks, Hang Glider,
+  KleeSlabs, Measurements, Pretty Rain и FramedBlocks.
 
 Оригинальные моды, TreeChop и шейдерные компоненты скачиваются лаунчером с
 CurseForge. Это не поиск «последней версии»: `manifest.json` фиксирует точные
@@ -91,18 +93,26 @@ CurseForge. Это не поиск «последней версии»: `manifes
 - Ванильная сложность новых миров: `Normal`, без блокировки.
 - Клиенту нужна 64-битная Java 21. Оба one-click установщика ставят отдельную
   приватную копию автоматически.
-- Сервер должен использовать ту же базовую версию и серверные версии обоих
-  `gto-*-fix` модов. Шейдеры и Oculus серверу не нужны.
+- Сервер должен использовать ту же базовую версию, серверные версии обоих
+  `gto-*-fix` модов и те же семь включённых модов из версии 1.1.0. Шейдеры и
+  Oculus серверу не нужны.
 
 ## Обновление без потери миров
 
-Для проверки или восстановления лицензированной 1.0.4 повторно запустите её
-`INSTALL-GTO-LICENSED.bat`, выбрав прежнюю папку установки. Переходите с ней
-на будущую версию в той же папке только при явном указании совместимости в
-описании нового релиза; иначе используйте отдельную папку. Перед операцией
-закройте Minecraft и Prism. Установщик сохраняет Microsoft-аккаунт, настройки
-Prism, миры, серверы, скриншоты и карты Xaero. TLauncher-версия обновляется
-своим `INSTALL-GTO-TLAUNCHER.bat` по правилам её инструкции.
+Версия 1.1.0 обновляет Friends Edition 1.0.4, установленную одним из наших
+one-click установщиков, **в той же папке**. Полная переустановка не нужна:
+
+1. Закройте Minecraft и лаунчер.
+2. Скачайте новый ZIP установщика для своего лаунчера и полностью распакуйте
+   его.
+3. Запустите находящийся в нём `INSTALL-*.bat`.
+4. Для Prism оставьте прежнюю папку установки; для TLauncher оставьте игровую
+   папку, которую установщик нашёл автоматически.
+
+Установщик проверяет и включает ровно семь выбранных модов. Миры, список
+серверов, `options.txt`, скриншоты, карты и точки Xaero сохраняются. В
+лицензионной версии также сохраняются аккаунт Microsoft и настройки portable
+Prism.
 
 Режим GTO записывается внутрь мира отдельно от ванильной сложности. Мир,
 созданный в GTO `Normal` или `Expert`, нельзя молча понизить до `Easy`:

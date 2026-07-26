@@ -188,6 +188,10 @@ try {
         throw "Release manifest package version mismatch: $($releaseManifest.package.version)"
     }
     $clientLock = Read-EntryText 'CLIENT-MOD-LOCK.json' | ConvertFrom-Json
+    $repositoryClientLockText = Get-Content -LiteralPath (
+        Join-Path $PSScriptRoot 'CLIENT-MOD-LOCK.json'
+    ) -Raw -Encoding UTF8
+    $packagedClientLockText = Read-EntryText 'CLIENT-MOD-LOCK.json'
     if ($clientLock.schema -ne 'gto-friends-client-lock/v1') {
         throw "Unexpected client lock schema: $($clientLock.schema)"
     }
@@ -196,8 +200,12 @@ try {
     }
     $readmeFirst = Read-EntryText 'README-FIRST.md'
     $overrideReadmeFirst = Read-EntryText 'overrides/README-FIRST.md'
+    $repositoryReadmeFirst = Get-Content -LiteralPath (
+        Join-Path $PSScriptRoot 'README-FIRST.md'
+    ) -Raw -Encoding UTF8
     if (
         $readmeFirst -ne $overrideReadmeFirst -or
+        $readmeFirst -ne $repositoryReadmeFirst -or
         $readmeFirst -notmatch 'Java 21' -or
         $readmeFirst -notmatch 'GTOCore.+Easy' -or
         $readmeFirst -notmatch 'Normal'
@@ -206,8 +214,14 @@ try {
     }
     $installAiText = Read-EntryText 'INSTALL-AI.json'
     $overrideInstallAiText = Read-EntryText 'overrides/INSTALL-AI.json'
-    if ($installAiText -ne $overrideInstallAiText) {
-        throw 'INSTALL-AI.json copies differ.'
+    $repositoryInstallAiText = Get-Content -LiteralPath (
+        Join-Path $PSScriptRoot 'INSTALL-AI.json'
+    ) -Raw -Encoding UTF8
+    if (
+        $installAiText -ne $overrideInstallAiText -or
+        $installAiText -ne $repositoryInstallAiText
+    ) {
+        throw 'Packaged INSTALL-AI.json differs from repository source.'
     }
     $clientVerifierText = Read-EntryText 'VERIFY-CLIENT.ps1'
     $overrideClientVerifierText = Read-EntryText 'overrides/VERIFY-CLIENT.ps1'
@@ -246,8 +260,18 @@ try {
     }
     $rootLockHash = Get-EntryHash (Get-Entry 'CLIENT-MOD-LOCK.json')
     $overrideLockHash = Get-EntryHash (Get-Entry 'overrides/CLIENT-MOD-LOCK.json')
-    if ($rootLockHash -ne $overrideLockHash -or $rootLockHash -ne $releaseManifest.exactClientLock.sha256) {
-        throw 'Client lock copies or release-manifest hash do not match.'
+    $repositoryLockHash = (
+        Get-FileHash -LiteralPath (
+            Join-Path $PSScriptRoot 'CLIENT-MOD-LOCK.json'
+        ) -Algorithm SHA256
+    ).Hash
+    if (
+        $packagedClientLockText -ne $repositoryClientLockText -or
+        $rootLockHash -ne $overrideLockHash -or
+        $rootLockHash -ne $repositoryLockHash -or
+        $rootLockHash -ne $releaseManifest.exactClientLock.sha256
+    ) {
+        throw 'Packaged client lock differs from repository or release manifest.'
     }
     $embeddedLockedFiles = 0
     foreach ($lockedFile in $clientLock.files) {

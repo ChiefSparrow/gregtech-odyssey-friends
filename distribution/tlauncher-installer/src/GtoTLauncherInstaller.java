@@ -65,9 +65,11 @@ import java.util.zip.ZipInputStream;
 
 public final class GtoTLauncherInstaller {
     private static final String PACK_NAME = "GregTech Odyssey — Friends Edition";
-    private static final String PACK_VERSION = "1.0.4";
+    private static final String PACK_VERSION = "1.1.0";
     private static final List<String> PREVIOUS_PACK_VERSIONS =
-            Collections.unmodifiableList(Arrays.asList("1.0.3", "1.0.2"));
+            Collections.unmodifiableList(
+                    Arrays.asList("1.0.4", "1.0.3", "1.0.2")
+            );
     private static final String MINECRAFT_VERSION = "1.20.1";
     private static final String FORGE_VERSION = "47.4.20";
     private static final String FORGE_PROFILE_ID =
@@ -77,8 +79,41 @@ public final class GtoTLauncherInstaller {
     private static final String MARKER_FILE = "GTO-FRIENDS-INSTALLED.txt";
     private static final String RECOVERY_FILE =
             "GTO-FRIENDS-INSTALL-IN-PROGRESS.txt";
+    private static final String MOD_ALIAS_MIGRATION_FILE =
+            "GTO-FRIENDS-MOD-ALIASES-IN-PROGRESS.txt";
+    private static final int MOD_STATE_ALIAS_COUNT = 7;
+    private static final ModStateAlias[] MOD_STATE_ALIASES = {
+            new ModStateAlias(
+                    "mods/chisel-forge-2.0.0+mc1.20.1.jar.disabled",
+                    "mods/chisel-forge-2.0.0+mc1.20.1.jar"
+            ),
+            new ModStateAlias(
+                    "mods/factory_blocks-forge-1.4.0+mc1.20.1.jar.disabled",
+                    "mods/factory_blocks-forge-1.4.0+mc1.20.1.jar"
+            ),
+            new ModStateAlias(
+                    "mods/FramedBlocks-9.4.3.jar.disabled",
+                    "mods/FramedBlocks-9.4.3.jar"
+            ),
+            new ModStateAlias(
+                    "mods/HangGlider-v8.0.1-1.20.1-Forge.jar.disabled",
+                    "mods/HangGlider-v8.0.1-1.20.1-Forge.jar"
+            ),
+            new ModStateAlias(
+                    "mods/kleeslabs-forge-1.20.1-15.0.12.jar.disabled",
+                    "mods/kleeslabs-forge-1.20.1-15.0.12.jar"
+            ),
+            new ModStateAlias(
+                    "mods/Measurements-forge-1.20.1-2.0.1.jar.disabled",
+                    "mods/Measurements-forge-1.20.1-2.0.1.jar"
+            ),
+            new ModStateAlias(
+                    "mods/Pretty Rain-1.20.1-Forge-1.1.3.jar.disabled",
+                    "mods/Pretty Rain-1.20.1-Forge-1.1.3.jar"
+            )
+    };
     private static final String USER_AGENT =
-            "GTO-Friends-TLauncher-Installer/1.0.4 "
+            "GTO-Friends-TLauncher-Installer/1.1.0 "
                     + "(https://github.com/ChiefSparrow/gregtech-odyssey-friends)";
     private static final DownloadEntry FORGE_INSTALLER =
             new DownloadEntry(
@@ -166,6 +201,18 @@ public final class GtoTLauncherInstaller {
             return;
         }
 
+        if (options.selfCheck) {
+            try {
+                runSelfCheck();
+                System.out.println("SELF-CHECK PASSED");
+            } catch (Exception error) {
+                error.printStackTrace(System.err);
+                System.err.println("SELF-CHECK FAILED: " + error.getMessage());
+                System.exit(1);
+            }
+            return;
+        }
+
         if (options.nonInteractive) {
             Path target = options.target != null ? options.target : defaultTarget();
             try {
@@ -194,7 +241,7 @@ public final class GtoTLauncherInstaller {
     private static void printUsage() {
         System.out.println(
                 "Usage: java -jar GTO-TLauncher-Installer.jar "
-                        + "[--target <directory>] [--non-interactive]"
+                        + "[--target <directory>] [--non-interactive] [--self-check]"
         );
     }
 
@@ -414,7 +461,16 @@ public final class GtoTLauncherInstaller {
             Progress progress
     ) throws Exception {
         validateTarget(target);
-        boolean repairExisting = hasSupportedMarker(target);
+        String installedVersion = supportedMarkerVersion(target);
+        boolean repairExisting = installedVersion != null;
+        boolean upgradingModAliases = repairExisting
+                && !PACK_VERSION.equals(installedVersion);
+        boolean resumingModAliasMigration = upgradingModAliases
+                && Files.exists(
+                        target.resolve(MOD_ALIAS_MIGRATION_FILE),
+                        LinkOption.NOFOLLOW_LINKS
+                );
+        boolean[] initialModAliasStates = null;
 
         Path staging = parent.resolve(
                         "." + target.getFileName() + ".gto-installing-"
@@ -436,7 +492,36 @@ public final class GtoTLauncherInstaller {
                                 + "Моды повторно скачиваться не будут."
                 );
                 progress.update(10, "Проверка сборки");
-                verifyClient(target);
+                if (upgradingModAliases) {
+                    if (resumingModAliasMigration) {
+                        ModAliasMigrationJournal migrationJournal =
+                                 validateModAliasMigrationMarker(target);
+                        if (!installedVersion.equals(
+                                migrationJournal.sourceVersion
+                        )) {
+                            throw new IOException(
+                                    "Mod alias migration source does not match "
+                                            + "the installed version."
+                            );
+                        }
+                        initialModAliasStates =
+                                verifyClientForAliasMigration(
+                                        target,
+                                        migrationJournal,
+                                        false
+                                );
+                    } else {
+                        initialModAliasStates =
+                                verifyClientForAliasMigration(
+                                        target,
+                                        null,
+                                        false
+                                );
+                    }
+                } else {
+                    verifyClient(target);
+                    deleteCompletedModAliasMigrationMarker(target, progress);
+                }
 
                 progress.update(20, "Установка Java 21");
                 extractPayloadFile(staging, "README-TLAUNCHER.txt");
@@ -451,16 +536,45 @@ public final class GtoTLauncherInstaller {
 
                 progress.update(88, "Копирование исправлений");
                 rejectUnsafeLinks(target);
-                replaceManagedJavaRuntime(staging, target);
-                deleteTree(javaRuntimePlatformRoot(staging));
-                copyTree(staging, target);
+                boolean modAliasMigrationActive = false;
+                boolean newMarkerCommitted = false;
+                try {
+                    if (upgradingModAliases) {
+                        prepareModAliasMigrationMarker(
+                                target,
+                                installedVersion,
+                                initialModAliasStates
+                        );
+                        modAliasMigrationActive = true;
+                        verifyClientForAliasMigration(
+                                target,
+                                validateModAliasMigrationMarker(target),
+                                false
+                        );
+                        migrateModStateAliases(target);
+                    }
+                    replaceManagedJavaRuntime(staging, target);
+                    deleteTree(javaRuntimePlatformRoot(staging));
+                    copyTree(staging, target);
 
-                progress.update(96, "Финальная проверка");
-                verifyClient(target);
-                verifyForgeRuntime(target);
-                verifyJava21Runtime(target);
-                verifyPackConfigurationAfterUpdate(target);
-                writeMarker(target);
+                    progress.update(96, "Финальная проверка");
+                    verifyClient(target);
+                    verifyForgeRuntime(target);
+                    verifyJava21Runtime(target);
+                    verifyPackConfigurationAfterUpdate(target);
+                    writeMarker(target);
+                    newMarkerCommitted = true;
+                    deleteCompletedModAliasMigrationMarker(target, progress);
+                } catch (Exception error) {
+                    if (!newMarkerCommitted
+                            && hasMarkerVersion(target, PACK_VERSION)) {
+                        newMarkerCommitted = true;
+                    }
+                    if (modAliasMigrationActive && !newMarkerCommitted) {
+                        rollbackModStateAliases(target, progress, error);
+                    }
+                    throw error;
+                }
 
                 progress.update(100, "Готово");
                 progress.log("Локальный профиль Forge и Java 21 исправлены.");
@@ -583,15 +697,19 @@ public final class GtoTLauncherInstaller {
     }
 
     private static boolean hasSupportedMarker(Path target) {
+        return supportedMarkerVersion(target) != null;
+    }
+
+    private static String supportedMarkerVersion(Path target) {
         if (hasMarkerVersion(target, PACK_VERSION)) {
-            return true;
+            return PACK_VERSION;
         }
         for (String version : PREVIOUS_PACK_VERSIONS) {
             if (hasMarkerVersion(target, version)) {
-                return true;
+                return version;
             }
         }
-        return false;
+        return null;
     }
 
     private static boolean hasMarkerVersion(Path target, String version) {
@@ -1403,6 +1521,13 @@ public final class GtoTLauncherInstaller {
             }
         }
 
+        verifyNoExtraMods(root, expectedMods);
+    }
+
+    private static void verifyNoExtraMods(
+            Path root,
+            Set<String> expectedMods
+    ) throws IOException {
         Path mods = root.resolve("mods");
         if (!Files.isDirectory(mods)) {
             throw new IOException("Отсутствует папка mods.");
@@ -1418,6 +1543,530 @@ public final class GtoTLauncherInstaller {
                             "Обнаружен лишний мод: mods/" + file.getFileName()
                     );
                 }
+            }
+        }
+    }
+
+    private static boolean[] verifyClientForAliasMigration(
+            Path root,
+            ModAliasMigrationJournal journal,
+            boolean requireOriginalState
+    ) throws Exception {
+        validateModStateAliases();
+        List<LockedEntry> locked = loadClientLock();
+        validateModStateAliasLock(locked);
+
+        Set<String> expectedMods = new HashSet<String>();
+        boolean[] initiallyEnabled = journal == null
+                ? new boolean[MOD_STATE_ALIAS_COUNT]
+                : journal.initiallyEnabled.clone();
+        int aliasesSeen = 0;
+        for (LockedEntry entry : locked) {
+            int aliasIndex = findAliasIndexByEnabledPath(entry.path);
+            ModStateAlias alias = aliasIndex >= 0
+                    ? MOD_STATE_ALIASES[aliasIndex]
+                    : null;
+            Path file;
+            if (alias == null) {
+                file = safeResolve(root, entry.path);
+            } else {
+                aliasesSeen++;
+                Path disabled = safeResolve(root, alias.disabledPath);
+                Path enabled = safeResolve(root, alias.enabledPath);
+                boolean disabledExists =
+                        Files.exists(disabled, LinkOption.NOFOLLOW_LINKS);
+                boolean enabledExists =
+                        Files.exists(enabled, LinkOption.NOFOLLOW_LINKS);
+                if (disabledExists && !Files.isRegularFile(disabled)) {
+                    throw new IOException(
+                            "Disabled mod alias is not a regular file: "
+                                    + alias.disabledPath
+                    );
+                }
+                if (enabledExists && !Files.isRegularFile(enabled)) {
+                    throw new IOException(
+                            "Enabled mod alias is not a regular file: "
+                                    + alias.enabledPath
+                    );
+                }
+                if (disabledExists == enabledExists) {
+                    throw new IOException(
+                            "Mod migration must contain exactly one alias: "
+                                    + alias.disabledPath + " or "
+                                    + alias.enabledPath
+                    );
+                }
+                if (journal == null) {
+                    initiallyEnabled[aliasIndex] = enabledExists;
+                } else if (journal.initiallyEnabled[aliasIndex]) {
+                    if (!enabledExists) {
+                        throw new IOException(
+                                "Originally enabled mod changed state during "
+                                        + "migration: " + alias.enabledPath
+                        );
+                    }
+                } else if (requireOriginalState && !disabledExists) {
+                    throw new IOException(
+                            "Mod alias rollback did not restore its original "
+                                    + "disabled state: " + alias.disabledPath
+                    );
+                }
+                file = enabledExists ? enabled : disabled;
+            }
+
+            if (!matches(file, entry.size, entry.sha256)) {
+                throw new IOException(
+                        "Mod migration preflight mismatch: " + entry.path
+                );
+            }
+            if (entry.path.startsWith("mods/")) {
+                expectedMods.add(
+                        file.getFileName().toString().toLowerCase(Locale.ROOT)
+                );
+            }
+        }
+        if (aliasesSeen != MOD_STATE_ALIAS_COUNT) {
+            throw new IOException(
+                    "Expected " + MOD_STATE_ALIAS_COUNT
+                            + " mod aliases in client lock, found "
+                            + aliasesSeen
+            );
+        }
+        verifyNoExtraMods(root, expectedMods);
+        return initiallyEnabled;
+    }
+
+    private static void validateModStateAliases() throws IOException {
+        if (MOD_STATE_ALIASES.length != MOD_STATE_ALIAS_COUNT) {
+            throw new IOException(
+                    "Expected exactly " + MOD_STATE_ALIAS_COUNT
+                            + " mod state aliases."
+            );
+        }
+        Set<String> paths = new HashSet<String>();
+        for (ModStateAlias alias : MOD_STATE_ALIASES) {
+            if (!alias.disabledPath.startsWith("mods/")
+                    || !alias.disabledPath.endsWith(".jar.disabled")
+                    || !alias.enabledPath.equals(
+                            alias.disabledPath.substring(
+                                    0,
+                                    alias.disabledPath.length()
+                                            - ".disabled".length()
+                            )
+                    )
+                    || alias.enabledPath.indexOf('\\') >= 0
+                    || alias.disabledPath.indexOf('\\') >= 0
+                    || !paths.add(alias.disabledPath.toLowerCase(Locale.ROOT))
+                    || !paths.add(alias.enabledPath.toLowerCase(Locale.ROOT))) {
+                throw new IOException(
+                        "Invalid or duplicate mod state alias: "
+                                + alias.disabledPath + " -> "
+                                + alias.enabledPath
+                );
+            }
+        }
+    }
+
+    private static void validateModStateAliasLock(
+            List<LockedEntry> locked
+    ) throws IOException {
+        Set<String> lockPaths = new HashSet<String>();
+        for (LockedEntry entry : locked) {
+            if (!lockPaths.add(entry.path.toLowerCase(Locale.ROOT))) {
+                throw new IOException(
+                        "Duplicate path in client lock: " + entry.path
+                );
+            }
+        }
+        for (ModStateAlias alias : MOD_STATE_ALIASES) {
+            if (findLockedEntry(locked, alias.enabledPath) == null
+                    || findLockedEntry(locked, alias.disabledPath) != null) {
+                throw new IOException(
+                        "Client lock does not enable exactly one mod alias: "
+                                + alias.enabledPath
+                );
+            }
+        }
+    }
+
+    private static LockedEntry findLockedEntry(
+            List<LockedEntry> locked,
+            String path
+    ) {
+        for (LockedEntry entry : locked) {
+            if (entry.path.equals(path)) {
+                return entry;
+            }
+        }
+        return null;
+    }
+
+    private static int findAliasIndexByEnabledPath(String path) {
+        for (int index = 0; index < MOD_STATE_ALIASES.length; index++) {
+            if (MOD_STATE_ALIASES[index].enabledPath.equals(path)) {
+                return index;
+            }
+        }
+        return -1;
+    }
+
+    private static ModAliasMigrationJournal prepareModAliasMigrationMarker(
+            Path target,
+            String sourceVersion,
+            boolean[] initiallyEnabled
+    ) throws IOException {
+        validateInitialModAliasStates(initiallyEnabled);
+        Path marker = target.resolve(MOD_ALIAS_MIGRATION_FILE);
+        if (Files.exists(marker, LinkOption.NOFOLLOW_LINKS)) {
+            ModAliasMigrationJournal recorded =
+                    validateModAliasMigrationMarker(target);
+            requireSameModAliasJournal(
+                    recorded,
+                    sourceVersion,
+                    initiallyEnabled
+            );
+            return recorded;
+        }
+        if (!PREVIOUS_PACK_VERSIONS.contains(sourceVersion)) {
+            throw new IOException(
+                    "Unsupported mod alias migration source: " + sourceVersion
+            );
+        }
+        StringBuilder text = new StringBuilder();
+        text.append(PACK_NAME).append('\n');
+        text.append("source-version=").append(sourceVersion).append('\n');
+        text.append("target-version=").append(PACK_VERSION).append('\n');
+        text.append("status=mod-alias-migration-in-progress\n");
+        text.append("alias-count=").append(MOD_STATE_ALIAS_COUNT).append('\n');
+        for (int index = 0; index < MOD_STATE_ALIASES.length; index++) {
+            ModStateAlias alias = MOD_STATE_ALIASES[index];
+            text.append("alias-state=")
+                    .append(initiallyEnabled[index] ? "enabled;" : "disabled;")
+                    .append(alias.disabledPath)
+                    .append(" -> ")
+                    .append(alias.enabledPath)
+                    .append('\n');
+        }
+        writeUtf8Atomically(marker, text.toString());
+        ModAliasMigrationJournal recorded =
+                validateModAliasMigrationMarker(target);
+        requireSameModAliasJournal(recorded, sourceVersion, initiallyEnabled);
+        return recorded;
+    }
+
+    private static ModAliasMigrationJournal validateModAliasMigrationMarker(
+            Path target
+    )
+            throws IOException {
+        validateModStateAliases();
+        Path marker = target.resolve(MOD_ALIAS_MIGRATION_FILE);
+        if (!Files.isRegularFile(marker, LinkOption.NOFOLLOW_LINKS)) {
+            throw new IOException(
+                    "Missing mod alias migration marker: " + marker
+            );
+        }
+        List<String> lines = Files.readAllLines(
+                marker,
+                StandardCharsets.UTF_8
+        );
+        int expectedLines = 5 + MOD_STATE_ALIAS_COUNT;
+        if (lines.size() != expectedLines
+                || !PACK_NAME.equals(lines.get(0))
+                || !lines.get(1).startsWith("source-version=")
+                || !("target-version=" + PACK_VERSION).equals(lines.get(2))
+                || !"status=mod-alias-migration-in-progress".equals(
+                        lines.get(3)
+                )
+                || !("alias-count=" + MOD_STATE_ALIAS_COUNT).equals(
+                        lines.get(4)
+                )) {
+            throw new IOException(
+                    "Invalid mod alias migration marker: " + marker
+            );
+        }
+        String sourceVersion = lines.get(1).substring(
+                "source-version=".length()
+        );
+        if (!PREVIOUS_PACK_VERSIONS.contains(sourceVersion)) {
+            throw new IOException(
+                    "Unsupported migration source in marker: " + sourceVersion
+            );
+        }
+        boolean[] initiallyEnabled = new boolean[MOD_STATE_ALIAS_COUNT];
+        for (int index = 0; index < MOD_STATE_ALIASES.length; index++) {
+            ModStateAlias alias = MOD_STATE_ALIASES[index];
+            String line = lines.get(5 + index);
+            String enabled = "alias-state=enabled;" + alias.disabledPath
+                    + " -> " + alias.enabledPath;
+            String disabled = "alias-state=disabled;" + alias.disabledPath
+                    + " -> " + alias.enabledPath;
+            if (enabled.equals(line)) {
+                initiallyEnabled[index] = true;
+            } else if (disabled.equals(line)) {
+                initiallyEnabled[index] = false;
+            } else {
+                throw new IOException(
+                        "Unexpected alias in migration marker: "
+                                + line
+                );
+            }
+        }
+        return new ModAliasMigrationJournal(
+                sourceVersion,
+                initiallyEnabled
+        );
+    }
+
+    private static void validateInitialModAliasStates(
+            boolean[] initiallyEnabled
+    ) throws IOException {
+        if (initiallyEnabled == null
+                || initiallyEnabled.length != MOD_STATE_ALIAS_COUNT) {
+            throw new IOException(
+                    "Missing exact original state for all mod aliases."
+            );
+        }
+    }
+
+    private static void requireSameModAliasJournal(
+            ModAliasMigrationJournal journal,
+            String sourceVersion,
+            boolean[] initiallyEnabled
+    ) throws IOException {
+        validateInitialModAliasStates(initiallyEnabled);
+        if (!sourceVersion.equals(journal.sourceVersion)
+                || !Arrays.equals(
+                        initiallyEnabled,
+                        journal.initiallyEnabled
+                )) {
+            throw new IOException(
+                    "Mod alias migration journal does not match the captured "
+                            + "original state."
+            );
+        }
+    }
+
+    private static void migrateModStateAliases(Path target)
+            throws IOException {
+        ModAliasMigrationJournal journal =
+                validateModAliasMigrationMarker(target);
+        for (int index = 0; index < MOD_STATE_ALIASES.length; index++) {
+            ModStateAlias alias = MOD_STATE_ALIASES[index];
+            Path disabled = safeResolve(target, alias.disabledPath);
+            Path enabled = safeResolve(target, alias.enabledPath);
+            boolean disabledExists =
+                    Files.isRegularFile(disabled, LinkOption.NOFOLLOW_LINKS);
+            boolean enabledExists =
+                    Files.isRegularFile(enabled, LinkOption.NOFOLLOW_LINKS);
+            if (journal.initiallyEnabled[index]) {
+                if (!disabledExists && enabledExists) {
+                    continue;
+                }
+                throw new IOException(
+                        "Originally enabled mod is not intact during migration: "
+                                + alias.enabledPath
+                );
+            } else if (disabledExists && !enabledExists) {
+                moveModAliasAtomically(disabled, enabled);
+            } else if (!disabledExists && enabledExists) {
+                // A previous process stopped after this atomic rename.
+            } else {
+                throw new IOException(
+                        "Cannot resume mod alias migration: "
+                                + alias.disabledPath + " -> "
+                                + alias.enabledPath
+                );
+            }
+        }
+    }
+
+    private static void moveModAliasAtomically(
+            Path source,
+            Path destination
+    ) throws IOException {
+        if (!Files.isRegularFile(source, LinkOption.NOFOLLOW_LINKS)
+                || Files.exists(destination, LinkOption.NOFOLLOW_LINKS)) {
+            throw new IOException(
+                    "Unsafe mod alias move: " + source + " -> " + destination
+            );
+        }
+        Files.move(source, destination, StandardCopyOption.ATOMIC_MOVE);
+    }
+
+    private static ModAliasMigrationJournal restoreOriginalModStateAliases(
+            Path target
+    )
+            throws IOException {
+        ModAliasMigrationJournal journal =
+                validateModAliasMigrationMarker(target);
+        for (int index = MOD_STATE_ALIASES.length - 1; index >= 0; index--) {
+            ModStateAlias alias = MOD_STATE_ALIASES[index];
+            Path disabled = safeResolve(target, alias.disabledPath);
+            Path enabled = safeResolve(target, alias.enabledPath);
+            boolean disabledExists =
+                    Files.isRegularFile(disabled, LinkOption.NOFOLLOW_LINKS);
+            boolean enabledExists =
+                    Files.isRegularFile(enabled, LinkOption.NOFOLLOW_LINKS);
+            if (journal.initiallyEnabled[index]) {
+                if (!disabledExists && enabledExists) {
+                    continue;
+                }
+                throw new IOException(
+                        "Cannot preserve originally enabled mod during rollback: "
+                                + alias.enabledPath
+                );
+            } else if (!disabledExists && enabledExists) {
+                moveModAliasAtomically(enabled, disabled);
+            } else if (disabledExists && !enabledExists) {
+                // Already restored or not yet migrated.
+            } else {
+                throw new IOException(
+                        "Cannot roll back mod alias migration: "
+                                + alias.enabledPath + " -> "
+                                + alias.disabledPath
+                );
+            }
+        }
+        return journal;
+    }
+
+    private static void rollbackModStateAliases(
+            Path target,
+            Progress progress,
+            Exception originalError
+    ) {
+        try {
+            ModAliasMigrationJournal journal =
+                    restoreOriginalModStateAliases(target);
+            verifyClientForAliasMigration(target, journal, true);
+            Files.deleteIfExists(target.resolve(MOD_ALIAS_MIGRATION_FILE));
+            progress.log(
+                    "Mod state migration was rolled back to the previous "
+                            + "installed version."
+            );
+        } catch (Exception rollbackError) {
+            originalError.addSuppressed(rollbackError);
+            progress.log(
+                    "Mod state rollback was incomplete. Run the installer "
+                            + "again to resume safely."
+            );
+        }
+    }
+
+    private static void deleteCompletedModAliasMigrationMarker(
+            Path target,
+            Progress progress
+    ) throws IOException {
+        Path marker = target.resolve(MOD_ALIAS_MIGRATION_FILE);
+        if (!Files.exists(marker, LinkOption.NOFOLLOW_LINKS)) {
+            return;
+        }
+        validateModAliasMigrationMarker(target);
+        try {
+            Files.deleteIfExists(marker);
+        } catch (IOException cleanupError) {
+            progress.log(
+                    "Verified update is complete, but its migration marker "
+                            + "could not be removed: " + marker
+            );
+        }
+    }
+
+    private static void runSelfCheck() throws Exception {
+        validateModStateAliases();
+        validateModStateAliasLock(loadClientLock());
+
+        Path root = Files.createTempDirectory(
+                "gto-mod-alias-self-check-"
+        ).toAbsolutePath().normalize();
+        try {
+            boolean[] initialStates =
+                    {false, true, true, false, true, false, true};
+            for (int index = 0; index < MOD_STATE_ALIASES.length; index++) {
+                ModStateAlias alias = MOD_STATE_ALIASES[index];
+                Path initial = safeResolve(
+                        root,
+                        initialStates[index]
+                                ? alias.enabledPath
+                                : alias.disabledPath
+                );
+                Files.createDirectories(initial.getParent());
+                Files.write(
+                        initial,
+                        selfCheckAliasBytes(index)
+                );
+            }
+            ModAliasMigrationJournal journal =
+                    prepareModAliasMigrationMarker(
+                            root,
+                            "1.0.4",
+                            initialStates
+                    );
+            assertSelfCheckAliasStateAndBytes(root, journal, false);
+
+            // Simulate a hard stop after two of the disabled aliases moved.
+            int[] interruptedIndexes = {0, 3};
+            for (int index : interruptedIndexes) {
+                ModStateAlias alias = MOD_STATE_ALIASES[index];
+                moveModAliasAtomically(
+                        safeResolve(root, alias.disabledPath),
+                        safeResolve(root, alias.enabledPath)
+                );
+            }
+            ModAliasMigrationJournal resumed =
+                    validateModAliasMigrationMarker(root);
+            requireSameModAliasJournal(
+                    resumed,
+                    "1.0.4",
+                    initialStates
+            );
+            migrateModStateAliases(root);
+            assertSelfCheckAliasStateAndBytes(root, resumed, true);
+
+            ModAliasMigrationJournal restored =
+                    restoreOriginalModStateAliases(root);
+            assertSelfCheckAliasStateAndBytes(root, restored, false);
+            Files.deleteIfExists(root.resolve(MOD_ALIAS_MIGRATION_FILE));
+        } finally {
+            deleteTree(root);
+        }
+    }
+
+    private static byte[] selfCheckAliasBytes(int index) {
+        return (
+                "gto-mod-alias-self-check-" + index + "-"
+                        + MOD_STATE_ALIASES[index].disabledPath
+        ).getBytes(StandardCharsets.UTF_8);
+    }
+
+    private static void assertSelfCheckAliasStateAndBytes(
+            Path root,
+            ModAliasMigrationJournal journal,
+            boolean requireAllEnabled
+    ) throws Exception {
+        for (int index = 0; index < MOD_STATE_ALIASES.length; index++) {
+            ModStateAlias alias = MOD_STATE_ALIASES[index];
+            boolean shouldBeEnabled = requireAllEnabled
+                    || journal.initiallyEnabled[index];
+            Path expected = safeResolve(
+                    root,
+                    shouldBeEnabled ? alias.enabledPath : alias.disabledPath
+            );
+            Path forbidden = safeResolve(
+                    root,
+                    shouldBeEnabled ? alias.disabledPath : alias.enabledPath
+            );
+            if (!Files.isRegularFile(expected, LinkOption.NOFOLLOW_LINKS)
+                    || Files.exists(forbidden, LinkOption.NOFOLLOW_LINKS)
+                    || !Arrays.equals(
+                            Files.readAllBytes(expected),
+                            selfCheckAliasBytes(index)
+                    )) {
+                throw new IOException(
+                        "Self-check lost mod alias state or bytes: "
+                                + alias.disabledPath + " -> "
+                                + alias.enabledPath
+                );
             }
         }
     }
@@ -2353,18 +3002,48 @@ public final class GtoTLauncherInstaller {
         }
     }
 
+    private static final class ModAliasMigrationJournal {
+        private final String sourceVersion;
+        private final boolean[] initiallyEnabled;
+
+        private ModAliasMigrationJournal(
+                String sourceVersion,
+                boolean[] initiallyEnabled
+        ) {
+            this.sourceVersion = sourceVersion;
+            this.initiallyEnabled = initiallyEnabled.clone();
+        }
+    }
+
+    private static final class ModStateAlias {
+        private final String disabledPath;
+        private final String enabledPath;
+
+        private ModStateAlias(String disabledPath, String enabledPath) {
+            this.disabledPath = disabledPath;
+            this.enabledPath = enabledPath;
+        }
+    }
+
     private static final class CliOptions {
         private final Path target;
         private final boolean nonInteractive;
+        private final boolean selfCheck;
 
-        private CliOptions(Path target, boolean nonInteractive) {
+        private CliOptions(
+                Path target,
+                boolean nonInteractive,
+                boolean selfCheck
+        ) {
             this.target = target;
             this.nonInteractive = nonInteractive;
+            this.selfCheck = selfCheck;
         }
 
         private static CliOptions parse(String[] args) {
             Path target = null;
             boolean nonInteractive = false;
+            boolean selfCheck = false;
             for (int index = 0; index < args.length; index++) {
                 String argument = args[index];
                 if ("--target".equals(argument)) {
@@ -2376,6 +3055,8 @@ public final class GtoTLauncherInstaller {
                     target = Paths.get(args[++index]).toAbsolutePath().normalize();
                 } else if ("--non-interactive".equals(argument)) {
                     nonInteractive = true;
+                } else if ("--self-check".equals(argument)) {
+                    selfCheck = true;
                 } else if ("--help".equals(argument) || "-h".equals(argument)) {
                     printUsage();
                     System.exit(0);
@@ -2385,7 +3066,12 @@ public final class GtoTLauncherInstaller {
                     );
                 }
             }
-            return new CliOptions(target, nonInteractive);
+            if (selfCheck && (target != null || nonInteractive)) {
+                throw new IllegalArgumentException(
+                        "--self-check cannot be combined with installation options."
+                );
+            }
+            return new CliOptions(target, nonInteractive, selfCheck);
         }
     }
 }

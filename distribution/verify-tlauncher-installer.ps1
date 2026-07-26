@@ -88,6 +88,98 @@ function ConvertTo-WindowsBatchText {
     return $Text.Replace("`n", "`r`n") + "`r`n"
 }
 
+function Copy-EntryToFile {
+    param(
+        [IO.Compression.ZipArchiveEntry]$Entry,
+        [string]$Path
+    )
+
+    New-Item -ItemType Directory -Path (Split-Path -Parent $Path) -Force |
+        Out-Null
+    $input = $Entry.Open()
+    $output = [IO.File]::Open($Path, [IO.FileMode]::CreateNew)
+    try {
+        $input.CopyTo($output)
+    }
+    finally {
+        $output.Dispose()
+        $input.Dispose()
+    }
+}
+
+function Find-SelfCheckJava {
+    $candidates = @()
+    if ($env:JAVA_HOME) {
+        $candidates += Join-Path $env:JAVA_HOME 'bin\java.exe'
+    }
+    $pathJava = Get-Command java.exe -ErrorAction SilentlyContinue
+    if ($pathJava) {
+        $candidates += $pathJava.Source
+    }
+    $adoptiumRoot = Join-Path $env:ProgramFiles 'Eclipse Adoptium'
+    if (Test-Path -LiteralPath $adoptiumRoot -PathType Container) {
+        $candidates += @(
+            Get-ChildItem -LiteralPath $adoptiumRoot -Directory |
+                Sort-Object Name -Descending |
+                ForEach-Object { Join-Path $_.FullName 'bin\java.exe' }
+        )
+    }
+    $java = @(
+        $candidates |
+            Where-Object { Test-Path -LiteralPath $_ -PathType Leaf } |
+            Select-Object -Unique
+    ) | Select-Object -First 1
+    if (-not $java) {
+        throw (
+            'Java was not found for packaged installer --self-check. ' +
+            'Run verification on the JDK-equipped build machine.'
+        )
+    }
+    return [string]$java
+}
+
+function Invoke-CapturedProcess {
+    param(
+        [string]$FileName,
+        [string]$Arguments,
+        [string]$WorkingDirectory,
+        [int]$TimeoutMilliseconds = 60000
+    )
+
+    $startInfo = New-Object Diagnostics.ProcessStartInfo
+    $startInfo.FileName = $FileName
+    $startInfo.Arguments = $Arguments
+    $startInfo.WorkingDirectory = $WorkingDirectory
+    $startInfo.UseShellExecute = $false
+    $startInfo.CreateNoWindow = $true
+    $startInfo.RedirectStandardOutput = $true
+    $startInfo.RedirectStandardError = $true
+    $process = New-Object Diagnostics.Process
+    $process.StartInfo = $startInfo
+    try {
+        if (-not $process.Start()) {
+            throw "Failed to start process: $FileName"
+        }
+        $stdoutTask = $process.StandardOutput.ReadToEndAsync()
+        $stderrTask = $process.StandardError.ReadToEndAsync()
+        if (-not $process.WaitForExit($TimeoutMilliseconds)) {
+            $process.Kill()
+            throw "Process timed out: $FileName $Arguments"
+        }
+        $stdout = $stdoutTask.Result
+        $stderr = $stderrTask.Result
+        return [pscustomobject]@{
+            ExitCode = $process.ExitCode
+            StdOut = $stdout
+            StdErr = $stderr
+            Combined = $stdout + "`n" + $stderr
+        }
+    }
+    finally {
+        $process.Dispose()
+    }
+}
+
 $checksumPath = "$ArchivePath.sha256"
 if (-not (Test-Path -LiteralPath $checksumPath -PathType Leaf)) {
     throw "Outer checksum file not found: $checksumPath"
@@ -279,6 +371,29 @@ try {
         'rejectUnsafeLinks(target)',
         'channel.tryLock()',
         'writeRecoveryMarker(target)',
+        'MOD_STATE_ALIAS_COUNT = 7',
+        'GTO-FRIENDS-MOD-ALIASES-IN-PROGRESS.txt',
+        'verifyClientForAliasMigration(',
+        'prepareModAliasMigrationMarker(',
+        'migrateModStateAliases(',
+        'rollbackModStateAliases(',
+        'restoreOriginalModStateAliases(',
+        'moveModAliasAtomically(',
+        'StandardCopyOption.ATOMIC_MOVE',
+        'alias-state=',
+        'journal.initiallyEnabled[index]',
+        'initiallyEnabled[aliasIndex] = enabledExists;',
+        'if (disabledExists == enabledExists)',
+        'requireSameModAliasJournal(',
+        'verifyClientForAliasMigration(target, journal, true);',
+        '{false, true, true, false, true, false, true};',
+        'int[] interruptedIndexes = {0, 3};',
+        'assertSelfCheckAliasStateAndBytes(root, journal, false);',
+        'assertSelfCheckAliasStateAndBytes(root, resumed, true);',
+        'assertSelfCheckAliasStateAndBytes(root, restored, false);',
+        'Files.readAllBytes(expected)',
+        'SELF-CHECK PASSED',
+        'Arrays.asList("1.0.4", "1.0.3", "1.0.2")',
         'java-runtime-verification=passed',
         'pack-mode-default=GTO-Easy',
         'vanilla-difficulty-default=NORMAL',
@@ -296,6 +411,144 @@ try {
         'private static final String PACK_VERSION = "' + $Config.packageVersion + '";'
     if (-not $repositorySource.Contains($expectedVersionConstant)) {
         throw "Java installer PACK_VERSION differs from pack-config.json."
+    }
+    $expectedModStateAliases = @(
+        [pscustomobject]@{
+            disabled = 'mods/chisel-forge-2.0.0+mc1.20.1.jar.disabled'
+            enabled = 'mods/chisel-forge-2.0.0+mc1.20.1.jar'
+        },
+        [pscustomobject]@{
+            disabled = 'mods/factory_blocks-forge-1.4.0+mc1.20.1.jar.disabled'
+            enabled = 'mods/factory_blocks-forge-1.4.0+mc1.20.1.jar'
+        },
+        [pscustomobject]@{
+            disabled = 'mods/FramedBlocks-9.4.3.jar.disabled'
+            enabled = 'mods/FramedBlocks-9.4.3.jar'
+        },
+        [pscustomobject]@{
+            disabled = 'mods/HangGlider-v8.0.1-1.20.1-Forge.jar.disabled'
+            enabled = 'mods/HangGlider-v8.0.1-1.20.1-Forge.jar'
+        },
+        [pscustomobject]@{
+            disabled = 'mods/kleeslabs-forge-1.20.1-15.0.12.jar.disabled'
+            enabled = 'mods/kleeslabs-forge-1.20.1-15.0.12.jar'
+        },
+        [pscustomobject]@{
+            disabled = 'mods/Measurements-forge-1.20.1-2.0.1.jar.disabled'
+            enabled = 'mods/Measurements-forge-1.20.1-2.0.1.jar'
+        },
+        [pscustomobject]@{
+            disabled = 'mods/Pretty Rain-1.20.1-Forge-1.1.3.jar.disabled'
+            enabled = 'mods/Pretty Rain-1.20.1-Forge-1.1.3.jar'
+        }
+    )
+    $aliasMatches = @(
+        [regex]::Matches(
+            $repositorySource,
+            'new\s+ModStateAlias\(\s*"([^"]+)"\s*,\s*"([^"]+)"\s*\)'
+        )
+    )
+    if ($aliasMatches.Count -ne $expectedModStateAliases.Count) {
+        throw (
+            "Expected exactly $($expectedModStateAliases.Count) Java mod aliases, " +
+            "found $($aliasMatches.Count)."
+        )
+    }
+    for ($index = 0; $index -lt $expectedModStateAliases.Count; $index++) {
+        $actual = $aliasMatches[$index]
+        $expected = $expectedModStateAliases[$index]
+        if (
+            $actual.Groups[1].Value -cne $expected.disabled -or
+            $actual.Groups[2].Value -cne $expected.enabled
+        ) {
+            throw (
+                "Unexpected Java mod alias at index $index`: " +
+                "$($actual.Groups[1].Value) -> $($actual.Groups[2].Value)"
+            )
+        }
+    }
+    $transactionStart = $repositorySource.IndexOf(
+        'boolean modAliasMigrationActive = false;'
+    )
+    $transactionEnd = if ($transactionStart -ge 0) {
+        $repositorySource.IndexOf(
+            'progress.update(100,',
+            $transactionStart
+        )
+    }
+    else {
+        -1
+    }
+    if ($transactionStart -lt 0 -or $transactionEnd -le $transactionStart) {
+        throw 'Could not isolate the mod alias migration transaction.'
+    }
+    $transaction = $repositorySource.Substring(
+        $transactionStart,
+        $transactionEnd - $transactionStart
+    )
+    $orderedTransactionSteps = @(
+        'prepareModAliasMigrationMarker(',
+        'migrateModStateAliases(target);',
+        'verifyClient(target);',
+        'writeMarker(target);',
+        'newMarkerCommitted = true;',
+        'deleteCompletedModAliasMigrationMarker(target, progress);'
+    )
+    $previousOffset = -1
+    foreach ($step in $orderedTransactionSteps) {
+        $offset = $transaction.IndexOf($step)
+        if ($offset -le $previousOffset) {
+            throw "Missing or reordered mod alias transaction step: $step"
+        }
+        $previousOffset = $offset
+    }
+    if (
+        -not $transaction.Contains(
+            'if (modAliasMigrationActive && !newMarkerCommitted)'
+        ) -or
+        -not $transaction.Contains(
+            'rollbackModStateAliases(target, progress, error);'
+        )
+    ) {
+        throw 'Mod alias transaction does not roll back pre-commit errors.'
+    }
+    $selfCheckStart = $repositorySource.IndexOf(
+        'private static void runSelfCheck()'
+    )
+    $selfCheckEnd = if ($selfCheckStart -ge 0) {
+        $repositorySource.IndexOf(
+            'private static byte[] selfCheckAliasBytes(',
+            $selfCheckStart
+        )
+    }
+    else {
+        -1
+    }
+    if ($selfCheckStart -lt 0 -or $selfCheckEnd -le $selfCheckStart) {
+        throw 'Could not isolate the mixed-state mod alias self-check.'
+    }
+    $selfCheckSource = $repositorySource.Substring(
+        $selfCheckStart,
+        $selfCheckEnd - $selfCheckStart
+    )
+    $orderedSelfCheckSteps = @(
+        '{false, true, true, false, true, false, true};',
+        'prepareModAliasMigrationMarker(',
+        'assertSelfCheckAliasStateAndBytes(root, journal, false);',
+        'int[] interruptedIndexes = {0, 3};',
+        'validateModAliasMigrationMarker(root);',
+        'migrateModStateAliases(root);',
+        'assertSelfCheckAliasStateAndBytes(root, resumed, true);',
+        'restoreOriginalModStateAliases(root);',
+        'assertSelfCheckAliasStateAndBytes(root, restored, false);'
+    )
+    $previousOffset = -1
+    foreach ($step in $orderedSelfCheckSteps) {
+        $offset = $selfCheckSource.IndexOf($step)
+        if ($offset -le $previousOffset) {
+            throw "Missing or reordered mixed-state self-check step: $step"
+        }
+        $previousOffset = $offset
     }
 
     $packagedReadme = Read-EntryText (Get-Entry $outer 'README-TLAUNCHER.txt')
@@ -463,6 +716,33 @@ try {
         if ($lockedMods.Count -ne 174) {
             throw "Expected 174 TLauncher mod files, found $($lockedMods.Count)"
         }
+        foreach ($alias in $expectedModStateAliases) {
+            $oldLock = @($lock | Where-Object path -CEQ $alias.disabled)
+            $newLock = @($lock | Where-Object path -CEQ $alias.enabled)
+            $oldDownload = @(
+                $downloads | Where-Object destination -CEQ $alias.disabled
+            )
+            $newDownload = @(
+                $downloads | Where-Object destination -CEQ $alias.enabled
+            )
+            if (
+                $oldLock.Count -ne 0 -or
+                $newLock.Count -ne 1 -or
+                $oldDownload.Count -ne 0 -or
+                $newDownload.Count -ne 1
+            ) {
+                throw (
+                    "Mod alias is not enabled exactly once in lock/downloads: " +
+                    "$($alias.disabled) -> $($alias.enabled)"
+                )
+            }
+            if (
+                [long]$newLock[0].size -ne [long]$newDownload[0].size -or
+                $newLock[0].sha256 -cne $newDownload[0].sha256
+            ) {
+                throw "Mod alias lock/download identity differs: $($alias.enabled)"
+            }
+        }
         foreach ($removedTheme in @(
             'mods/AE-Dark-UI-GTO-v0.5.6.0.zip.disabled',
             'mods/AE-Light-UI-GTO-v0.5.6.0.zip.disabled'
@@ -547,6 +827,55 @@ try {
             throw 'A Java runtime leaked into the static payload instead of verified installation.'
         }
 
+        $selfCheckRoot = Join-Path $env:TEMP (
+            'GTO TLauncher Self Check Кириллица ! ' +
+            [Guid]::NewGuid().ToString('N')
+        )
+        New-Item -ItemType Directory -Path $selfCheckRoot | Out-Null
+        try {
+            $selfCheckJar = Join-Path (
+                $selfCheckRoot
+            ) 'GTO-TLauncher-Installer.jar'
+            Copy-EntryToFile $jarEntry $selfCheckJar
+            $selfCheckJava = Find-SelfCheckJava
+            $selfCheck = Invoke-CapturedProcess (
+                $selfCheckJava
+            ) (
+                '-jar "' + $selfCheckJar.Replace('"', '\"') +
+                '" --self-check'
+            ) $selfCheckRoot
+            if (
+                $selfCheck.ExitCode -ne 0 -or
+                $selfCheck.Combined -notmatch '(?m)^SELF-CHECK PASSED\s*$' -or
+                $selfCheck.Combined -match '(?m)^SELF-CHECK FAILED:'
+            ) {
+                throw (
+                    "Packaged installer --self-check failed:`n" +
+                    $selfCheck.Combined
+                )
+            }
+        }
+        finally {
+            if (Test-Path -LiteralPath $selfCheckRoot) {
+                $resolvedSelfCheckRoot = (
+                    Resolve-Path -LiteralPath $selfCheckRoot
+                ).Path
+                $resolvedTempRoot = [IO.Path]::GetFullPath(
+                    $env:TEMP
+                ).TrimEnd('\') + '\'
+                if (-not ($resolvedSelfCheckRoot + '\').StartsWith(
+                    $resolvedTempRoot,
+                    [StringComparison]::OrdinalIgnoreCase
+                )) {
+                    throw (
+                        'Refusing to remove unsafe self-check path: ' +
+                        $resolvedSelfCheckRoot
+                    )
+                }
+                Remove-Item -LiteralPath $resolvedSelfCheckRoot -Recurse -Force
+            }
+        }
+
         Write-Host 'TLAUNCHER INSTALLER VERIFICATION PASSED'
         Write-Host "Archive: $ArchivePath"
         Write-Host "Outer entries: $($outer.Entries.Count)"
@@ -555,6 +884,7 @@ try {
         Write-Host "Locked files: $($lock.Count)"
         Write-Host "Embedded local mods: $($embeddedMods.Count)"
         Write-Host "Java class major: $majorVersion"
+        Write-Host "Packaged --self-check: passed"
         Write-Host "SHA-256: $actualOuterHash"
     }
     finally {
