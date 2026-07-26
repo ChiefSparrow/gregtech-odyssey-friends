@@ -25,9 +25,9 @@ $PrismUrl =
     'PrismLauncher-Windows-MinGW-w64-Portable-11.0.3.zip'
 $PrismSize = 43902886L
 $PrismSha256 = '7E27AEDD92EABB0699792B5F6305DB6635290D83652CBD73742C70350E42B7F8'
-$ExpectedClientArchiveSize = 69961102L
+$ExpectedClientArchiveSize = 69963667L
 $ExpectedClientArchiveSha256 =
-    '8E72B022E52D64D5B5DF08F7A282F9A2F1A9CB239825F2E7FA7A3E2DB0599571'
+    '0CDF2E2FB9CF14DEC9587CD3F596FFBFC64784AA1CAFD93245F8B16DF9CEF4B1'
 
 if (-not $OutputDirectory) {
     $OutputDirectory = Join-Path $RepoRoot 'dist'
@@ -301,12 +301,12 @@ if ($expectedClientHash -cne $actualClientHash) {
     throw "Client release SHA-256 mismatch: $actualClientHash"
 }
 if (
-    $PackConfig.packageVersion -ne '1.0.4' -or
+    $PackConfig.packageVersion -ne '1.1.0' -or
     (Get-Item -LiteralPath $ClientArchive).Length -ne $ExpectedClientArchiveSize -or
     $actualClientHash -cne $ExpectedClientArchiveSha256
 ) {
     throw (
-        'Client release is not the independently pinned Friends Edition 1.0.4 ' +
+        'Client release is not the independently pinned Friends Edition 1.1.0 ' +
         "archive: $ClientArchive"
     )
 }

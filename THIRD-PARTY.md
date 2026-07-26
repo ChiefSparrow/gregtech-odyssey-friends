@@ -16,6 +16,13 @@ Eclipse Temurin; приватная копия Temurin 21 включена в е
 | Eclipse Temurin JRE 21.0.11+10 x64 | — | — | https://github.com/adoptium/temurin21-binaries/releases/tag/jdk-21.0.11%2B10 |
 | Easy Villagers 1.20.1-1.1.39 | 400514 | 7202309 | https://www.curseforge.com/minecraft/mc-mods/easy-villagers |
 | Oculus 1.20.1-1.8.0 | 581495 | 6020952 | https://www.curseforge.com/minecraft/mc-mods/oculus |
+| Chisel Reborn 2.0.0 | 551763 | 6266130 | https://www.curseforge.com/minecraft/mc-mods/chisel-reborn |
+| Factory Blocks 1.4.0 | 640001 | 6267781 | https://www.curseforge.com/minecraft/mc-mods/factory-blocks |
+| FramedBlocks 9.4.3 | 441647 | 7386520 | https://www.curseforge.com/minecraft/mc-mods/framedblocks |
+| Hang Glider 8.0.1 | 852668 | 4710223 | https://www.curseforge.com/minecraft/mc-mods/hang-glider |
+| KleeSlabs 15.0.12 | 241895 | 8163134 | https://www.curseforge.com/minecraft/mc-mods/kleeslabs |
+| Measurements 2.0.1 | 478559 | 6426500 | https://www.curseforge.com/minecraft/mc-mods/measurements |
+| Pretty Rain 1.1.3 | 1163800 | 6411988 | https://www.curseforge.com/minecraft/mc-mods/pretty-rain |
 | HT's TreeChop 0.19.0 fixed | 421377 | 5565422 | https://www.curseforge.com/minecraft/mc-mods/treechop |
 | Panda's Falling Trees 0.13.2 | 880630 | 6231030 | https://www.curseforge.com/minecraft/mc-mods/pandas-falling-trees |
 | Complementary Reimagined r5.6.1 | 627557 | 7090226 | https://www.curseforge.com/minecraft/shaders/complementary-reimagined |
